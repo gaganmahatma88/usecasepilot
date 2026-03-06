@@ -11,7 +11,7 @@ export async function POST(request: Request) {
       .select('admin_password_hash')
       .single()
 
-    let isValid = false
+  
 
     if (!settings?.admin_password_hash) {
   return NextResponse.json(
@@ -35,7 +35,7 @@ const isValid = await comparePassword(password, settings.admin_password_hash)
       value: token,
       httpOnly: true,
       sameSite: 'lax',
-      secure: false,
+     secure: process.env.NODE_ENV === 'production',
       path: '/',
       maxAge: 60 * 60 * 24 * 7,
     })
