@@ -20,7 +20,7 @@ export async function POST(request: Request) {
   )
 }
 
-const isValid = password === "UseCasePilot@Secure2026!"
+const isValid = await comparePassword(password, settings.admin_password_hash)
 
     if (!isValid) {
       return NextResponse.json({ error: 'Invalid password' }, { status: 401 })
