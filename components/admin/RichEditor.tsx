@@ -4,7 +4,7 @@ import StarterKit from '@tiptap/starter-kit'
 import Underline from '@tiptap/extension-underline'
 import Link from '@tiptap/extension-link'
 import Placeholder from '@tiptap/extension-placeholder'
-import { useState, useCallback } from 'react'
+import { useState, useCallback, useEffect } from 'react'
 
 interface RichEditorProps {
   content: string
@@ -124,6 +124,17 @@ export function RichEditor({ content, onChange }: RichEditorProps) {
       setRawContent(mdx)
     },
   })
+
+  useEffect(() => {
+  if (!editor) return
+
+  const current = htmlToMdx(editor.getHTML())
+
+  if (content !== current) {
+    editor.commands.setContent(mdxToHtml(content))
+    setRawContent(content)
+  }
+}, [content, editor])
 
   const setLink = useCallback(() => {
     if (!editor) return
