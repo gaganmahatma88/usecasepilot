@@ -73,9 +73,6 @@ export default function AdminLoginPage() {
             </button>
           </form>
         </div>
-        <p className="text-center text-xs text-gray-400 mt-4">
-          Default password: <code className="font-mono">admin123</code>
-        </p>
       </div>
     </div>
   )

@@ -13,12 +13,14 @@ export async function POST(request: Request) {
 
     let isValid = false
 
-    if (settings?.admin_password_hash) {
-      isValid = await comparePassword(password, settings.admin_password_hash)
-    } else {
-      // fallback default
-      isValid = password === 'admin123'
-    }
+    if (!settings?.admin_password_hash) {
+  return NextResponse.json(
+    { error: 'Admin password not configured' },
+    { status: 500 }
+  )
+}
+
+isValid = await comparePassword(password, settings.admin_password_hash)
 
     if (!isValid) {
       return NextResponse.json({ error: 'Invalid password' }, { status: 401 })
