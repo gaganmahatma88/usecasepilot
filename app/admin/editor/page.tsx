@@ -1,5 +1,5 @@
 'use client'
-import { useState, useEffect, Suspense } from 'react'
+import { useState, useEffect, useRef, Suspense } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { AdminNav } from '@/components/admin/AdminNav'
 import { RichEditor } from '@/components/admin/RichEditor'
@@ -26,7 +26,21 @@ function EditorContent() {
     seo_description: '',
     published: false,
   })
+  const autosaveTimer = useRef<NodeJS.Timeout | null>(null)
+  const lastSavedSnapshot = useRef<string>('')
+
+  function getSnapshot() {
+    return JSON.stringify({
+      title: form.title,
+      slug: form.slug,
+      content_mdx: form.content_mdx,
+      role_id: form.role_id,
+      seo_title: form.seo_title,
+      seo_description: form.seo_description,
+    })
+  }
   const [saving, setSaving] = useState(false)
+  const [autosaving, setAutosaving] = useState(false)
   const [saved, setSaved] = useState(false)
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(true)
@@ -49,6 +63,14 @@ function EditorContent() {
           seo_description: uc.seo_description || '',
           published: uc.published,
         })
+        lastSavedSnapshot.current = JSON.stringify({
+          title: uc.title,
+          slug: uc.slug,
+          content_mdx: uc.content_mdx || '',
+          role_id: uc.role_id,
+          seo_title: uc.seo_title || '',
+          seo_description: uc.seo_description || '',
+        })
       } else if (rolesData.length > 0) {
         setForm((f) => ({ ...f, role_id: rolesData[0].id }))
       }
@@ -56,6 +78,37 @@ function EditorContent() {
     }
     load()
   }, [editId])
+
+  useEffect(() => {
+    if (!editId) return
+
+    if (autosaveTimer.current) {
+      clearTimeout(autosaveTimer.current)
+    }
+
+    autosaveTimer.current = setTimeout(async () => {
+      if (saving) return
+      const snapshot = getSnapshot()
+      if (snapshot === lastSavedSnapshot.current) return
+      setAutosaving(true)
+      await handleSave()
+      lastSavedSnapshot.current = snapshot
+      setAutosaving(false)
+    }, 5000)
+
+    return () => {
+      if (autosaveTimer.current) {
+        clearTimeout(autosaveTimer.current)
+      }
+    }
+  }, [
+    form.title,
+    form.slug,
+    form.content_mdx,
+    form.role_id,
+    form.seo_title,
+    form.seo_description,
+  ])
 
   function handleTitleChange(title: string) {
     setForm((f) => ({
@@ -123,6 +176,7 @@ function EditorContent() {
           )}
         </div>
         <div className="flex items-center gap-2">
+          {autosaving && <span className="text-xs text-gray-400">Saving...</span>}
           {saved && <span className="text-xs text-green-600">✓ Saved</span>}
           {error && <span className="text-xs text-red-500">{error}</span>}
           <button
