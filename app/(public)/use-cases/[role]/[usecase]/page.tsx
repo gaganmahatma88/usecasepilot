@@ -1,6 +1,7 @@
 export const dynamic = 'force-dynamic'
+
 import { notFound } from 'next/navigation'
-import { supabase } from '@/lib/supabase'
+import { supabaseAdmin } from '@/lib/supabase'
 import { Breadcrumb } from '@/components/ui/Breadcrumb'
 import { MDXRenderer } from '@/components/ui/MDXRenderer'
 import { formatDate } from '@/lib/utils'
@@ -12,7 +13,7 @@ interface Props {
 
 async function getUseCase(roleSlug: string, usecaseSlug: string) {
   try {
-    const { data: role } = await supabase
+    const { data: role } = await supabaseAdmin
       .from('roles')
       .select('*')
       .eq('slug', roleSlug)
@@ -20,7 +21,7 @@ async function getUseCase(roleSlug: string, usecaseSlug: string) {
 
     if (!role) return null
 
-    const { data: usecase } = await supabase
+    const { data: usecase } = await supabaseAdmin
       .from('usecases')
       .select('*')
       .eq('role_id', role.id)
@@ -29,7 +30,8 @@ async function getUseCase(roleSlug: string, usecaseSlug: string) {
       .single()
 
     if (!usecase) return null
-    return { usecase, role }
+
+    return { role, usecase }
   } catch {
     return null
   }
@@ -37,11 +39,16 @@ async function getUseCase(roleSlug: string, usecaseSlug: string) {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const result = await getUseCase(params.role, params.usecase)
+
   if (!result) return {}
-  const { usecase, role } = result
+
+  const { usecase } = result
+
   const siteUrl =
     process.env.NEXT_PUBLIC_SITE_URL || 'https://usecasepilot.com'
+
   const canonical = `${siteUrl}/use-cases/${params.role}/${params.usecase}`
+
   return {
     title: usecase.seo_title || usecase.title,
     description: usecase.seo_description,
@@ -57,9 +64,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function UseCasePage({ params }: Props) {
   const result = await getUseCase(params.role, params.usecase)
+
   if (!result) notFound()
 
-  const { usecase, role } = result
+  const { role, usecase } = result
 
   return (
     <div className="max-w-3xl mx-auto px-4 sm:px-6 py-10 sm:py-14">
@@ -77,16 +85,20 @@ export default async function UseCasePage({ params }: Props) {
           <div className="inline-flex items-center gap-1.5 text-xs font-medium text-blue-600 bg-blue-50 border border-blue-100 rounded-full px-2.5 py-1 mb-4">
             {role.title}
           </div>
+
           <h1 className="text-3xl font-bold tracking-tight text-gray-900 mb-4">
             {usecase.title}
           </h1>
+
           {usecase.seo_description && (
             <p className="text-gray-500 text-lg leading-relaxed">
               {usecase.seo_description}
             </p>
           )}
+
           <div className="mt-4 text-xs text-gray-400">
-            Last updated {formatDate(usecase.created_at)}
+            Last updated{' '}
+            {formatDate(usecase.updated_at || usecase.created_at)}
           </div>
         </header>
 
@@ -103,7 +115,10 @@ export default async function UseCasePage({ params }: Props) {
           <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
             <path
               d="M10 7H4M4 7L7 4M4 7L7 10"
-              stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"
+              stroke="currentColor"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
             />
           </svg>
           Back to {role.title}
