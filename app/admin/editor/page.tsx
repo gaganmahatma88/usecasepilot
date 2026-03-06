@@ -246,9 +246,15 @@ function EditorContent() {
                   onChange={(e) =>
                     setForm((f) => ({ ...f, slug: e.target.value }))
                   }
-                  className="w-full px-2.5 py-2 rounded-lg border border-gray-200 text-xs font-mono focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  disabled={form.published}
+                  className="w-full px-2.5 py-2 rounded-lg border border-gray-200 text-xs font-mono focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:bg-gray-50 disabled:text-gray-400 disabled:cursor-not-allowed"
                   placeholder="my-use-case"
                 />
+                {form.published && (
+                  <p className="text-xs text-gray-400 mt-1">
+                    Slug cannot be edited after publishing to avoid breaking URLs.
+                  </p>
+                )}
               </div>
             </div>
 

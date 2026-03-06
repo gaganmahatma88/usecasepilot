@@ -31,7 +31,15 @@ async function getUseCase(roleSlug: string, usecaseSlug: string) {
 
     if (!usecase) return null
 
-    return { role, usecase }
+    const { data: related } = await supabaseAdmin
+      .from('usecases')
+      .select('title, slug')
+      .eq('role_id', role.id)
+      .eq('published', true)
+      .neq('slug', usecaseSlug)
+      .limit(4)
+
+    return { role, usecase, related: related || [] }
   } catch {
     return null
   }
@@ -67,7 +75,7 @@ export default async function UseCasePage({ params }: Props) {
 
   if (!result) notFound()
 
-  const { role, usecase } = result
+  const { role, usecase, related } = result
 
   return (
     <div className="max-w-3xl mx-auto px-4 sm:px-6 py-10 sm:py-14">
@@ -107,7 +115,28 @@ export default async function UseCasePage({ params }: Props) {
         </div>
       </article>
 
-      <div className="mt-12 pt-8 border-t border-gray-100">
+      {related.length > 0 && (
+        <div className="mt-12 pt-8 border-t border-gray-100">
+          <h2 className="text-base font-semibold text-gray-900 mb-4">
+            Related Use Cases
+          </h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            {related.map((item) => (
+              <a
+                key={item.slug}
+                href={`/use-cases/${role.slug}/${item.slug}`}
+                className="block p-4 rounded-xl border border-gray-100 hover:border-gray-200 hover:bg-gray-50 transition-colors"
+              >
+                <span className="text-sm font-medium text-gray-800">
+                  {item.title}
+                </span>
+              </a>
+            ))}
+          </div>
+        </div>
+      )}
+
+      <div className="mt-8 pt-8 border-t border-gray-100">
         <a
           href={`/use-cases/${role.slug}`}
           className="inline-flex items-center gap-2 text-sm text-gray-500 hover:text-gray-900 transition-colors"

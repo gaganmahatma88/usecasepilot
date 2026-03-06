@@ -12,7 +12,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
     const { data: usecases } = await supabase
       .from('usecases')
-      .select('slug, created_at, roles(slug)')
+      .select('slug, created_at, updated_at, roles(slug)')
       .eq('published', true)
 
     const roleUrls: MetadataRoute.Sitemap = (roles || []).map((r) => ({
@@ -23,7 +23,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const usecaseUrls: MetadataRoute.Sitemap = (usecases || []).map(
       (uc: any) => ({
         url: `${baseUrl}/use-cases/${uc.roles?.slug}/${uc.slug}`,
-        lastModified: uc.created_at,
+        lastModified: uc.updated_at || uc.created_at,
       })
     )
 
