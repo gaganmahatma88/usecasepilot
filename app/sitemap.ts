@@ -11,15 +11,19 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     .from('roles')
     .select('slug, created_at')
 
-  const { data: usecases } = await supabase
+  const { data: usecases, error: usecasesError } = await supabase
     .from('usecases')
     .select(`
       slug,
       created_at,
-      updated_at,
       roles!inner(slug)
     `)
     .eq('published', true)
+
+  if (usecasesError) {
+    console.error('[sitemap] usecases query error:', usecasesError)
+  }
+  console.log('[sitemap] usecases fetched:', usecases?.length ?? 0, usecases)
 
   const roleUrls =
     roles?.map((r) => ({
@@ -30,7 +34,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const usecaseUrls =
     usecases?.map((uc: any) => ({
       url: `${baseUrl}/use-cases/${uc.roles.slug}/${uc.slug}`,
-      lastModified: uc.updated_at || uc.created_at,
+      lastModified: uc.created_at,
     })) || []
 
   return [
