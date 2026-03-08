@@ -8,6 +8,7 @@ const navItems = [
   { href: '/admin/roles',     label: 'Roles',      icon: '👥' },
   { href: '/admin/usecases',  label: 'Use Cases',  icon: '📄' },
   { href: '/admin/editor',    label: 'New Use Case', icon: '✏️' },
+  { href: '/admin/ideas',     label: 'Use Case Ideas', icon: '💡' },
 ]
 
 export function AdminNav() {

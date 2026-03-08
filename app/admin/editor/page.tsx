@@ -15,6 +15,7 @@ function EditorContent() {
   const router = useRouter()
   const searchParams = useSearchParams()
   const editId = searchParams.get('id')
+  const titleParam = searchParams.get('title')
 
   const [roles, setRoles] = useState<Role[]>([])
   const [form, setForm] = useState({
@@ -44,6 +45,7 @@ function EditorContent() {
   const [saved, setSaved] = useState(false)
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(true)
+  const [generating, setGenerating] = useState(false)
 
   useEffect(() => {
     async function load() {
@@ -72,7 +74,11 @@ function EditorContent() {
           seo_description: uc.seo_description || '',
         })
       } else if (rolesData.length > 0) {
-        setForm((f) => ({ ...f, role_id: rolesData[0].id }))
+        setForm((f) => ({
+          ...f,
+          role_id: rolesData[0].id,
+          ...(titleParam ? { title: titleParam, slug: createSlug(titleParam) } : {}),
+        }))
       }
       setLoading(false)
     }
@@ -117,6 +123,44 @@ function EditorContent() {
       slug: editId ? f.slug : createSlug(title),
       seo_title: f.seo_title || title,
     }))
+  }
+
+  async function generateUseCase() {
+    if (!form.title) {
+      alert('Enter a title first')
+      return
+    }
+
+    if (form.content_mdx && form.content_mdx.trim().length > 50) {
+      const confirmed = confirm(
+        "This will replace the current content. Continue?"
+      )
+      if (!confirmed) return
+    }
+
+    setGenerating(true)
+
+    const roleTitle = roles.find((r) => r.id === form.role_id)?.title
+
+    const res = await fetch('/api/ai/generate-usecase', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        title: form.title,
+        role: roleTitle,
+      }),
+    })
+
+    const data = await res.json()
+
+    setForm((f) => ({
+      ...f,
+      content_mdx: data.content,
+      seo_title: data.seo_title,
+      seo_description: data.seo_description,
+    }))
+
+    setGenerating(false)
   }
 
   async function handleSave(publish?: boolean) {
@@ -179,6 +223,13 @@ function EditorContent() {
           {autosaving && <span className="text-xs text-gray-400">Saving...</span>}
           {saved && <span className="text-xs text-green-600">✓ Saved</span>}
           {error && <span className="text-xs text-red-500">{error}</span>}
+          <button
+            onClick={generateUseCase}
+            disabled={generating}
+            className="text-sm px-4 py-2 rounded-lg bg-purple-600 text-white hover:bg-purple-700 disabled:opacity-50 transition-colors"
+          >
+            {generating ? 'Generating...' : 'Generate Use Case'}
+          </button>
           <button
             onClick={() => handleSave()}
             disabled={saving}
@@ -275,7 +326,7 @@ function EditorContent() {
                   placeholder="SEO title…"
                 />
                 <p className="text-xs text-gray-400 mt-1">
-                  {form.seo_title.length}/60
+                  {form.seo_title?.length || 0}/60
                 </p>
               </div>
               <div>
@@ -295,7 +346,7 @@ function EditorContent() {
                   placeholder="Brief description for search results…"
                 />
                 <p className="text-xs text-gray-400 mt-1">
-                  {form.seo_description.length}/160
+                  {form.seo_description?.length || 0}/160
                 </p>
               </div>
             </div>
