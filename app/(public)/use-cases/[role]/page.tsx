@@ -61,6 +61,12 @@ export default async function RolePage({ params }: Props) {
         <p className="text-gray-500 leading-relaxed max-w-2xl">
           {role.description}
         </p>
+        <p className="mt-3 text-gray-500 leading-relaxed max-w-2xl">
+          AI is changing how {role.title} work — from automating repetitive tasks to
+          accelerating research, drafting, and analysis. The use cases below document
+          practical AI workflows that {role.title} can apply directly to their day-to-day
+          responsibilities.
+        </p>
       </div>
 
       {role.use_cases.length === 0 ? (
