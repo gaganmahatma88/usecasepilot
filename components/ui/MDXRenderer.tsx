@@ -1,4 +1,7 @@
 import { MDXRemote } from 'next-mdx-remote/rsc'
+import rehypeSlug from 'rehype-slug'
+import { rehypeToolLinks } from '@/lib/rehypeToolLinks'
+import { rehypeExternalLinks } from '@/lib/rehypeExternalLinks'
 
 const components = {
   Callout: ({
@@ -42,7 +45,7 @@ export function MDXRenderer({ content }: MDXRendererProps) {
         options={{
           mdxOptions: {
             remarkPlugins: [],
-            rehypePlugins: [],
+            rehypePlugins: [rehypeSlug, rehypeToolLinks, rehypeExternalLinks],
           },
         }}
       />

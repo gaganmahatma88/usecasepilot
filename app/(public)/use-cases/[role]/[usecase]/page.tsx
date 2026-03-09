@@ -2,11 +2,20 @@ export const dynamic = 'force-dynamic'
 
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
+import GithubSlugger from 'github-slugger'
 import { supabaseAdmin } from '@/lib/supabase'
 import { Breadcrumb } from '@/components/ui/Breadcrumb'
 import { MDXRenderer } from '@/components/ui/MDXRenderer'
 import { formatDate } from '@/lib/utils'
 import type { Metadata } from 'next'
+
+function extractHeadings(content: string): { text: string; id: string }[] {
+  const slugger = new GithubSlugger()
+  return [...content.matchAll(/^## (.+)$/gm)].map((m) => {
+    const text = m[1].trim()
+    return { text, id: slugger.slug(text) }
+  })
+}
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://usecasepilot.com'
 
@@ -78,6 +87,8 @@ export default async function UseCasePage({ params }: Props) {
   const { role, usecase, related } = result
 
   const canonical = `${siteUrl}/use-cases/${params.role}/${params.usecase}`
+  const headings = extractHeadings(usecase.content_mdx || '')
+  const task = usecase.title.replace(/^AI for /i, '')
 
   const jsonLd = {
     '@context': 'https://schema.org',
@@ -96,11 +107,48 @@ export default async function UseCasePage({ params }: Props) {
     },
   }
 
+  const faqJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: [
+      {
+        '@type': 'Question',
+        name: `What is ${usecase.title}?`,
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text:
+            usecase.seo_description ||
+            `${usecase.title} is a practical AI workflow designed to help ${role.title} professionals work more efficiently.`,
+        },
+      },
+      {
+        '@type': 'Question',
+        name: `How does AI help with ${task}?`,
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: `AI tools can accelerate and automate ${task} by analysing data, generating structured outputs, and reducing manual effort — helping ${role.title} professionals focus on higher-value work.`,
+        },
+      },
+      {
+        '@type': 'Question',
+        name: `What tools can be used for ${task}?`,
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: `A range of AI-powered tools support ${task}, including writing assistants, analysis platforms, and workflow automation tools tailored to ${role.title} workflows.`,
+        },
+      },
+    ],
+  }
+
   return (
     <div className="max-w-3xl mx-auto px-4 sm:px-6 py-10 sm:py-14">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
       />
       <Breadcrumb
         items={[
@@ -132,6 +180,26 @@ export default async function UseCasePage({ params }: Props) {
             {formatDate(usecase.updated_at || usecase.created_at)}
           </div>
         </header>
+
+        {headings.length > 0 && (
+          <nav aria-label="Table of contents" className="mb-8 p-4 rounded-xl border border-gray-100 bg-gray-50/50">
+            <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-3">
+              On this page
+            </p>
+            <ul className="space-y-1.5">
+              {headings.map((h) => (
+                <li key={h.id}>
+                  <a
+                    href={`#${h.id}`}
+                    className="text-sm text-gray-600 hover:text-blue-600 transition-colors"
+                  >
+                    {h.text}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        )}
 
         <div className="border-t border-gray-100 pt-8">
           <MDXRenderer content={usecase.content_mdx} />
