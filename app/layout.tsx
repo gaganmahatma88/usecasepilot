@@ -20,6 +20,10 @@ export const metadata: Metadata = {
   },
   twitter: { card: 'summary_large_image' },
   robots: { index: true, follow: true },
+
+  verification: {
+    google: '6Xl4Z8KrUskQ-fCAOxpr-Da0qwkgM3-uKME8rz_C1Ug',
+  },
 }
 
 export default function RootLayout({
