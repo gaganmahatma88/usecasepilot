@@ -184,6 +184,8 @@ export default async function UseCasePage({ params }: Props) {
           </div>
         </header>
 
+        <RecommendedTool tool={recommendedTool} compact />
+
         {headings.length > 0 && (
           <nav aria-label="Table of contents" className="mb-8 p-4 rounded-xl border border-gray-100 bg-gray-50/50">
             <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-3">

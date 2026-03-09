@@ -1,16 +1,9 @@
 import { visit } from 'unist-util-visit'
 import { toString } from 'hast-util-to-string'
-
-const TOOL_LINKS: Record<string, string> = {
-  'OWASP ZAP': 'https://www.zaproxy.org',
-  'Snyk': 'https://snyk.io',
-  'Veracode': 'https://www.veracode.com',
-  'Checkmarx': 'https://checkmarx.com',
-  'SonarQube': 'https://www.sonarsource.com/products/sonarqube/',
-}
+import { TOOL_NAME_TO_KEY } from '@/lib/tools'
 
 // Sorted longest-first so multi-word names ("OWASP ZAP") match before prefixes
-const TOOL_NAMES = Object.keys(TOOL_LINKS).sort((a, b) => b.length - a.length)
+const TOOL_NAMES = Object.keys(TOOL_NAME_TO_KEY).sort((a, b) => b.length - a.length)
 
 function isToolsHeading(node: any): boolean {
   return (
@@ -38,13 +31,14 @@ function linkToolInLi(li: any): void {
   )
   if (!toolName) return
 
-  const url = TOOL_LINKS[toolName]
+  const key = TOOL_NAME_TO_KEY[toolName]
+  const href = `/api/track?tool=${key}`
   const remainder = text.slice(toolName.length)
 
   const anchor = {
     type: 'element',
     tagName: 'a',
-    properties: { href: url, target: '_blank', rel: ['nofollow', 'noopener'] },
+    properties: { href, target: '_blank', rel: ['nofollow', 'noopener'] },
     children: [{ type: 'text', value: toolName }],
   }
 
