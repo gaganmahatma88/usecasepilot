@@ -39,7 +39,7 @@ SEO description rules:
 ---
 
 Content rules:
-- Written in MDX (standard Markdown — no JSX or custom components)
+- Written in MDX (standard Markdown — inline HTML anchor tags are allowed, no other JSX or custom components)
 - Use clear, professional language
 - Be specific to the "${role}" role — avoid generic statements that apply to any profession
 - Each section must have real substance — no filler or placeholder text
@@ -64,7 +64,16 @@ A short numbered step-by-step showing how a ${role} would complete this task usi
 
 ## Tools That Can Help
 
-A short bulleted list of AI tool categories relevant to this workflow (e.g. "AI writing assistants", "AI meeting transcription tools"). Do not name or promote specific products.
+A bulleted list of 3–5 real, well-known tools relevant to this workflow.
+For each tool, output an HTML anchor tag using this exact format:
+
+- <a href="https://example.com" target="_blank" rel="nofollow noopener">Tool Name</a> — one sentence describing what it does for this workflow.
+
+Rules:
+- Use the tool's real homepage URL (e.g. https://snyk.io, https://www.sonarqube.org, https://github.com/features/copilot)
+- Only include tools that genuinely apply to the workflow described
+- Do not invent URLs — only use well-known tools with verifiable public websites
+- Keep the description to one sentence focused on the specific workflow
 
 ---
 
