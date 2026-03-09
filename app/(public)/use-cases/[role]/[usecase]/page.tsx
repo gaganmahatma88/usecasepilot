@@ -6,6 +6,8 @@ import GithubSlugger from 'github-slugger'
 import { supabaseAdmin } from '@/lib/supabase'
 import { Breadcrumb } from '@/components/ui/Breadcrumb'
 import { MDXRenderer } from '@/components/ui/MDXRenderer'
+import { RecommendedTool } from '@/components/ui/RecommendedTool'
+import { getToolForSlug } from '@/lib/tools'
 import { formatDate } from '@/lib/utils'
 import type { Metadata } from 'next'
 
@@ -89,6 +91,7 @@ export default async function UseCasePage({ params }: Props) {
   const canonical = `${siteUrl}/use-cases/${params.role}/${params.usecase}`
   const headings = extractHeadings(usecase.content_mdx || '')
   const task = usecase.title.replace(/^AI for /i, '')
+  const recommendedTool = getToolForSlug(params.usecase)
 
   const jsonLd = {
     '@context': 'https://schema.org',
@@ -205,6 +208,8 @@ export default async function UseCasePage({ params }: Props) {
           <MDXRenderer content={usecase.content_mdx} />
         </div>
       </article>
+
+      <RecommendedTool tool={recommendedTool} />
 
       {related.length > 0 && (
         <div className="mt-12 pt-8 border-t border-gray-100">
