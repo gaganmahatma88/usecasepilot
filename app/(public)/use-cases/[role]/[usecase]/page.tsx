@@ -11,7 +11,7 @@ import type { Metadata } from 'next'
 
 function extractHeadings(content: string): { text: string; id: string }[] {
   const slugger = new GithubSlugger()
-  return [...content.matchAll(/^## (.+)$/gm)].map((m) => {
+  return Array.from(content.matchAll(/^## (.+)$/gm)).map((m) => {
     const text = m[1].trim()
     return { text, id: slugger.slug(text) }
   })
