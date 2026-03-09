@@ -1,7 +1,9 @@
+import Link from 'next/link'
 import type { Metadata } from 'next'
 import { Breadcrumb } from '@/components/ui/Breadcrumb'
 import { RecommendedTool } from '@/components/ui/RecommendedTool'
 import { tools } from '@/lib/tools'
+import { supabase } from '@/lib/supabase'
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://usecasepilot.com'
 const canonical = `${siteUrl}/best-ai-tools-for-software-engineers`
@@ -29,7 +31,33 @@ const pageTools = [
   tools['linear'],
 ]
 
-export default function BestAIToolsForSoftwareEngineers() {
+async function getRelatedUseCases() {
+  try {
+    const { data: role } = await supabase
+      .from('roles')
+      .select('id')
+      .eq('slug', 'software-engineers')
+      .single()
+
+    if (!role) return []
+
+    const { data } = await supabase
+      .from('usecases')
+      .select('title, slug')
+      .eq('role_id', role.id)
+      .eq('published', true)
+      .order('created_at', { ascending: false })
+      .limit(4)
+
+    return data || []
+  } catch {
+    return []
+  }
+}
+
+export default async function BestAIToolsForSoftwareEngineers() {
+  const relatedUseCases = await getRelatedUseCases()
+
   return (
     <div className="max-w-3xl mx-auto px-4 sm:px-6 py-10 sm:py-14">
       <Breadcrumb
@@ -58,6 +86,28 @@ export default function BestAIToolsForSoftwareEngineers() {
           <RecommendedTool key={tool.key} tool={tool} />
         ))}
       </div>
+
+      {relatedUseCases.length > 0 && (
+        <div className="mt-12 pt-8 border-t border-gray-100">
+          <h2 className="text-base font-semibold text-gray-900 mb-4">
+            AI Workflows You Can Implement With These Tools
+          </h2>
+          <div className="space-y-2">
+            {relatedUseCases.map((uc) => (
+              <Link
+                key={uc.slug}
+                href={`/use-cases/software-engineers/${uc.slug}`}
+                className="group flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 transition-colors"
+              >
+                <span className="w-1.5 h-1.5 rounded-full bg-blue-400 flex-shrink-0" />
+                <span className="text-sm text-gray-700 group-hover:text-blue-700 transition-colors">
+                  {uc.title}
+                </span>
+              </Link>
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   )
 }

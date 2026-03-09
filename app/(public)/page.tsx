@@ -154,6 +154,43 @@ export default async function HomePage() {
         </section>
       )}
 
+      {/* Popular AI Tools */}
+      <section className="max-w-5xl mx-auto px-4 sm:px-6 py-16 sm:py-20 border-t border-gray-100">
+        <div className="flex items-center justify-between mb-8">
+          <h2 className="text-xl font-semibold text-gray-900">Popular AI Tools</h2>
+        </div>
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          {[
+            {
+              href: '/best-ai-tools-for-software-engineers',
+              label: 'Best AI Tools for Software Engineers',
+              desc: 'Code completion, security scanning, and issue tracking.',
+            },
+            {
+              href: '/best-ai-tools-for-product-managers',
+              label: 'Best AI Tools for Product Managers',
+              desc: 'Roadmapping, feedback analysis, and user analytics.',
+            },
+            {
+              href: '/best-ai-tools-for-project-managers',
+              label: 'Best AI Tools for Project Managers',
+              desc: 'Meeting intelligence, scheduling, and project tracking.',
+            },
+          ].map((item) => (
+            <Link
+              key={item.href}
+              href={item.href}
+              className="group block p-5 rounded-xl border border-gray-100 hover:border-blue-200 hover:bg-blue-50/30 transition-all"
+            >
+              <h3 className="font-semibold text-gray-900 group-hover:text-blue-700 transition-colors mb-1.5 text-[15px]">
+                {item.label}
+              </h3>
+              <p className="text-sm text-gray-500 leading-relaxed">{item.desc}</p>
+            </Link>
+          ))}
+        </div>
+      </section>
+
       {/* Features strip */}
       <section className="border-t border-gray-100 bg-gray-50/50">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 py-16">

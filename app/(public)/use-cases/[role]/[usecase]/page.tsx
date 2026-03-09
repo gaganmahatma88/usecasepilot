@@ -21,6 +21,21 @@ function extractHeadings(content: string): { text: string; id: string }[] {
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://usecasepilot.com'
 
+const ROLE_TOOLS_PAGE: Record<string, { href: string; label: string }> = {
+  'software-engineers': {
+    href: '/best-ai-tools-for-software-engineers',
+    label: 'Best AI Tools for Software Engineers',
+  },
+  'product-managers': {
+    href: '/best-ai-tools-for-product-managers',
+    label: 'Best AI Tools for Product Managers',
+  },
+  'project-managers': {
+    href: '/best-ai-tools-for-project-managers',
+    label: 'Best AI Tools for Project Managers',
+  },
+}
+
 interface Props {
   params: { role: string; usecase: string }
 }
@@ -212,6 +227,24 @@ export default async function UseCasePage({ params }: Props) {
       </article>
 
       <RecommendedTool tool={recommendedTool} />
+
+      {ROLE_TOOLS_PAGE[params.role] && (
+        <div className="mt-10 pt-8 border-t border-gray-100">
+          <h2 className="text-base font-semibold text-gray-900 mb-2">
+            Recommended AI Tools for {role.title}
+          </h2>
+          <p className="text-sm text-gray-500">
+            Looking for tools to implement these workflows?{' '}
+            <Link
+              href={ROLE_TOOLS_PAGE[params.role].href}
+              className="text-blue-600 hover:text-blue-700 hover:underline transition-colors"
+            >
+              See our guide to the {ROLE_TOOLS_PAGE[params.role].label}
+            </Link>
+            .
+          </p>
+        </div>
+      )}
 
       {related.length > 0 && (
         <div className="mt-12 pt-8 border-t border-gray-100">

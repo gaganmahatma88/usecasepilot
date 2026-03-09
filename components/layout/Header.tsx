@@ -21,6 +21,16 @@ export function Header() {
           >
             Use Cases
           </Link>
+          <Link
+            href="/best-ai-tools-for-software-engineers"
+            className={`text-sm font-medium transition-colors ${
+              pathname.startsWith('/best-ai-tools')
+                ? 'text-blue-600'
+                : 'text-gray-600 hover:text-gray-900'
+            }`}
+          >
+            AI Tools
+          </Link>
         </nav>
       </div>
     </header>
