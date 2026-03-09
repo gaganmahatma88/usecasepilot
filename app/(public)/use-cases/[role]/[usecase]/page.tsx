@@ -1,11 +1,14 @@
 export const dynamic = 'force-dynamic'
 
 import { notFound } from 'next/navigation'
+import Link from 'next/link'
 import { supabaseAdmin } from '@/lib/supabase'
 import { Breadcrumb } from '@/components/ui/Breadcrumb'
 import { MDXRenderer } from '@/components/ui/MDXRenderer'
 import { formatDate } from '@/lib/utils'
 import type { Metadata } from 'next'
+
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://usecasepilot.com'
 
 interface Props {
   params: { role: string; usecase: string }
@@ -52,9 +55,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   const { usecase } = result
 
-  const siteUrl =
-    process.env.NEXT_PUBLIC_SITE_URL || 'https://usecasepilot.com'
-
   const canonical = `${siteUrl}/use-cases/${params.role}/${params.usecase}`
 
   return {
@@ -77,8 +77,31 @@ export default async function UseCasePage({ params }: Props) {
 
   const { role, usecase, related } = result
 
+  const canonical = `${siteUrl}/use-cases/${params.role}/${params.usecase}`
+
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: usecase.title,
+    description: usecase.seo_description || '',
+    datePublished: usecase.created_at,
+    dateModified: usecase.updated_at || usecase.created_at,
+    author: {
+      '@type': 'Organization',
+      name: 'UseCasePilot',
+    },
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': canonical,
+    },
+  }
+
   return (
     <div className="max-w-3xl mx-auto px-4 sm:px-6 py-10 sm:py-14">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <Breadcrumb
         items={[
           { label: 'Home', href: '/' },
@@ -122,7 +145,7 @@ export default async function UseCasePage({ params }: Props) {
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             {related.map((item) => (
-              <a
+              <Link
                 key={item.slug}
                 href={`/use-cases/${role.slug}/${item.slug}`}
                 className="block p-4 rounded-xl border border-gray-100 hover:border-gray-200 hover:bg-gray-50 transition-colors"
@@ -130,14 +153,14 @@ export default async function UseCasePage({ params }: Props) {
                 <span className="text-sm font-medium text-gray-800">
                   {item.title}
                 </span>
-              </a>
+              </Link>
             ))}
           </div>
         </div>
       )}
 
       <div className="mt-8 pt-8 border-t border-gray-100">
-        <a
+        <Link
           href={`/use-cases/${role.slug}`}
           className="inline-flex items-center gap-2 text-sm text-gray-500 hover:text-gray-900 transition-colors"
         >
@@ -151,7 +174,7 @@ export default async function UseCasePage({ params }: Props) {
             />
           </svg>
           Back to {role.title}
-        </a>
+        </Link>
       </div>
     </div>
   )

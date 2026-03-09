@@ -2,6 +2,26 @@ import Link from 'next/link'
 import { supabase } from '@/lib/supabase'
 import type { Role } from '@/types'
 
+interface LatestUseCase {
+  title: string
+  slug: string
+  roles: { slug: string } | null
+}
+
+async function getLatestUseCases(): Promise<LatestUseCase[]> {
+  try {
+    const { data } = await supabase
+      .from('usecases')
+      .select('title, slug, roles(slug)')
+      .eq('published', true)
+      .order('created_at', { ascending: false })
+      .limit(8)
+    return (data as LatestUseCase[]) || []
+  } catch {
+    return []
+  }
+}
+
 async function getRoles(): Promise<Role[]> {
   try {
     const { data } = await supabase
@@ -15,7 +35,7 @@ async function getRoles(): Promise<Role[]> {
 }
 
 export default async function HomePage() {
-  const roles = await getRoles()
+  const [roles, latestUseCases] = await Promise.all([getRoles(), getLatestUseCases()])
 
   return (
     <div>
@@ -108,6 +128,31 @@ export default async function HomePage() {
           </div>
         )}
       </section>
+
+      {/* Latest use cases */}
+      {latestUseCases.length > 0 && (
+        <section className="max-w-5xl mx-auto px-4 sm:px-6 py-16 sm:py-20 border-t border-gray-100">
+          <h2 className="text-xl font-semibold text-gray-900 mb-8">Latest AI Use Cases</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            {latestUseCases.map((uc) => {
+              const roleSlug = uc.roles?.slug
+              if (!roleSlug) return null
+              return (
+                <Link
+                  key={uc.slug}
+                  href={`/use-cases/${roleSlug}/${uc.slug}`}
+                  className="group flex items-center gap-3 p-4 rounded-xl border border-gray-100 hover:border-blue-200 hover:bg-blue-50/20 transition-all"
+                >
+                  <span className="w-1.5 h-1.5 rounded-full bg-blue-400 flex-shrink-0" />
+                  <span className="text-sm font-medium text-gray-800 group-hover:text-blue-700 transition-colors">
+                    {uc.title}
+                  </span>
+                </Link>
+              )
+            })}
+          </div>
+        </section>
+      )}
 
       {/* Features strip */}
       <section className="border-t border-gray-100 bg-gray-50/50">
