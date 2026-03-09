@@ -240,6 +240,168 @@ export const tools: Record<string, Tool> = {
       'Syncs with Google Calendar and project tasks',
     ],
   },
+
+  // ── Marketing ────────────────────────────────────────────────────────────
+  jasper: {
+    key: 'jasper',
+    name: 'Jasper',
+    url: 'https://www.jasper.ai',
+    description: 'AI writing platform for marketing copy, blogs, and campaigns.',
+    bestFor: 'Marketing copy',
+    pricing: 'Free Trial',
+    benefits: [
+      'Generate on-brand content at scale',
+      'Built-in marketing frameworks and templates',
+      'Supports 30+ languages',
+    ],
+  },
+  semrush: {
+    key: 'semrush',
+    name: 'Semrush',
+    url: 'https://www.semrush.com',
+    description: 'All-in-one SEO and content marketing platform.',
+    bestFor: 'SEO & content research',
+    pricing: 'Free Trial',
+    benefits: [
+      'AI-powered keyword research and gap analysis',
+      'Competitor traffic and strategy insights',
+      'Content optimisation recommendations',
+    ],
+  },
+  hubspot: {
+    key: 'hubspot',
+    name: 'HubSpot',
+    url: 'https://www.hubspot.com',
+    description: 'CRM and marketing automation platform with built-in AI.',
+    bestFor: 'Marketing automation',
+    pricing: 'Free',
+    benefits: [
+      'AI drafts email campaigns and landing pages',
+      'Automated lead nurturing workflows',
+      'Unified contact and analytics dashboard',
+    ],
+  },
+  buffer: {
+    key: 'buffer',
+    name: 'Buffer',
+    url: 'https://buffer.com',
+    description: 'Social media scheduling and analytics tool with AI assistant.',
+    bestFor: 'Social media',
+    pricing: 'Free',
+    benefits: [
+      'AI suggests post ideas and captions',
+      'Schedule across all major platforms',
+      'Engagement analytics in one place',
+    ],
+  },
+  canva: {
+    key: 'canva',
+    name: 'Canva',
+    url: 'https://www.canva.com',
+    description: 'AI-powered design platform for marketing visuals and presentations.',
+    bestFor: 'Visual content',
+    pricing: 'Free',
+    benefits: [
+      'AI generates images, backgrounds, and layouts',
+      'Magic Write creates copy inside designs',
+      'Brand kit keeps all assets consistent',
+    ],
+  },
+
+  // ── Sales ────────────────────────────────────────────────────────────────
+  apollo: {
+    key: 'apollo',
+    name: 'Apollo.io',
+    url: 'https://www.apollo.io',
+    description: 'AI-powered sales intelligence and outreach platform.',
+    bestFor: 'Lead generation',
+    pricing: 'Free',
+    benefits: [
+      'Database of 275M+ verified contacts',
+      'AI writes personalised outreach sequences',
+      'Enriches CRM data automatically',
+    ],
+  },
+  gong: {
+    key: 'gong',
+    name: 'Gong',
+    url: 'https://www.gong.io',
+    description: 'Revenue intelligence platform that analyses every sales call.',
+    bestFor: 'Sales call analysis',
+    pricing: 'Paid',
+    benefits: [
+      'AI surfaces deal risks and next-step recommendations',
+      'Analyses talk ratios and objection patterns',
+      'Forecasting based on actual pipeline activity',
+    ],
+  },
+  outreach: {
+    key: 'outreach',
+    name: 'Outreach',
+    url: 'https://www.outreach.io',
+    description: 'Sales execution platform with AI-driven sequences and coaching.',
+    bestFor: 'Sales sequences',
+    pricing: 'Paid',
+    benefits: [
+      'AI personalises outreach at scale',
+      'Automated follow-up sequences with smart timing',
+      'Real-time coaching during live calls',
+    ],
+  },
+  clay: {
+    key: 'clay',
+    name: 'Clay',
+    url: 'https://www.clay.com',
+    description: 'AI-powered prospecting and lead enrichment tool.',
+    bestFor: 'Lead enrichment',
+    pricing: 'Free Trial',
+    benefits: [
+      'Enriches leads from 75+ data sources automatically',
+      'AI writes hyper-personalised outreach messages',
+      'Automates the entire prospecting workflow',
+    ],
+  },
+
+  // ── Customer Support ─────────────────────────────────────────────────────
+  intercom: {
+    key: 'intercom',
+    name: 'Intercom',
+    url: 'https://www.intercom.com',
+    description: 'AI-first customer service platform with Fin AI agent.',
+    bestFor: 'AI support chat',
+    pricing: 'Free Trial',
+    benefits: [
+      'Fin AI resolves up to 50% of queries automatically',
+      'Seamless handoff to human agents when needed',
+      'Unified inbox for all support channels',
+    ],
+  },
+  zendesk: {
+    key: 'zendesk',
+    name: 'Zendesk',
+    url: 'https://www.zendesk.com',
+    description: 'AI-powered customer support and ticketing platform.',
+    bestFor: 'Ticket management',
+    pricing: 'Free Trial',
+    benefits: [
+      'AI auto-classifies and routes incoming tickets',
+      'Suggests responses based on resolved tickets',
+      'Advanced reporting on CSAT and resolution times',
+    ],
+  },
+  freshdesk: {
+    key: 'freshdesk',
+    name: 'Freshdesk',
+    url: 'https://www.freshdesk.com',
+    description: 'Cloud-based helpdesk with AI automation for support teams.',
+    bestFor: 'Helpdesk automation',
+    pricing: 'Free',
+    benefits: [
+      'AI Freddy suggests answers from your knowledge base',
+      'Auto-assigns tickets by topic and priority',
+      'Free plan supports unlimited agents',
+    ],
+  },
 }
 
 // Name → registry key for rehype tool-link rewriting
@@ -261,6 +423,18 @@ export const TOOL_NAME_TO_KEY: Record<string, string> = {
   'Fireflies': 'fireflies',
   'ClickUp': 'clickup',
   'Motion': 'motion',
+  'Jasper': 'jasper',
+  'Semrush': 'semrush',
+  'HubSpot': 'hubspot',
+  'Buffer': 'buffer',
+  'Canva': 'canva',
+  'Apollo': 'apollo',
+  'Gong': 'gong',
+  'Outreach': 'outreach',
+  'Clay': 'clay',
+  'Intercom': 'intercom',
+  'Zendesk': 'zendesk',
+  'Freshdesk': 'freshdesk',
 }
 
 export function getToolForSlug(slug: string): Tool {

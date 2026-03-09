@@ -4,6 +4,15 @@ import { supabase } from '@/lib/supabase'
 import { Breadcrumb } from '@/components/ui/Breadcrumb'
 import type { Metadata } from 'next'
 
+const ROLE_TOOLS_PAGE: Record<string, string> = {
+  'software-engineers':  '/best-ai-tools-for-software-engineers',
+  'product-managers':    '/best-ai-tools-for-product-managers',
+  'project-managers':    '/best-ai-tools-for-project-managers',
+  'marketing-managers':  '/ai-tools-for-marketing-managers',
+  'sales-teams':         '/ai-tools-for-sales-teams',
+  'customer-support':    '/ai-tools-for-customer-support',
+}
+
 interface Props {
   params: { role: string }
 }
@@ -67,6 +76,17 @@ export default async function RolePage({ params }: Props) {
           practical AI workflows that {role.title} can apply directly to their day-to-day
           responsibilities.
         </p>
+        {ROLE_TOOLS_PAGE[params.role] && (
+          <p className="mt-4 text-sm text-gray-500">
+            Looking for tool recommendations?{' '}
+            <Link
+              href={ROLE_TOOLS_PAGE[params.role]}
+              className="text-blue-600 hover:text-blue-700 hover:underline transition-colors"
+            >
+              Explore AI Tools for {role.title} →
+            </Link>
+          </p>
+        )}
       </div>
 
       {role.use_cases.length === 0 ? (
