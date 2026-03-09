@@ -35,7 +35,20 @@ export function RecommendedTool({ tool, compact = false }: Props) {
       <p className="text-xs font-semibold text-blue-400 uppercase tracking-wide mb-2">
         Recommended Tool
       </p>
-      <p className="text-sm font-semibold text-gray-900 mb-1">{tool.name}</p>
+      <div className="flex items-center gap-2 mb-1">
+        <p className="text-sm font-semibold text-gray-900">{tool.name}</p>
+        {tool.pricing && (
+          <span className={`text-xs font-medium px-2 py-0.5 rounded-full ${
+            tool.pricing === 'Free'
+              ? 'bg-green-50 text-green-700 border border-green-100'
+              : tool.pricing === 'Free Trial'
+              ? 'bg-yellow-50 text-yellow-700 border border-yellow-100'
+              : 'bg-gray-100 text-gray-500'
+          }`}>
+            {tool.pricing === 'Free' ? 'Free plan' : tool.pricing === 'Free Trial' ? 'Free trial' : 'Paid'}
+          </span>
+        )}
+      </div>
       <p className="text-sm text-gray-500 mb-3">{tool.description}</p>
       {tool.benefits && tool.benefits.length > 0 && (
         <ul className="mb-4 space-y-1.5">

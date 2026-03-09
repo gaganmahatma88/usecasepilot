@@ -2,6 +2,7 @@ import Link from 'next/link'
 import type { Metadata } from 'next'
 import { Breadcrumb } from '@/components/ui/Breadcrumb'
 import { RecommendedTool } from '@/components/ui/RecommendedTool'
+import { ToolComparisonTable } from '@/components/ui/ToolComparisonTable'
 import { tools } from '@/lib/tools'
 import { supabase } from '@/lib/supabase'
 
@@ -80,6 +81,8 @@ export default async function BestAIToolsForSoftwareEngineers() {
           workflows.
         </p>
       </div>
+
+      <ToolComparisonTable tools={pageTools} />
 
       <div className="space-y-6">
         {pageTools.map((tool) => (

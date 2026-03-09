@@ -7,6 +7,7 @@ import { supabaseAdmin } from '@/lib/supabase'
 import { Breadcrumb } from '@/components/ui/Breadcrumb'
 import { MDXRenderer } from '@/components/ui/MDXRenderer'
 import { RecommendedTool } from '@/components/ui/RecommendedTool'
+import { StickyToolCTA } from '@/components/ui/StickyToolCTA'
 import { getToolForSlug } from '@/lib/tools'
 import { formatDate } from '@/lib/utils'
 import type { Metadata } from 'next'
@@ -227,6 +228,8 @@ export default async function UseCasePage({ params }: Props) {
       </article>
 
       <RecommendedTool tool={recommendedTool} />
+
+      <StickyToolCTA tool={recommendedTool} />
 
       {ROLE_TOOLS_PAGE[params.role] && (
         <div className="mt-10 pt-8 border-t border-gray-100">
