@@ -12,6 +12,34 @@ import { getToolForSlug } from '@/lib/tools'
 import { formatDate } from '@/lib/utils'
 import type { Metadata } from 'next'
 
+interface Faq {
+  question: string
+  answer: string
+}
+
+function generateFaqs(title: string, task: string, roleTitle: string, seoDescription: string): Faq[] {
+  return [
+    {
+      question: `What is ${title}?`,
+      answer:
+        seoDescription ||
+        `${title} is a practical AI workflow that helps ${roleTitle} automate and improve ${task.toLowerCase()}, reducing manual effort and increasing output quality.`,
+    },
+    {
+      question: `How does AI help ${roleTitle} with ${task}?`,
+      answer: `AI tools assist ${roleTitle} with ${task.toLowerCase()} by analysing large volumes of data quickly, generating structured suggestions, and flagging issues that would take significantly longer to identify manually.`,
+    },
+    {
+      question: `What are the main benefits of using AI for ${task}?`,
+      answer: `The key benefits include faster turnaround times, more consistent outputs, reduced human error, and the ability to focus professional effort on decisions that require judgment rather than repetitive processing.`,
+    },
+    {
+      question: `How do I get started with AI for ${task}?`,
+      answer: `Start by identifying the most time-consuming parts of your ${task.toLowerCase()} workflow. Most AI tools offer a free plan or trial — integrate one into a low-risk project first, evaluate the output quality, then expand usage from there.`,
+    },
+  ]
+}
+
 function extractHeadings(content: string): { text: string; id: string }[] {
   const slugger = new GithubSlugger()
   return Array.from(content.matchAll(/^## (.+)$/gm)).map((m) => {
@@ -126,37 +154,19 @@ export default async function UseCasePage({ params }: Props) {
     },
   }
 
+  const faqs = generateFaqs(usecase.title, task, role.title, usecase.seo_description || '')
+
   const faqJsonLd = {
     '@context': 'https://schema.org',
     '@type': 'FAQPage',
-    mainEntity: [
-      {
-        '@type': 'Question',
-        name: `What is ${usecase.title}?`,
-        acceptedAnswer: {
-          '@type': 'Answer',
-          text:
-            usecase.seo_description ||
-            `${usecase.title} is a practical AI workflow designed to help ${role.title} professionals work more efficiently.`,
-        },
+    mainEntity: faqs.map((faq) => ({
+      '@type': 'Question',
+      name: faq.question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: faq.answer,
       },
-      {
-        '@type': 'Question',
-        name: `How does AI help with ${task}?`,
-        acceptedAnswer: {
-          '@type': 'Answer',
-          text: `AI tools can accelerate and automate ${task} by analysing data, generating structured outputs, and reducing manual effort — helping ${role.title} professionals focus on higher-value work.`,
-        },
-      },
-      {
-        '@type': 'Question',
-        name: `What tools can be used for ${task}?`,
-        acceptedAnswer: {
-          '@type': 'Answer',
-          text: `A range of AI-powered tools support ${task}, including writing assistants, analysis platforms, and workflow automation tools tailored to ${role.title} workflows.`,
-        },
-      },
-    ],
+    })),
   }
 
   return (
@@ -248,6 +258,22 @@ export default async function UseCasePage({ params }: Props) {
           </p>
         </div>
       )}
+
+      <div className="mt-12 pt-8 border-t border-gray-100">
+        <h2 className="text-base font-semibold text-gray-900 mb-6">
+          Frequently Asked Questions
+        </h2>
+        <div className="space-y-5">
+          {faqs.map((faq) => (
+            <div key={faq.question}>
+              <h3 className="text-sm font-semibold text-gray-900 mb-1.5">
+                {faq.question}
+              </h3>
+              <p className="text-sm text-gray-500 leading-relaxed">{faq.answer}</p>
+            </div>
+          ))}
+        </div>
+      </div>
 
       {related.length > 0 && (
         <div className="mt-12 pt-8 border-t border-gray-100">
