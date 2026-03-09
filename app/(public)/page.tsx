@@ -16,7 +16,7 @@ async function getLatestUseCases(): Promise<LatestUseCase[]> {
       .eq('published', true)
       .order('created_at', { ascending: false })
       .limit(8)
-    return (data as LatestUseCase[]) || []
+    return (data as unknown as LatestUseCase[]) || []
   } catch {
     return []
   }
