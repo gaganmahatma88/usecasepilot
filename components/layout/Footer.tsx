@@ -13,6 +13,9 @@ export function Footer() {
           <Link href="/ai-use-cases" className="hover:text-gray-600 transition-colors">
             AI Use Cases Directory
           </Link>
+          <Link href="/best-ai-use-cases" className="hover:text-gray-600 transition-colors">
+            Best AI Use Cases
+          </Link>
           <Link href="/sitemap.xml" className="hover:text-gray-600 transition-colors">
             Sitemap
           </Link>
