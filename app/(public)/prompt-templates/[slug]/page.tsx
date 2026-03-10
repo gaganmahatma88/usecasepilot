@@ -83,26 +83,45 @@ export default function PromptTemplatePage({ params }: Props) {
       {/* Prompt template */}
       <section className="mb-12">
         <h2 className="text-base font-semibold text-gray-900 mb-4">Prompt Template</h2>
-        <div className="rounded-xl border border-gray-200 bg-gray-50/50 overflow-hidden">
-          <pre className="p-5 text-sm text-gray-700 leading-relaxed whitespace-pre-wrap font-mono">
+        <div className="prompt-block">
+          {/* Header bar */}
+          <div className="prompt-block-header">
+            <div className="flex items-center gap-2.5">
+              <div className="flex gap-1.5">
+                <span className="w-2.5 h-2.5 rounded-full bg-[hsl(220_15%_22%)]" />
+                <span className="w-2.5 h-2.5 rounded-full bg-[hsl(220_15%_22%)]" />
+                <span className="w-2.5 h-2.5 rounded-full bg-[hsl(220_15%_22%)]" />
+              </div>
+              <span className="text-xs text-gray-500 font-mono">prompt.txt</span>
+            </div>
+            <CopyPromptButton text={page.promptTemplate} variant="dark" />
+          </div>
+          {/* Content */}
+          <pre className="px-5 py-5 text-sm text-[hsl(220_15%_82%)] leading-relaxed whitespace-pre-wrap font-mono overflow-x-auto">
             {page.promptTemplate}
           </pre>
-          <div className="flex flex-wrap gap-2 px-5 py-3 border-t border-gray-100 bg-white">
-            <CopyPromptButton text={page.promptTemplate} />
+          {/* Footer actions */}
+          <div className="prompt-block-footer">
             <a
               href={chatgptUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-xs font-medium px-3 py-1.5 rounded-lg border border-gray-200 bg-white text-gray-500 hover:border-green-300 hover:text-green-700 transition-colors"
+              className="inline-flex items-center gap-1.5 text-xs font-medium px-3 py-1.5 rounded-lg border border-[hsl(220_15%_22%)] bg-[hsl(220_15%_12%)] text-gray-400 hover:border-green-700/60 hover:text-green-400 hover:bg-green-950/40 transition-all"
             >
+              <svg width="10" height="10" viewBox="0 0 10 10" fill="none" className="opacity-70">
+                <path d="M1.5 8.5L8.5 1.5M8.5 1.5H3.5M8.5 1.5V6.5" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
               Open in ChatGPT
             </a>
             <a
               href={claudeUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-xs font-medium px-3 py-1.5 rounded-lg border border-gray-200 bg-white text-gray-500 hover:border-orange-300 hover:text-orange-700 transition-colors"
+              className="inline-flex items-center gap-1.5 text-xs font-medium px-3 py-1.5 rounded-lg border border-[hsl(220_15%_22%)] bg-[hsl(220_15%_12%)] text-gray-400 hover:border-orange-700/60 hover:text-orange-400 hover:bg-orange-950/40 transition-all"
             >
+              <svg width="10" height="10" viewBox="0 0 10 10" fill="none" className="opacity-70">
+                <path d="M1.5 8.5L8.5 1.5M8.5 1.5H3.5M8.5 1.5V6.5" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
               Open in Claude
             </a>
           </div>
@@ -140,7 +159,7 @@ export default function PromptTemplatePage({ params }: Props) {
       {/* Example input */}
       <section className="mb-12">
         <h2 className="text-base font-semibold text-gray-900 mb-4">Example Input</h2>
-        <pre className="p-5 rounded-xl border border-gray-100 bg-gray-50/50 text-sm text-gray-700 leading-relaxed whitespace-pre-wrap font-mono overflow-x-auto">
+        <pre className="p-5 rounded-xl border border-gray-200 bg-gray-50 text-sm text-gray-700 leading-relaxed whitespace-pre-wrap font-mono overflow-x-auto">
           {page.exampleInput}
         </pre>
       </section>
@@ -205,13 +224,20 @@ export default function PromptTemplatePage({ params }: Props) {
 
       {/* FAQ */}
       <section className="pt-8 border-t border-gray-100">
-        <h2 className="text-base font-semibold text-gray-900 mb-6">Frequently Asked Questions</h2>
-        <div className="space-y-5">
+        <h2 className="text-base font-semibold text-gray-900 mb-4">Frequently Asked Questions</h2>
+        <div className="divide-y divide-gray-100">
           {page.faqs.map((faq) => (
-            <div key={faq.question}>
-              <h3 className="text-sm font-semibold text-gray-900 mb-1.5">{faq.question}</h3>
-              <p className="text-sm text-gray-500 leading-relaxed">{faq.answer}</p>
-            </div>
+            <details key={faq.question} className="faq-item group">
+              <summary className="flex items-center justify-between gap-4 py-4 cursor-pointer">
+                <h3 className="text-sm font-semibold text-gray-900">{faq.question}</h3>
+                <span className="flex-shrink-0 w-5 h-5 rounded-full bg-gray-100 group-open:bg-blue-50 flex items-center justify-center transition-colors">
+                  <svg width="10" height="10" viewBox="0 0 10 10" fill="none" className="text-gray-400 group-open:text-blue-500 transition-colors group-open:rotate-45 duration-200">
+                    <path d="M5 2V8M2 5H8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+                  </svg>
+                </span>
+              </summary>
+              <p className="pb-5 text-sm text-gray-500 leading-relaxed">{faq.answer}</p>
+            </details>
           ))}
         </div>
       </section>

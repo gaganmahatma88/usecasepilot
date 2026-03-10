@@ -6,7 +6,8 @@
       "Bash(where:*)",
       "Bash(powershell:*)",
       "Bash(npm run:*)",
-      "Bash(ls:*)"
+      "Bash(ls:*)",
+      "Bash(npx tsc:*)"
     ]
   }
 }

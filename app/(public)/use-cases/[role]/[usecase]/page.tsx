@@ -248,13 +248,14 @@ export default async function UseCasePage({ params }: Props) {
         <RecommendedTool tool={recommendedTool} compact />
 
         {headings.length > 0 && (
-          <nav aria-label="Table of contents" className="mb-8 p-4 rounded-xl border border-gray-100 bg-gray-50/50">
-            <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-3">
+          <nav aria-label="Table of contents" className="mb-8 p-4 rounded-xl border border-gray-100 bg-gray-50/60">
+            <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-3">
               On this page
             </p>
             <ul className="space-y-1.5">
               {headings.map((h) => (
-                <li key={h.id}>
+                <li key={h.id} className="flex items-center gap-2">
+                  <span className="w-1 h-1 rounded-full bg-gray-300 flex-shrink-0" />
                   <a
                     href={`#${h.id}`}
                     className="text-sm text-gray-600 hover:text-blue-600 transition-colors"
@@ -295,17 +296,22 @@ export default async function UseCasePage({ params }: Props) {
       )}
 
       <div className="mt-12 pt-8 border-t border-gray-100">
-        <h2 className="text-base font-semibold text-gray-900 mb-6">
+        <h2 className="text-base font-semibold text-gray-900 mb-4">
           Frequently Asked Questions
         </h2>
-        <div className="space-y-5">
+        <div className="divide-y divide-gray-100">
           {faqs.map((faq) => (
-            <div key={faq.question}>
-              <h3 className="text-sm font-semibold text-gray-900 mb-1.5">
-                {faq.question}
-              </h3>
-              <p className="text-sm text-gray-500 leading-relaxed">{faq.answer}</p>
-            </div>
+            <details key={faq.question} className="faq-item group">
+              <summary className="flex items-center justify-between gap-4 py-4 cursor-pointer">
+                <h3 className="text-sm font-semibold text-gray-900">{faq.question}</h3>
+                <span className="flex-shrink-0 w-5 h-5 rounded-full bg-gray-100 group-open:bg-blue-50 flex items-center justify-center transition-colors">
+                  <svg width="10" height="10" viewBox="0 0 10 10" fill="none" className="text-gray-400 group-open:text-blue-500 transition-colors group-open:rotate-45 duration-200">
+                    <path d="M5 2V8M2 5H8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+                  </svg>
+                </span>
+              </summary>
+              <p className="pb-5 text-sm text-gray-500 leading-relaxed">{faq.answer}</p>
+            </details>
           ))}
         </div>
       </div>
@@ -315,16 +321,22 @@ export default async function UseCasePage({ params }: Props) {
           <h2 className="text-base font-semibold text-gray-900 mb-4">
             Related Use Cases
           </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
             {related.map((item) => (
               <Link
                 key={item.slug}
                 href={`/use-cases/${role.slug}/${item.slug}`}
-                className="block p-4 rounded-xl border border-gray-100 hover:border-gray-200 hover:bg-gray-50 transition-colors"
+                className="group flex items-center justify-between p-4 rounded-xl border border-gray-100 hover:border-blue-200 hover:bg-blue-50/20 card-hover transition-all"
               >
-                <span className="text-sm font-medium text-gray-800">
+                <span className="text-sm font-medium text-gray-800 group-hover:text-blue-700 transition-colors">
                   {item.title}
                 </span>
+                <svg
+                  width="13" height="13" viewBox="0 0 13 13" fill="none"
+                  className="text-gray-300 group-hover:text-blue-400 transition-colors flex-shrink-0 ml-3"
+                >
+                  <path d="M2.5 6.5H10.5M10.5 6.5L7 3M10.5 6.5L7 10" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
               </Link>
             ))}
           </div>

@@ -351,15 +351,22 @@ function PromptPage({ slug }: { slug: string }) {
 
       {/* FAQ */}
       <div className="mt-12 pt-8 border-t border-gray-100">
-        <h2 className="text-base font-semibold text-gray-900 mb-6">
+        <h2 className="text-base font-semibold text-gray-900 mb-4">
           Frequently Asked Questions
         </h2>
-        <div className="space-y-5">
+        <div className="divide-y divide-gray-100">
           {faqs.map((faq) => (
-            <div key={faq.question}>
-              <h3 className="text-sm font-semibold text-gray-900 mb-1.5">{faq.question}</h3>
-              <p className="text-sm text-gray-500 leading-relaxed">{faq.answer}</p>
-            </div>
+            <details key={faq.question} className="faq-item group">
+              <summary className="flex items-center justify-between gap-4 py-4 cursor-pointer">
+                <h3 className="text-sm font-semibold text-gray-900">{faq.question}</h3>
+                <span className="flex-shrink-0 w-5 h-5 rounded-full bg-gray-100 group-open:bg-blue-50 flex items-center justify-center transition-colors">
+                  <svg width="10" height="10" viewBox="0 0 10 10" fill="none" className="text-gray-400 group-open:text-blue-500 transition-colors group-open:rotate-45 duration-200">
+                    <path d="M5 2V8M2 5H8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+                  </svg>
+                </span>
+              </summary>
+              <p className="pb-5 text-sm text-gray-500 leading-relaxed">{faq.answer}</p>
+            </details>
           ))}
         </div>
       </div>
