@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { Breadcrumb } from '@/components/ui/Breadcrumb'
 import { RecommendedTool } from '@/components/ui/RecommendedTool'
 import { CopyPromptButton } from '@/components/CopyPromptButton'
-import { templatePages } from '@/lib/templatePages'
+import { allTemplatePages as templatePages } from '@/lib/templateRegistry'
 import { tools } from '@/lib/tools'
 import type { Metadata } from 'next'
 

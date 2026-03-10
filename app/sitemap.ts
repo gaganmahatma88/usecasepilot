@@ -2,7 +2,7 @@ import { MetadataRoute } from 'next'
 import { supabase } from '@/lib/supabase'
 import { prompts } from '@/lib/prompts'
 import { promptRoles } from '@/lib/promptRoles'
-import { templatePages } from '@/lib/templatePages'
+import { allTemplatePages as templatePages } from '@/lib/templateRegistry'
 
 export const dynamic = "force-dynamic";
 
