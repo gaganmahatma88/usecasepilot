@@ -77,6 +77,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   return [
     { url: `${baseUrl}/use-cases`, lastModified: new Date() },
     { url: `${baseUrl}/ai-prompts`, lastModified: new Date(), changeFrequency: 'weekly', priority: 0.7 },
+    { url: `${baseUrl}/prompt-templates`, lastModified: new Date(), changeFrequency: 'weekly', priority: 0.7 },
     ...roleUrls,
     ...usecaseUrls,
     ...promptRoleUrls,

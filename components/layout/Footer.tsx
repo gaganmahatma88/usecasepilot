@@ -30,6 +30,11 @@ export function Footer() {
                 </Link>
               </li>
               <li>
+                <Link href="/prompt-templates" className="hover:text-gray-700 transition-colors">
+                  Prompt Templates
+                </Link>
+              </li>
+              <li>
                 <Link href="/best-ai-use-cases" className="hover:text-gray-700 transition-colors">
                   Best AI Use Cases
                 </Link>
