@@ -1,3 +1,5 @@
+import { generatedPrompts } from '@/lib/promptCategories'
+
 export interface PromptPage {
   slug: string
   title: string
@@ -8,7 +10,7 @@ export interface PromptPage {
   role: string
 }
 
-export const prompts: Record<string, PromptPage> = {
+const handwrittenPrompts: Record<string, PromptPage> = {
   'code-review': {
     slug: 'code-review',
     role: 'software-engineers',
@@ -170,4 +172,10 @@ export const prompts: Record<string, PromptPage> = {
       },
     ],
   },
+}
+
+// Merge handwritten + generated. Handwritten entries take precedence on slug collision.
+export const prompts: Record<string, PromptPage> = {
+  ...generatedPrompts,
+  ...handwrittenPrompts,
 }
