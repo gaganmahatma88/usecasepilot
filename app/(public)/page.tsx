@@ -1,6 +1,13 @@
 import Link from 'next/link'
 import { supabase } from '@/lib/supabase'
+import type { Metadata } from 'next'
 import type { Role } from '@/types'
+
+export const metadata: Metadata = {
+  title: 'AI Use Cases & Workflows for Professionals | UseCasePilot',
+  description:
+    'Explore practical AI use cases and workflows for engineers, product managers, marketers, and business teams. Discover real-world ways to use AI tools to automate work and improve productivity.',
+}
 
 interface LatestUseCase {
   title: string
@@ -69,6 +76,94 @@ export default async function HomePage() {
               />
             </svg>
           </Link>
+        </div>
+      </section>
+
+      {/* Intro */}
+      <section className="max-w-3xl mx-auto px-4 sm:px-6 py-12">
+        <h2 className="text-2xl font-bold tracking-tight text-gray-900 mb-4">
+          AI Use Cases for Professionals
+        </h2>
+        <p className="text-gray-500 leading-relaxed">
+          UseCasePilot is a directory of practical AI use cases and workflows for professionals.
+        </p>
+        <p className="text-gray-500 leading-relaxed mt-3">
+          Discover how engineers, product managers, marketers, and support teams use AI tools to
+          automate tasks, improve productivity, and streamline everyday work.
+        </p>
+      </section>
+
+      {/* Browse AI Use Cases by Role — static for SEO */}
+      <section className="max-w-5xl mx-auto px-4 sm:px-6 py-10 sm:py-14 border-t border-gray-100">
+        <div className="flex items-center justify-between mb-8">
+          <h2 className="text-xl font-semibold text-gray-900">Browse AI Use Cases by Role</h2>
+          <Link href="/use-cases" className="text-sm text-blue-600 hover:text-blue-700">
+            View all →
+          </Link>
+        </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          {[
+            { href: '/use-cases/software-engineers', label: 'Software Engineers' },
+            { href: '/use-cases/product-managers', label: 'Product Managers' },
+            { href: '/use-cases/project-managers', label: 'Project Managers' },
+            { href: '/use-cases/marketing-managers', label: 'Marketing Managers' },
+            { href: '/use-cases/sales-teams', label: 'Sales Teams' },
+            { href: '/use-cases/customer-support', label: 'Customer Support' },
+          ].map((role) => (
+            <Link
+              key={role.href}
+              href={role.href}
+              className="group block p-5 rounded-xl border border-gray-100 hover:border-blue-200 hover:bg-blue-50/30 transition-all"
+            >
+              <h3 className="font-semibold text-gray-900 group-hover:text-blue-700 transition-colors text-[15px]">
+                {role.label}
+              </h3>
+            </Link>
+          ))}
+        </div>
+      </section>
+
+      {/* Popular AI Use Cases — static for SEO */}
+      <section className="max-w-5xl mx-auto px-4 sm:px-6 py-10 sm:py-14 border-t border-gray-100">
+        <h2 className="text-xl font-semibold text-gray-900 mb-8">Popular AI Use Cases</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          {[
+            {
+              label: 'AI for Code Review',
+              href: '/use-cases/software-engineers/ai-for-code-review',
+            },
+            {
+              label: 'AI for Sprint Retrospective',
+              href: '/use-cases/project-managers/ai-for-sprint-retrospective',
+            },
+            {
+              label: 'AI for Roadmap Planning',
+              href: '/use-cases/product-managers/ai-for-roadmap-planning',
+            },
+            {
+              label: 'AI for Customer Support Automation',
+              href: '/use-cases/customer-support/ai-for-customer-support-automation',
+            },
+            {
+              label: 'AI for Marketing Content Generation',
+              href: '/use-cases/marketing-managers/ai-for-marketing-content-generation',
+            },
+            {
+              label: 'AI for Bug Triage',
+              href: '/use-cases/software-engineers/ai-for-bug-triage',
+            },
+          ].map((uc) => (
+            <Link
+              key={uc.href}
+              href={uc.href}
+              className="group flex items-center gap-3 p-4 rounded-xl border border-gray-100 hover:border-blue-200 hover:bg-blue-50/20 transition-all"
+            >
+              <span className="w-1.5 h-1.5 rounded-full bg-blue-400 flex-shrink-0" />
+              <span className="text-sm font-medium text-gray-800 group-hover:text-blue-700 transition-colors">
+                {uc.label}
+              </span>
+            </Link>
+          ))}
         </div>
       </section>
 
