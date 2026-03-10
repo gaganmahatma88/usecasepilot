@@ -120,6 +120,38 @@ function RoleHub({ slug }: { slug: string }) {
   )
 }
 
+// ─── FAQ generation ───────────────────────────────────────────────────────────
+
+function extractTopic(title: string): string {
+  // "AI Prompts for Debugging with ChatGPT" → "debugging"
+  return title
+    .replace(/^AI Prompts for\s+/i, '')
+    .replace(/\s+with (ChatGPT|Claude)$/i, '')
+    .toLowerCase()
+}
+
+function generatePromptFaqs(title: string) {
+  const topic = extractTopic(title)
+  return [
+    {
+      question: `What are AI ${topic} prompts?`,
+      answer: `AI ${topic} prompts are structured instructions given to AI assistants like ChatGPT or Claude to help with ${topic} tasks. You provide relevant context — such as code snippets, error messages, or requirements — so the AI can give targeted, actionable suggestions.`,
+    },
+    {
+      question: `How do I use ChatGPT or Claude for ${topic}?`,
+      answer: `Copy one of the prompts from this page, paste it into ChatGPT or Claude, and include your specific context such as code, error output, or requirements. Providing more detail helps the AI give more accurate and useful responses.`,
+    },
+    {
+      question: `What should I include in a ${topic} prompt?`,
+      answer: `The best ${topic} prompts include relevant context such as the programming language or platform, any error messages or expected behaviour, and what you have already tried. This helps the AI assistant understand the problem and give more precise guidance.`,
+    },
+    {
+      question: `Can AI fully automate ${topic}?`,
+      answer: `AI tools can significantly speed up ${topic} tasks by generating suggestions, identifying issues, and drafting solutions. However, professionals should review all AI output carefully before applying it, especially in production environments.`,
+    },
+  ]
+}
+
 // ─── Prompt page view ─────────────────────────────────────────────────────────
 
 function PromptPage({ slug }: { slug: string }) {
@@ -147,6 +179,17 @@ function PromptPage({ slug }: { slug: string }) {
   }
 
   const pageTools = page.relatedTools.map((key) => tools[key]).filter(Boolean)
+  const faqs = generatePromptFaqs(page.title)
+
+  const faqJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqs.map((faq) => ({
+      '@type': 'Question',
+      name: faq.question,
+      acceptedAnswer: { '@type': 'Answer', text: faq.answer },
+    })),
+  }
 
   const breadcrumbItems = [
     { label: 'Home', href: '/' },
@@ -160,6 +203,10 @@ function PromptPage({ slug }: { slug: string }) {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
       />
 
       <Breadcrumb items={breadcrumbItems} />
@@ -248,6 +295,21 @@ function PromptPage({ slug }: { slug: string }) {
           </div>
         </div>
       )}
+
+      {/* FAQ */}
+      <div className="mt-12 pt-8 border-t border-gray-100">
+        <h2 className="text-base font-semibold text-gray-900 mb-6">
+          Frequently Asked Questions
+        </h2>
+        <div className="space-y-5">
+          {faqs.map((faq) => (
+            <div key={faq.question}>
+              <h3 className="text-sm font-semibold text-gray-900 mb-1.5">{faq.question}</h3>
+              <p className="text-sm text-gray-500 leading-relaxed">{faq.answer}</p>
+            </div>
+          ))}
+        </div>
+      </div>
     </div>
   )
 }
