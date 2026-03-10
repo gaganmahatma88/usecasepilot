@@ -1,38 +1,29 @@
 import Link from 'next/link'
+import { prompts } from '@/lib/prompts'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
   title: 'AI Prompts for Professionals | UseCasePilot',
   description:
-    'Discover practical AI prompts for real workflows. These prompts help professionals automate tasks, generate ideas, and improve productivity using modern AI tools.',
+    'Discover practical AI prompts that help professionals automate workflows, generate ideas, and improve productivity.',
 }
 
 const sections = [
   {
     heading: 'Prompts for Software Engineers',
-    items: [
-      { label: 'Code Review Prompts', href: '/ai-prompts/code-review' },
-      { label: 'Bug Triage Prompts', href: '/ai-prompts/bug-triage' },
-    ],
+    slugs: ['code-review', 'bug-triage'],
   },
   {
     heading: 'Prompts for Product Managers',
-    items: [
-      { label: 'Sprint Planning Prompts', href: '/ai-prompts/sprint-planning' },
-      { label: 'Product Roadmap Prompts', href: '/ai-prompts/product-roadmap' },
-    ],
+    slugs: ['sprint-planning', 'product-roadmap'],
   },
   {
     heading: 'Prompts for Marketing',
-    items: [
-      { label: 'Marketing Copy Prompts', href: '/ai-prompts/marketing-copy' },
-    ],
+    slugs: ['marketing-copy'],
   },
   {
     heading: 'Prompts for Customer Support',
-    items: [
-      { label: 'Customer Support Reply Prompts', href: '/ai-prompts/customer-support-replies' },
-    ],
+    slugs: ['customer-support-replies'],
   },
 ]
 
@@ -44,39 +35,48 @@ export default function AIPromptsPage() {
           AI Prompts for Professionals
         </h1>
         <p className="text-gray-500 leading-relaxed max-w-2xl">
-          Discover practical AI prompts for real workflows. These prompts help professionals
-          automate tasks, generate ideas, and improve productivity using modern AI tools.
+          Discover practical AI prompts that help professionals automate workflows, generate ideas,
+          and improve productivity.
         </p>
       </div>
 
       <div className="space-y-12">
-        {sections.map((section) => (
-          <div key={section.heading}>
-            <h2 className="text-lg font-semibold text-gray-900 mb-4">{section.heading}</h2>
-            <div className="space-y-3">
-              {section.items.map((item) => (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  className="group flex items-center justify-between p-5 rounded-xl border border-gray-100 hover:border-blue-200 hover:bg-blue-50/20 transition-all"
-                >
-                  <span className="font-medium text-gray-900 group-hover:text-blue-700 transition-colors">
-                    {item.label}
-                  </span>
-                  <svg
-                    width="16" height="16" viewBox="0 0 16 16" fill="none"
-                    className="text-gray-300 group-hover:text-blue-400 transition-colors flex-shrink-0"
+        {sections.map((section) => {
+          const pages = section.slugs
+            .map((slug) => prompts[slug])
+            .filter(Boolean)
+
+          return (
+            <div key={section.heading}>
+              <h2 className="text-lg font-semibold text-gray-900 mb-4">{section.heading}</h2>
+              <div className="space-y-3">
+                {pages.map((page) => (
+                  <Link
+                    key={page.slug}
+                    href={`/ai-prompts/${page.slug}`}
+                    className="group flex items-center justify-between p-5 rounded-xl border border-gray-100 hover:border-blue-200 hover:bg-blue-50/20 transition-all"
                   >
-                    <path
-                      d="M4 8H12M12 8L8 4M12 8L8 12"
-                      stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"
-                    />
-                  </svg>
-                </Link>
-              ))}
+                    <div>
+                      <p className="font-medium text-gray-900 group-hover:text-blue-700 transition-colors mb-1">
+                        {page.title}
+                      </p>
+                      <p className="text-sm text-gray-500 line-clamp-1">{page.description}</p>
+                    </div>
+                    <svg
+                      width="16" height="16" viewBox="0 0 16 16" fill="none"
+                      className="text-gray-300 group-hover:text-blue-400 transition-colors flex-shrink-0 ml-4"
+                    >
+                      <path
+                        d="M4 8H12M12 8L8 4M12 8L8 12"
+                        stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"
+                      />
+                    </svg>
+                  </Link>
+                ))}
+              </div>
             </div>
-          </div>
-        ))}
+          )
+        })}
       </div>
     </div>
   )
