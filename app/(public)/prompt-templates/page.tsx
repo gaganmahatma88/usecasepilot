@@ -7,7 +7,7 @@ import type { Metadata } from 'next'
 export const metadata: Metadata = {
   title: 'Prompt Templates for ChatGPT & Claude | UseCasePilot',
   description:
-    'Browse AI prompt templates for debugging, refactoring, testing, and optimizing code with ChatGPT and Claude.',
+    'Browse ready-to-use AI prompt templates for debugging, refactoring, testing, and optimizing code using ChatGPT or Claude.',
 }
 
 const taskLabels: Record<string, string> = {
