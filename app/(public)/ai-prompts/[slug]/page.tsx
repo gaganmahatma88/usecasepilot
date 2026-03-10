@@ -45,7 +45,9 @@ function RoleHub({ slug }: { slug: string }) {
   const role = promptRoles[slug]
   if (!role) return notFound()
 
-  const rolePrompts = Object.values(prompts).filter((p) => p.role === slug)
+  const rolePrompts = Object.values(prompts).filter(
+    (p) => p.role === slug && !p.assistant
+  )
 
   const breadcrumbJsonLd = {
     '@context': 'https://schema.org',
