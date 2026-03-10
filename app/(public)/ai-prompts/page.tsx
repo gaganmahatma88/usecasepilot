@@ -1,0 +1,83 @@
+import Link from 'next/link'
+import type { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'AI Prompts for Professionals | UseCasePilot',
+  description:
+    'Discover practical AI prompts for real workflows. These prompts help professionals automate tasks, generate ideas, and improve productivity using modern AI tools.',
+}
+
+const sections = [
+  {
+    heading: 'Prompts for Software Engineers',
+    items: [
+      { label: 'Code Review Prompts', href: '/ai-prompts/code-review' },
+      { label: 'Bug Triage Prompts', href: '/ai-prompts/bug-triage' },
+    ],
+  },
+  {
+    heading: 'Prompts for Product Managers',
+    items: [
+      { label: 'Sprint Planning Prompts', href: '/ai-prompts/sprint-planning' },
+      { label: 'Product Roadmap Prompts', href: '/ai-prompts/product-roadmap' },
+    ],
+  },
+  {
+    heading: 'Prompts for Marketing',
+    items: [
+      { label: 'Marketing Copy Prompts', href: '/ai-prompts/marketing-copy' },
+    ],
+  },
+  {
+    heading: 'Prompts for Customer Support',
+    items: [
+      { label: 'Customer Support Reply Prompts', href: '/ai-prompts/customer-support-replies' },
+    ],
+  },
+]
+
+export default function AIPromptsPage() {
+  return (
+    <div className="max-w-4xl mx-auto px-4 sm:px-6 py-10 sm:py-14">
+      <div className="mb-10">
+        <h1 className="text-3xl font-bold tracking-tight text-gray-900 mb-3">
+          AI Prompts for Professionals
+        </h1>
+        <p className="text-gray-500 leading-relaxed max-w-2xl">
+          Discover practical AI prompts for real workflows. These prompts help professionals
+          automate tasks, generate ideas, and improve productivity using modern AI tools.
+        </p>
+      </div>
+
+      <div className="space-y-12">
+        {sections.map((section) => (
+          <div key={section.heading}>
+            <h2 className="text-lg font-semibold text-gray-900 mb-4">{section.heading}</h2>
+            <div className="space-y-3">
+              {section.items.map((item) => (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className="group flex items-center justify-between p-5 rounded-xl border border-gray-100 hover:border-blue-200 hover:bg-blue-50/20 transition-all"
+                >
+                  <span className="font-medium text-gray-900 group-hover:text-blue-700 transition-colors">
+                    {item.label}
+                  </span>
+                  <svg
+                    width="16" height="16" viewBox="0 0 16 16" fill="none"
+                    className="text-gray-300 group-hover:text-blue-400 transition-colors flex-shrink-0"
+                  >
+                    <path
+                      d="M4 8H12M12 8L8 4M12 8L8 12"
+                      stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"
+                    />
+                  </svg>
+                </Link>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  )
+}
