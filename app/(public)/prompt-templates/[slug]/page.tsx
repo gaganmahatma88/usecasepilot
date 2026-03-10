@@ -1,4 +1,5 @@
 import { notFound } from 'next/navigation'
+import Link from 'next/link'
 import { Breadcrumb } from '@/components/ui/Breadcrumb'
 import { RecommendedTool } from '@/components/ui/RecommendedTool'
 import { CopyPromptButton } from '@/components/CopyPromptButton'
@@ -161,6 +162,46 @@ export default function PromptTemplatePage({ params }: Props) {
           </div>
         </section>
       )}
+
+      {/* Related prompt templates */}
+      {(() => {
+        const related = Object.values(templatePages)
+          .filter((t) => t.slug !== page.slug)
+          .slice(0, 5)
+        if (related.length === 0) return null
+        return (
+          <section className="mb-12 pt-8 border-t border-gray-100">
+            <h2 className="text-base font-semibold text-gray-900 mb-4">
+              Related Prompt Templates
+            </h2>
+            <div className="space-y-3">
+              {related.map((t) => (
+                <Link
+                  key={t.slug}
+                  href={`/prompt-templates/${t.slug}`}
+                  className="group flex items-center justify-between p-4 rounded-xl border border-gray-100 hover:border-blue-200 hover:bg-blue-50/20 transition-all"
+                >
+                  <div className="min-w-0">
+                    <p className="text-sm font-medium text-gray-800 group-hover:text-blue-700 transition-colors mb-0.5">
+                      {t.heading}
+                    </p>
+                    <p className="text-xs text-gray-400 line-clamp-1">{t.seoDescription}</p>
+                  </div>
+                  <svg
+                    width="16" height="16" viewBox="0 0 16 16" fill="none"
+                    className="text-gray-300 group-hover:text-blue-400 transition-colors flex-shrink-0 ml-4"
+                  >
+                    <path
+                      d="M4 8H12M12 8L8 4M12 8L8 12"
+                      stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"
+                    />
+                  </svg>
+                </Link>
+              ))}
+            </div>
+          </section>
+        )
+      })()}
 
       {/* FAQ */}
       <section className="pt-8 border-t border-gray-100">
