@@ -5,11 +5,13 @@ export interface PromptPage {
   prompts: string[]
   relatedTools: string[]
   relatedUseCases: { label: string; href: string }[]
+  role: string
 }
 
 export const prompts: Record<string, PromptPage> = {
   'code-review': {
     slug: 'code-review',
+    role: 'software-engineers',
     title: 'AI Prompts for Code Review',
     description:
       'Powerful AI prompts that help developers review code faster, detect bugs, and improve software quality.',
@@ -36,6 +38,7 @@ export const prompts: Record<string, PromptPage> = {
 
   'bug-triage': {
     slug: 'bug-triage',
+    role: 'software-engineers',
     title: 'AI Prompts for Bug Triage',
     description:
       'AI prompts to help engineering teams classify, prioritise, and resolve bugs faster.',
@@ -62,6 +65,7 @@ export const prompts: Record<string, PromptPage> = {
 
   'sprint-planning': {
     slug: 'sprint-planning',
+    role: 'product-managers',
     title: 'AI Prompts for Sprint Planning',
     description:
       'AI prompts to help project managers run faster sprint planning sessions and write better user stories.',
@@ -88,6 +92,7 @@ export const prompts: Record<string, PromptPage> = {
 
   'customer-support-replies': {
     slug: 'customer-support-replies',
+    role: 'customer-support',
     title: 'AI Prompts for Customer Support Replies',
     description:
       'AI prompts to help support teams draft faster, higher-quality replies and resolve tickets more consistently.',
@@ -114,6 +119,7 @@ export const prompts: Record<string, PromptPage> = {
 
   'marketing-copy': {
     slug: 'marketing-copy',
+    role: 'marketing-managers',
     title: 'AI Prompts for Marketing Copy',
     description:
       'AI prompts to help marketing teams write high-converting copy, email campaigns, and social media content faster.',
@@ -140,6 +146,7 @@ export const prompts: Record<string, PromptPage> = {
 
   'product-roadmap': {
     slug: 'product-roadmap',
+    role: 'product-managers',
     title: 'AI Prompts for Product Roadmap Planning',
     description:
       'AI prompts to help product managers prioritise features, write roadmap narratives, and align stakeholders.',

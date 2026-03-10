@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { prompts } from '@/lib/prompts'
+import { promptRoles } from '@/lib/promptRoles'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
@@ -8,24 +9,24 @@ export const metadata: Metadata = {
     'Discover practical AI prompts that help professionals automate workflows, generate ideas, and improve productivity.',
 }
 
-const sections = [
-  {
-    heading: 'Prompts for Software Engineers',
-    slugs: ['code-review', 'bug-triage'],
-  },
-  {
-    heading: 'Prompts for Product Managers',
-    slugs: ['sprint-planning', 'product-roadmap'],
-  },
-  {
-    heading: 'Prompts for Marketing',
-    slugs: ['marketing-copy'],
-  },
-  {
-    heading: 'Prompts for Customer Support',
-    slugs: ['customer-support-replies'],
-  },
+const promptSections = [
+  { heading: 'Prompts for Software Engineers', slugs: ['code-review', 'bug-triage'] },
+  { heading: 'Prompts for Product Managers', slugs: ['sprint-planning', 'product-roadmap'] },
+  { heading: 'Prompts for Marketing', slugs: ['marketing-copy'] },
+  { heading: 'Prompts for Customer Support', slugs: ['customer-support-replies'] },
 ]
+
+const ChevronRight = () => (
+  <svg
+    width="16" height="16" viewBox="0 0 16 16" fill="none"
+    className="text-gray-300 group-hover:text-blue-400 transition-colors flex-shrink-0 ml-4"
+  >
+    <path
+      d="M4 8H12M12 8L8 4M12 8L8 12"
+      stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"
+    />
+  </svg>
+)
 
 export default function AIPromptsPage() {
   return (
@@ -40,12 +41,32 @@ export default function AIPromptsPage() {
         </p>
       </div>
 
-      <div className="space-y-12">
-        {sections.map((section) => {
-          const pages = section.slugs
-            .map((slug) => prompts[slug])
-            .filter(Boolean)
+      {/* Role hub links */}
+      <div className="mb-14">
+        <h2 className="text-lg font-semibold text-gray-900 mb-4">Browse Prompts by Role</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          {Object.values(promptRoles).map((role) => (
+            <Link
+              key={role.slug}
+              href={`/ai-prompts/${role.slug}`}
+              className="group flex items-center justify-between p-5 rounded-xl border border-gray-100 hover:border-blue-200 hover:bg-blue-50/20 transition-all"
+            >
+              <div>
+                <p className="font-medium text-gray-900 group-hover:text-blue-700 transition-colors mb-1">
+                  {role.title}
+                </p>
+                <p className="text-sm text-gray-500 line-clamp-1">{role.description}</p>
+              </div>
+              <ChevronRight />
+            </Link>
+          ))}
+        </div>
+      </div>
 
+      {/* Individual prompt pages grouped by role */}
+      <div className="space-y-12">
+        {promptSections.map((section) => {
+          const pages = section.slugs.map((slug) => prompts[slug]).filter(Boolean)
           return (
             <div key={section.heading}>
               <h2 className="text-lg font-semibold text-gray-900 mb-4">{section.heading}</h2>
@@ -62,15 +83,7 @@ export default function AIPromptsPage() {
                       </p>
                       <p className="text-sm text-gray-500 line-clamp-1">{page.description}</p>
                     </div>
-                    <svg
-                      width="16" height="16" viewBox="0 0 16 16" fill="none"
-                      className="text-gray-300 group-hover:text-blue-400 transition-colors flex-shrink-0 ml-4"
-                    >
-                      <path
-                        d="M4 8H12M12 8L8 4M12 8L8 12"
-                        stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"
-                      />
-                    </svg>
+                    <ChevronRight />
                   </Link>
                 ))}
               </div>
