@@ -1,4 +1,5 @@
 import { generatedPrompts } from '@/lib/promptCategories'
+import { generateAssistantTemplates } from '@/lib/promptTemplates'
 
 export interface PromptPage {
   slug: string
@@ -8,6 +9,7 @@ export interface PromptPage {
   relatedTools: string[]
   relatedUseCases: { label: string; href: string }[]
   role: string
+  assistant?: 'chatgpt' | 'claude'
 }
 
 const handwrittenPrompts: Record<string, PromptPage> = {
@@ -174,8 +176,15 @@ const handwrittenPrompts: Record<string, PromptPage> = {
   },
 }
 
-// Merge handwritten + generated. Handwritten entries take precedence on slug collision.
-export const prompts: Record<string, PromptPage> = {
+// Base merge: handwritten entries take precedence on slug collision.
+const basePrompts: Record<string, PromptPage> = {
   ...generatedPrompts,
   ...handwrittenPrompts,
+}
+
+// Assistant template variants (e.g. debugging-chatgpt, debugging-claude).
+// Base entries take precedence so existing pages are never overwritten.
+export const prompts: Record<string, PromptPage> = {
+  ...generateAssistantTemplates(basePrompts),
+  ...basePrompts,
 }

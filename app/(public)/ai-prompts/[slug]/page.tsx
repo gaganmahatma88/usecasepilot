@@ -5,6 +5,7 @@ import { RecommendedTool } from '@/components/ui/RecommendedTool'
 import { PromptCard } from '@/components/PromptCard'
 import { prompts } from '@/lib/prompts'
 import { promptRoles } from '@/lib/promptRoles'
+import { assistantConfig } from '@/lib/promptTemplates'
 import { tools } from '@/lib/tools'
 import type { Metadata } from 'next'
 
@@ -174,27 +175,34 @@ function PromptPage({ slug }: { slug: string }) {
       </div>
 
       {/* How to use */}
-      <div className="mb-12 p-5 rounded-xl border border-gray-100 bg-gray-50/50">
-        <h2 className="text-base font-semibold text-gray-900 mb-3">How to Use These Prompts</h2>
-        <p className="text-sm text-gray-500 leading-relaxed mb-4">
-          You can copy any prompt above and use it with tools like ChatGPT, Claude, or other AI
-          assistants.
-        </p>
-        <ol className="space-y-2">
-          {[
-            'Copy the prompt',
-            'Paste it into your AI assistant',
-            'Replace placeholders with your specific context',
-          ].map((step, i) => (
-            <li key={i} className="flex items-start gap-3 text-sm text-gray-600">
-              <span className="flex-shrink-0 w-5 h-5 rounded-full bg-blue-100 text-blue-600 text-xs font-semibold flex items-center justify-center mt-0.5">
-                {i + 1}
-              </span>
-              {step}
-            </li>
-          ))}
-        </ol>
-      </div>
+      {(() => {
+        const asst = page.assistant ? assistantConfig[page.assistant] : null
+        const howToTitle = asst
+          ? `How to Use These Prompts with ${asst.label}`
+          : 'How to Use These Prompts'
+        const howToIntro = asst
+          ? `Copy any prompt above and paste it directly into ${asst.label}. Add your specific code or context for best results.`
+          : 'You can copy any prompt above and use it with tools like ChatGPT, Claude, or other AI assistants.'
+        const howToSteps = asst
+          ? asst.steps
+          : ['Copy the prompt', 'Paste it into your AI assistant', 'Replace placeholders with your specific context']
+        return (
+          <div className="mb-12 p-5 rounded-xl border border-gray-100 bg-gray-50/50">
+            <h2 className="text-base font-semibold text-gray-900 mb-3">{howToTitle}</h2>
+            <p className="text-sm text-gray-500 leading-relaxed mb-4">{howToIntro}</p>
+            <ol className="space-y-2">
+              {howToSteps.map((step, i) => (
+                <li key={i} className="flex items-start gap-3 text-sm text-gray-600">
+                  <span className="flex-shrink-0 w-5 h-5 rounded-full bg-blue-100 text-blue-600 text-xs font-semibold flex items-center justify-center mt-0.5">
+                    {i + 1}
+                  </span>
+                  {step}
+                </li>
+              ))}
+            </ol>
+          </div>
+        )
+      })()}
 
       {/* Recommended tools */}
       {pageTools.length > 0 && (
