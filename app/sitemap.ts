@@ -45,12 +45,25 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.7,
   }))
 
+  const staticPages: MetadataRoute.Sitemap = [
+    '/',
+    '/about',
+    '/contact',
+    '/privacy-policy',
+    '/affiliate-disclosure',
+  ].map((path) => ({
+    url: `${baseUrl}${path}`,
+    lastModified: new Date(),
+    changeFrequency: 'yearly',
+    priority: 0.5,
+  }))
+
   return [
-    { url: baseUrl, lastModified: new Date() },
     { url: `${baseUrl}/use-cases`, lastModified: new Date() },
     { url: `${baseUrl}/ai-prompts`, lastModified: new Date(), changeFrequency: 'weekly', priority: 0.7 },
     ...roleUrls,
     ...usecaseUrls,
     ...promptUrls,
+    ...staticPages,
   ]
 }
