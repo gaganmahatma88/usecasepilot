@@ -6,8 +6,18 @@ import { PromptCard } from '@/components/PromptCard'
 import { prompts } from '@/lib/prompts'
 import { promptRoles } from '@/lib/promptRoles'
 import { assistantConfig } from '@/lib/promptTemplates'
+import { templateRegistry, allTemplatePages } from '@/lib/templateRegistry'
 import { tools } from '@/lib/tools'
 import type { Metadata } from 'next'
+import type { TemplateEntry } from '@/lib/templateRegistry'
+
+// Map prompt category slugs to template task types
+const promptSlugToTemplateTasks: Record<string, TemplateEntry['task'][]> = {
+  'debugging':    ['debugging'],
+  'refactoring':  ['refactoring'],
+  'unit-testing': ['testing'],
+  'sql-queries':  ['optimization', 'debugging'],
+}
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://usecasepilot.com'
 
@@ -266,6 +276,54 @@ function PromptPage({ slug }: { slug: string }) {
           </div>
         </div>
       )}
+
+      {/* Prompt Templates for This Task */}
+      {(() => {
+        const tasks = promptSlugToTemplateTasks[page.slug]
+        if (!tasks) return null
+        const matched = templateRegistry
+          .filter((e) => tasks.includes(e.task))
+          .map((e) => allTemplatePages[e.slug])
+          .filter(Boolean)
+        if (matched.length === 0) return null
+        const taskDescriptions: Record<string, string> = {
+          debugging:    'Use these ready-to-use prompt templates to debug code quickly with ChatGPT or Claude.',
+          refactoring:  'Use these ready-to-use prompt templates to refactor code with ChatGPT or Claude.',
+          testing:      'Use these ready-to-use prompt templates to generate tests quickly with ChatGPT or Claude.',
+          optimization: 'Use these ready-to-use prompt templates to optimize code and queries with ChatGPT or Claude.',
+        }
+        const description = taskDescriptions[tasks[0]] ?? 'Use these ready-to-use prompt templates with ChatGPT or Claude.'
+        return (
+          <div className="mb-12 pt-8 border-t border-gray-100">
+            <h2 className="text-base font-semibold text-gray-900 mb-2">
+              Prompt Templates for This Task
+            </h2>
+            <p className="text-sm text-gray-500 mb-4">{description}</p>
+            <div className="space-y-2">
+              {matched.map((t) => (
+                <Link
+                  key={t!.slug}
+                  href={`/prompt-templates/${t!.slug}`}
+                  className="group flex items-center justify-between p-4 rounded-xl border border-gray-100 hover:border-blue-200 hover:bg-blue-50/20 transition-all"
+                >
+                  <span className="text-sm font-medium text-gray-800 group-hover:text-blue-700 transition-colors">
+                    {t!.heading}
+                  </span>
+                  <svg
+                    width="16" height="16" viewBox="0 0 16 16" fill="none"
+                    className="text-gray-300 group-hover:text-blue-400 transition-colors flex-shrink-0 ml-4"
+                  >
+                    <path
+                      d="M4 8H12M12 8L8 4M12 8L8 12"
+                      stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"
+                    />
+                  </svg>
+                </Link>
+              ))}
+            </div>
+          </div>
+        )
+      })()}
 
       {/* Related use cases */}
       {page.relatedUseCases.length > 0 && (
