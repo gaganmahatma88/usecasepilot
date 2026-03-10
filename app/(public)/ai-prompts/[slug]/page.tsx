@@ -2,6 +2,7 @@ import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import { Breadcrumb } from '@/components/ui/Breadcrumb'
 import { RecommendedTool } from '@/components/ui/RecommendedTool'
+import { PromptCard } from '@/components/PromptCard'
 import { prompts } from '@/lib/prompts'
 import { promptRoles } from '@/lib/promptRoles'
 import { tools } from '@/lib/tools'
@@ -71,8 +72,14 @@ function RoleHub({ slug }: { slug: string }) {
       />
 
       <div className="mb-10">
-        <h1 className="text-3xl font-bold tracking-tight text-gray-900 mb-3">{role.title}</h1>
-        <p className="text-gray-500 leading-relaxed max-w-2xl">{role.description}</p>
+        <h1 className="text-3xl font-bold tracking-tight text-gray-900 mb-4">{role.title}</h1>
+        <div className="space-y-3 max-w-2xl">
+          {role.body.map((paragraph, i) => (
+            <p key={i} className="text-gray-500 leading-relaxed">
+              {paragraph}
+            </p>
+          ))}
+        </div>
       </div>
 
       {rolePrompts.length === 0 ? (
@@ -159,24 +166,41 @@ function PromptPage({ slug }: { slug: string }) {
         <p className="text-gray-500 leading-relaxed">{page.description}</p>
       </div>
 
-      <div className="space-y-3 mb-12">
+      {/* Prompt list */}
+      <div className="space-y-3 mb-10">
         {page.prompts.map((prompt, i) => (
-          <div
-            key={i}
-            className="flex gap-4 p-4 rounded-xl border border-gray-100 bg-gray-50/50"
-          >
-            <span className="flex-shrink-0 w-6 h-6 rounded-full bg-blue-100 text-blue-600 text-xs font-semibold flex items-center justify-center mt-0.5">
-              {i + 1}
-            </span>
-            <p className="text-sm text-gray-700 leading-relaxed">&ldquo;{prompt}&rdquo;</p>
-          </div>
+          <PromptCard key={i} prompt={prompt} index={i} />
         ))}
       </div>
 
+      {/* How to use */}
+      <div className="mb-12 p-5 rounded-xl border border-gray-100 bg-gray-50/50">
+        <h2 className="text-base font-semibold text-gray-900 mb-3">How to Use These Prompts</h2>
+        <p className="text-sm text-gray-500 leading-relaxed mb-4">
+          You can copy any prompt above and use it with tools like ChatGPT, Claude, or other AI
+          assistants.
+        </p>
+        <ol className="space-y-2">
+          {[
+            'Copy the prompt',
+            'Paste it into your AI assistant',
+            'Replace placeholders with your specific context',
+          ].map((step, i) => (
+            <li key={i} className="flex items-start gap-3 text-sm text-gray-600">
+              <span className="flex-shrink-0 w-5 h-5 rounded-full bg-blue-100 text-blue-600 text-xs font-semibold flex items-center justify-center mt-0.5">
+                {i + 1}
+              </span>
+              {step}
+            </li>
+          ))}
+        </ol>
+      </div>
+
+      {/* Recommended tools */}
       {pageTools.length > 0 && (
         <div className="mb-12">
           <h2 className="text-base font-semibold text-gray-900 mb-4">
-            Recommended AI Tools for These Prompts
+            Recommended AI Tools
           </h2>
           <div className="space-y-4">
             {pageTools.map((tool) => (
@@ -186,6 +210,7 @@ function PromptPage({ slug }: { slug: string }) {
         </div>
       )}
 
+      {/* Related use cases */}
       {page.relatedUseCases.length > 0 && (
         <div className="pt-8 border-t border-gray-100">
           <h2 className="text-base font-semibold text-gray-900 mb-4">Related AI Workflows</h2>
