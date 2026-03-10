@@ -2,6 +2,7 @@ import { MetadataRoute } from 'next'
 import { supabase } from '@/lib/supabase'
 import { prompts } from '@/lib/prompts'
 import { promptRoles } from '@/lib/promptRoles'
+import { templatePages } from '@/lib/templatePages'
 
 export const dynamic = "force-dynamic";
 
@@ -53,6 +54,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.7,
   }))
 
+  const templateUrls: MetadataRoute.Sitemap = Object.values(templatePages).map((t) => ({
+    url: `${baseUrl}/prompt-templates/${t.slug}`,
+    lastModified: new Date(),
+    changeFrequency: 'weekly',
+    priority: 0.7,
+  }))
+
   const staticPages: MetadataRoute.Sitemap = [
     '/',
     '/about',
@@ -73,6 +81,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...usecaseUrls,
     ...promptRoleUrls,
     ...promptUrls,
+    ...templateUrls,
     ...staticPages,
   ]
 }
