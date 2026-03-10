@@ -207,6 +207,153 @@ const categories: PromptCategory[] = [
       { label: 'AI for Code Review — Full Workflow Guide', href: '/use-cases/software-engineers/ai-for-code-review' },
     ],
   },
+
+  // ── Product Managers ────────────────────────────────────────────────────────
+
+  {
+    slug: 'prd-writing',
+    title: 'AI Prompts for Writing PRDs',
+    description:
+      'Prompts to help product managers write clear, structured product requirement documents that align engineering and design teams.',
+    role: 'product-managers',
+    prompts: [
+      'Write a product requirements document for this feature based on the user story.',
+      'Summarise the problem statement and success metrics for this PRD.',
+      'List the functional and non-functional requirements for this feature.',
+      'Write the out-of-scope section for this product requirements document.',
+      'Draft the user personas and use cases section for this PRD.',
+      'Define acceptance criteria for each requirement in this document.',
+      'Write an executive summary for this PRD for a stakeholder audience.',
+      'Identify missing requirements or ambiguities in this draft PRD.',
+      'Rewrite this requirements section to be clearer and more specific.',
+      'Generate a risks and dependencies section for this PRD.',
+    ],
+    relatedTools: ['notion-ai', 'productboard', 'aha'],
+    relatedUseCases: [
+      { label: 'AI for Roadmap Planning — Full Workflow Guide', href: '/use-cases/product-managers/ai-for-roadmap-planning' },
+    ],
+  },
+  {
+    slug: 'feature-prioritization',
+    title: 'AI Prompts for Feature Prioritization',
+    description:
+      'Prompts to help product managers prioritise features using impact, effort, strategic alignment, and customer data.',
+    role: 'product-managers',
+    prompts: [
+      'Score these features by user impact and implementation effort.',
+      'Apply the RICE framework to prioritise this feature backlog.',
+      'Identify which features align most closely with this quarter\'s OKRs.',
+      'Summarise customer feedback themes to inform feature priority.',
+      'Suggest which features to cut from the roadmap given capacity constraints.',
+      'Rank these features by revenue potential and strategic value.',
+      'Identify quick wins versus long-term investments in this feature list.',
+      'Write a prioritisation rationale for deferring this feature request.',
+      'Group these feature requests into themes for the next planning cycle.',
+      'Recommend which features to validate with a prototype before full build.',
+    ],
+    relatedTools: ['productboard', 'notion-ai', 'aha'],
+    relatedUseCases: [
+      { label: 'AI for Roadmap Planning — Full Workflow Guide', href: '/use-cases/product-managers/ai-for-roadmap-planning' },
+    ],
+  },
+
+  // ── Marketing Managers ──────────────────────────────────────────────────────
+
+  {
+    slug: 'seo-content',
+    title: 'AI Prompts for SEO Content Writing',
+    description:
+      'Prompts to help marketing teams produce SEO-optimised blog posts, landing pages, and content strategies that rank.',
+    role: 'marketing-managers',
+    prompts: [
+      'Write an SEO-optimised blog post outline for the keyword "{keyword}".',
+      'Generate five title tag variations for this blog post under 60 characters.',
+      'Write a meta description for this page under 155 characters.',
+      'Identify semantic keywords to include in this article for better ranking.',
+      'Rewrite this introduction to include the target keyword naturally.',
+      'Create an internal linking strategy for these related blog posts.',
+      'Write an FAQ section for this blog post based on common search queries.',
+      'Suggest content gaps based on competitors ranking for this keyword.',
+      'Write a compelling conclusion with a clear call to action for this post.',
+      'Generate a content brief for a pillar page targeting this topic cluster.',
+    ],
+    relatedTools: ['jasper', 'semrush', 'hubspot'],
+    relatedUseCases: [
+      { label: 'AI for Marketing Content Generation — Full Workflow Guide', href: '/use-cases/marketing-managers/ai-for-marketing-content-generation' },
+    ],
+  },
+  {
+    slug: 'ad-copy',
+    title: 'AI Prompts for Ad Copy',
+    description:
+      'Prompts for writing high-converting ad campaigns across search, social, and display channels.',
+    role: 'marketing-managers',
+    prompts: [
+      'Write three Google Search ad headlines under 30 characters for this product.',
+      'Generate a Facebook ad primary text for this offer targeting this audience.',
+      'Write a LinkedIn ad copy for this B2B product aimed at senior managers.',
+      'Create five ad copy variations to A/B test for this campaign.',
+      'Write a retargeting ad for users who visited this page but did not convert.',
+      'Rewrite this ad copy to emphasise urgency and scarcity.',
+      'Generate display ad copy in three sizes: short, medium, and long.',
+      'Write a YouTube pre-roll ad script under 30 seconds for this product.',
+      'Create ad copy that addresses the top three objections for this offer.',
+      'Write a benefit-focused ad headline and description for this feature.',
+    ],
+    relatedTools: ['jasper', 'hubspot', 'canva'],
+    relatedUseCases: [
+      { label: 'AI for Marketing Content Generation — Full Workflow Guide', href: '/use-cases/marketing-managers/ai-for-marketing-content-generation' },
+    ],
+  },
+
+  // ── Customer Support ────────────────────────────────────────────────────────
+
+  {
+    slug: 'ticket-resolution',
+    title: 'AI Prompts for Support Ticket Resolution',
+    description:
+      'Prompts to help support teams resolve tickets faster, draft clearer replies, and handle escalations consistently.',
+    role: 'customer-support',
+    prompts: [
+      'Draft a resolution reply for this support ticket in a professional tone.',
+      'Summarise this ticket thread and suggest the next best action.',
+      'Classify this ticket by type, urgency, and affected product area.',
+      'Write an empathetic response to this frustrated customer.',
+      'Suggest three resolution options for this billing dispute.',
+      'Draft an escalation summary to send to the engineering team.',
+      'Rewrite this response to be shorter and more direct.',
+      'Draft a follow-up message to confirm the issue has been resolved.',
+      'Identify the root cause of this recurring complaint from the ticket history.',
+      'Write a canned response template for this frequently asked question.',
+    ],
+    relatedTools: ['intercom', 'zendesk', 'freshdesk'],
+    relatedUseCases: [
+      { label: 'AI for Customer Support Automation — Full Workflow Guide', href: '/use-cases/customer-support/ai-for-customer-support-automation' },
+    ],
+  },
+  {
+    slug: 'faq-generation',
+    title: 'AI Prompts for FAQ Creation',
+    description:
+      'Prompts to generate comprehensive FAQ documentation from support questions, tickets, and product knowledge.',
+    role: 'customer-support',
+    prompts: [
+      'Generate a FAQ section for this product based on common support questions.',
+      'Write a clear answer to this frequently asked question.',
+      'Group these support questions into FAQ categories.',
+      'Rewrite this FAQ answer to be simpler and easier to understand.',
+      'Identify gaps in this existing FAQ based on recent ticket themes.',
+      'Write a FAQ entry for this new product feature.',
+      'Summarise this long support thread into a concise FAQ answer.',
+      'Generate five related questions to add to this FAQ section.',
+      'Write a troubleshooting FAQ for this common error message.',
+      'Turn these support ticket resolutions into a structured FAQ document.',
+    ],
+    relatedTools: ['intercom', 'freshdesk', 'zendesk'],
+    relatedUseCases: [
+      { label: 'AI for Customer Support Automation — Full Workflow Guide', href: '/use-cases/customer-support/ai-for-customer-support-automation' },
+    ],
+  },
 ]
 
 export const generatedPrompts: Record<string, PromptPage> = Object.fromEntries(
