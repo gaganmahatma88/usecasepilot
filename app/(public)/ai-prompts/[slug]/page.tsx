@@ -20,6 +20,16 @@ const promptSlugToTemplateTasks: Record<string, TemplateEntry['task'][]> = {
   'sql-queries':  ['optimization', 'debugging'],
 }
 
+// Popular template slugs shown on software-engineers role hub
+const POPULAR_TEMPLATE_SLUGS = [
+  'chatgpt-debug-python',
+  'chatgpt-debug-node',
+  'chatgpt-write-unit-tests',
+  'chatgpt-refactor-react',
+  'chatgpt-optimize-sql-query',
+  'chatgpt-test-python',
+]
+
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://usecasepilot.com'
 
 interface Props {
@@ -59,6 +69,13 @@ function RoleHub({ slug }: { slug: string }) {
   const rolePrompts = Object.values(prompts).filter(
     (p) => p.role === slug && !p.assistant
   )
+
+  const popularItems = slug === 'software-engineers'
+    ? POPULAR_TEMPLATE_SLUGS
+        .map((s) => allTemplatePages[s])
+        .filter(Boolean)
+        .map((t) => ({ slug: t!.slug, heading: t!.heading }))
+    : undefined
 
   const breadcrumbJsonLd = {
     '@context': 'https://schema.org',
@@ -102,6 +119,7 @@ function RoleHub({ slug }: { slug: string }) {
           title: p.title,
           description: p.description,
         }))}
+        popularItems={popularItems}
       />
     </div>
   )
