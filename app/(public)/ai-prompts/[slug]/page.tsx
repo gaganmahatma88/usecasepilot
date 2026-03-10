@@ -6,6 +6,7 @@ import { PromptCard } from '@/components/PromptCard'
 import { prompts } from '@/lib/prompts'
 import { promptRoles } from '@/lib/promptRoles'
 import { assistantConfig } from '@/lib/promptTemplates'
+import { PromptRoleSearch } from '@/components/PromptRoleSearch'
 import { templateRegistry, allTemplatePages } from '@/lib/templateRegistry'
 import { tools } from '@/lib/tools'
 import type { Metadata } from 'next'
@@ -95,37 +96,13 @@ function RoleHub({ slug }: { slug: string }) {
         </div>
       </div>
 
-      {rolePrompts.length === 0 ? (
-        <div className="text-center py-16 text-gray-400 border border-gray-100 rounded-xl">
-          <p>No prompt pages for this role yet.</p>
-        </div>
-      ) : (
-        <div className="space-y-3">
-          {rolePrompts.map((page) => (
-            <Link
-              key={page.slug}
-              href={`/ai-prompts/${page.slug}`}
-              className="group flex items-center justify-between p-5 rounded-xl border border-gray-100 hover:border-blue-200 hover:bg-blue-50/20 transition-all"
-            >
-              <div>
-                <p className="font-medium text-gray-900 group-hover:text-blue-700 transition-colors mb-1">
-                  {page.title}
-                </p>
-                <p className="text-sm text-gray-500 line-clamp-1">{page.description}</p>
-              </div>
-              <svg
-                width="16" height="16" viewBox="0 0 16 16" fill="none"
-                className="text-gray-300 group-hover:text-blue-400 transition-colors flex-shrink-0 ml-4"
-              >
-                <path
-                  d="M4 8H12M12 8L8 4M12 8L8 12"
-                  stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"
-                />
-              </svg>
-            </Link>
-          ))}
-        </div>
-      )}
+      <PromptRoleSearch
+        items={rolePrompts.map((p) => ({
+          slug: p.slug,
+          title: p.title,
+          description: p.description,
+        }))}
+      />
     </div>
   )
 }
