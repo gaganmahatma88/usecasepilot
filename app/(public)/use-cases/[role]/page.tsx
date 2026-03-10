@@ -4,6 +4,8 @@ import { supabase } from '@/lib/supabase'
 import { Breadcrumb } from '@/components/ui/Breadcrumb'
 import type { Metadata } from 'next'
 
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://usecasepilot.com'
+
 const ROLE_TOOLS_PAGE: Record<string, string> = {
   'software-engineers':  '/best-ai-tools-for-software-engineers',
   'product-managers':    '/best-ai-tools-for-product-managers',
@@ -53,8 +55,37 @@ export default async function RolePage({ params }: Props) {
   const role = await getRoleWithUseCases(params.role)
   if (!role) notFound()
 
+  const breadcrumbJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      {
+        '@type': 'ListItem',
+        position: 1,
+        name: 'Home',
+        item: siteUrl,
+      },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: 'Use Cases',
+        item: `${siteUrl}/use-cases`,
+      },
+      {
+        '@type': 'ListItem',
+        position: 3,
+        name: role.title,
+        item: `${siteUrl}/use-cases/${params.role}`,
+      },
+    ],
+  }
+
   return (
     <div className="max-w-4xl mx-auto px-4 sm:px-6 py-10 sm:py-14">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+      />
       <Breadcrumb
         items={[
           { label: 'Home', href: '/' },

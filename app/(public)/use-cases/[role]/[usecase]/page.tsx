@@ -137,6 +137,37 @@ export default async function UseCasePage({ params }: Props) {
   const task = usecase.title.replace(/^AI for /i, '')
   const recommendedTool = getToolForSlug(params.usecase)
 
+  const breadcrumbJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      {
+        '@type': 'ListItem',
+        position: 1,
+        name: 'Home',
+        item: siteUrl,
+      },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: 'Use Cases',
+        item: `${siteUrl}/use-cases`,
+      },
+      {
+        '@type': 'ListItem',
+        position: 3,
+        name: role.title,
+        item: `${siteUrl}/use-cases/${params.role}`,
+      },
+      {
+        '@type': 'ListItem',
+        position: 4,
+        name: usecase.title,
+        item: canonical,
+      },
+    ],
+  }
+
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'Article',
@@ -171,6 +202,10 @@ export default async function UseCasePage({ params }: Props) {
 
   return (
     <div className="max-w-3xl mx-auto px-4 sm:px-6 py-10 sm:py-14">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+      />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
