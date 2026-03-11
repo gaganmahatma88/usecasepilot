@@ -17,6 +17,7 @@
     "@tiptap/react": "^2.5.9",
     "@tiptap/starter-kit": "^2.5.9",
     "bcryptjs": "^2.4.3",
+    "github-slugger": "^2.0.0",
     "clsx": "^2.1.1",
     "dotenv": "^16.4.5",
     "jsonwebtoken": "^9.0.2",

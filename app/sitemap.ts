@@ -4,11 +4,12 @@ import { prompts } from '@/lib/prompts'
 import { promptRoles } from '@/lib/promptRoles'
 import { allTemplatePages as templatePages } from '@/lib/templateRegistry'
 
-export const dynamic = "force-dynamic";
+// Revalidate the sitemap every hour instead of re-generating on every request
+export const revalidate = 3600
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl =
-    process.env.NEXT_PUBLIC_SITE_URL || 'https://usecasepilot.org'
+    process.env.NEXT_PUBLIC_SITE_URL || 'https://usecasepilot.com'
 
   const { data: roles } = await supabase
     .from('roles')
@@ -26,18 +27,21 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   if (usecasesError) {
     console.error('[sitemap] usecases query error:', usecasesError)
   }
-  console.log('[sitemap] usecases fetched:', usecases?.length ?? 0, usecases)
 
   const roleUrls =
     roles?.map((r) => ({
       url: `${baseUrl}/use-cases/${r.slug}`,
       lastModified: r.created_at,
+      changeFrequency: 'weekly' as const,
+      priority: 0.8,
     })) || []
 
   const usecaseUrls =
     usecases?.map((uc: any) => ({
       url: `${baseUrl}/use-cases/${uc.roles.slug}/${uc.slug}`,
       lastModified: uc.created_at,
+      changeFrequency: 'monthly' as const,
+      priority: 0.7,
     })) || []
 
   const promptRoleUrls: MetadataRoute.Sitemap = Object.values(promptRoles).map((r) => ({

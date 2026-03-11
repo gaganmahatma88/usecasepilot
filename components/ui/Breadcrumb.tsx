@@ -18,6 +18,7 @@ export function Breadcrumb({ items }: BreadcrumbProps) {
             <svg
               width="14" height="14" viewBox="0 0 14 14" fill="none"
               className="text-gray-300 flex-shrink-0"
+              aria-hidden="true"
             >
               <path
                 d="M5 3L9 7L5 11"
@@ -40,6 +41,7 @@ export function Breadcrumb({ items }: BreadcrumbProps) {
                   ? 'text-gray-700 font-medium'
                   : ''
               }
+              aria-current={index === items.length - 1 ? 'page' : undefined}
             >
               {item.label}
             </span>

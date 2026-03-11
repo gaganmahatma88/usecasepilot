@@ -1,9 +1,10 @@
-export const dynamic = 'force-dynamic'
+// ISR: cache pages for 1 hour, then revalidate in the background on next request
+export const revalidate = 3600
 
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import GithubSlugger from 'github-slugger'
-import { supabaseAdmin } from '@/lib/supabase'
+import { supabase } from '@/lib/supabase'
 import { Breadcrumb } from '@/components/ui/Breadcrumb'
 import { MDXRenderer } from '@/components/ui/MDXRenderer'
 import { RecommendedTool } from '@/components/ui/RecommendedTool'
@@ -71,7 +72,7 @@ interface Props {
 
 async function getUseCase(roleSlug: string, usecaseSlug: string) {
   try {
-    const { data: role } = await supabaseAdmin
+    const { data: role } = await supabase
       .from('roles')
       .select('*')
       .eq('slug', roleSlug)
@@ -79,7 +80,7 @@ async function getUseCase(roleSlug: string, usecaseSlug: string) {
 
     if (!role) return null
 
-    const { data: usecase } = await supabaseAdmin
+    const { data: usecase } = await supabase
       .from('usecases')
       .select('*')
       .eq('role_id', role.id)
@@ -89,7 +90,7 @@ async function getUseCase(roleSlug: string, usecaseSlug: string) {
 
     if (!usecase) return null
 
-    const { data: related } = await supabaseAdmin
+    const { data: related } = await supabase
       .from('usecases')
       .select('title, slug')
       .eq('role_id', role.id)
@@ -174,10 +175,16 @@ export default async function UseCasePage({ params }: Props) {
     headline: usecase.title,
     description: usecase.seo_description || '',
     datePublished: usecase.created_at,
-    dateModified: usecase.updated_at || usecase.created_at,
+    dateModified: usecase.created_at,
     author: {
       '@type': 'Organization',
       name: 'UseCasePilot',
+      url: siteUrl,
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: 'UseCasePilot',
+      url: siteUrl,
     },
     mainEntityOfPage: {
       '@type': 'WebPage',

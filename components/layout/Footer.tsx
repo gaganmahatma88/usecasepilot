@@ -82,7 +82,7 @@ export function Footer() {
 
         {/* Bottom bar */}
         <div className="border-t border-gray-100 mt-10 pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-sm text-gray-400">
-          <span>© 2026 UseCasePilot. All rights reserved.</span>
+          <span>© {new Date().getFullYear()} UseCasePilot. All rights reserved.</span>
           <div className="flex items-center gap-5">
             <Link href="/privacy-policy" className="hover:text-gray-600 transition-colors">
               Privacy

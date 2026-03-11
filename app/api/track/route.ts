@@ -11,7 +11,18 @@ export async function GET(req: Request) {
     return new NextResponse('Tool not found', { status: 404 })
   }
 
-  console.log(`[affiliate-click] tool=${tool.key} url=${tool.url}`)
+  // Guard against open redirects: only allow absolute https:// URLs
+  let redirectUrl: URL
+  try {
+    redirectUrl = new URL(tool.url)
+  } catch {
+    return new NextResponse('Invalid redirect URL', { status: 400 })
+  }
+  if (redirectUrl.protocol !== 'https:') {
+    return new NextResponse('Redirect target must use HTTPS', { status: 400 })
+  }
 
-  return NextResponse.redirect(tool.url)
+  console.log(`[affiliate-click] tool=${tool.key} url=${redirectUrl.href}`)
+
+  return NextResponse.redirect(redirectUrl.href)
 }
