@@ -1,11 +1,14 @@
 import OpenAI from "openai"
 import { NextResponse } from "next/server"
+import { requireAdmin, adminAuthResponse } from "@/lib/adminAuth"
 
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY
 })
 
 export async function POST(req: Request) {
+  if (!requireAdmin()) return adminAuthResponse()
+
   try {
     const { title, role } = await req.json()
 
