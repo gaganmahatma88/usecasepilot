@@ -56,11 +56,41 @@ async function getRelatedUseCases() {
   }
 }
 
+const breadcrumbJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: siteUrl },
+    { '@type': 'ListItem', position: 2, name: 'Best AI Tools for Software Engineers', item: canonical },
+  ],
+}
+
+const itemListJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name: 'Best AI Tools for Software Engineers',
+  url: canonical,
+  itemListElement: pageTools.map((tool, i) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    name: tool.name,
+    url: tool.url,
+  })),
+}
+
 export default async function BestAIToolsForSoftwareEngineers() {
   const relatedUseCases = await getRelatedUseCases()
 
   return (
     <div className="max-w-3xl mx-auto px-4 sm:px-6 py-10 sm:py-14">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListJsonLd) }}
+      />
       <Breadcrumb
         items={[
           { label: 'Home', href: '/' },

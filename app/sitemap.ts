@@ -65,6 +65,23 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.7,
   }))
 
+  // Tool & directory pages — important for organic traffic, must be indexed
+  const toolAndDirectoryPages: MetadataRoute.Sitemap = [
+    '/ai-use-cases',
+    '/best-ai-use-cases',
+    '/best-ai-tools-for-software-engineers',
+    '/best-ai-tools-for-product-managers',
+    '/best-ai-tools-for-project-managers',
+    '/ai-tools-for-marketing-managers',
+    '/ai-tools-for-sales-teams',
+    '/ai-tools-for-customer-support',
+  ].map((path) => ({
+    url: `${baseUrl}${path}`,
+    lastModified: new Date(),
+    changeFrequency: 'monthly' as const,
+    priority: 0.8,
+  }))
+
   const staticPages: MetadataRoute.Sitemap = [
     '/',
     '/about',
@@ -74,7 +91,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   ].map((path) => ({
     url: `${baseUrl}${path}`,
     lastModified: new Date(),
-    changeFrequency: 'yearly',
+    changeFrequency: 'yearly' as const,
     priority: 0.5,
   }))
 
@@ -87,6 +104,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...promptRoleUrls,
     ...promptUrls,
     ...templateUrls,
+    ...toolAndDirectoryPages,
     ...staticPages,
   ]
 }

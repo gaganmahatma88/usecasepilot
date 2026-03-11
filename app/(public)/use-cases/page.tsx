@@ -4,8 +4,8 @@ import { Breadcrumb } from '@/components/ui/Breadcrumb'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'AI Use Cases by Role',
-  description: 'Browse practical AI use cases organized by professional role.',
+  title: 'Browse AI Use Cases by Professional Role | UseCasePilot',
+  description: 'Choose your professional role to explore practical AI use cases and workflows built for your day-to-day work.',
 }
 
 async function getRoles() {

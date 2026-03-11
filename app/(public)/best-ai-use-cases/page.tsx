@@ -66,11 +66,24 @@ async function getTopUseCasesByRole(): Promise<RoleWithUseCases[]> {
   }
 }
 
+const breadcrumbJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: siteUrl },
+    { '@type': 'ListItem', position: 2, name: 'Best AI Use Cases', item: `${siteUrl}/best-ai-use-cases` },
+  ],
+}
+
 export default async function BestAIUseCasesPage() {
   const roles = await getTopUseCasesByRole()
 
   return (
     <div className="max-w-4xl mx-auto px-4 sm:px-6 py-10 sm:py-14">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+      />
       <Breadcrumb
         items={[
           { label: 'Home', href: '/' },
