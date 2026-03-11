@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>UseCasePilot — Logo Export</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: system-ui, sans-serif; background: #f8fafc; display: flex; flex-direction: column; align-items: center; padding: 48px 24px; gap: 40px; }
+    h1 { font-size: 18px; font-weight: 600; color: #0f172a; }
+    .grid { display: flex; gap: 24px; flex-wrap: wrap; justify-content: center; }
+    .card { background: white; border: 1px solid #e2e8f0; border-radius: 12px; padding: 24px; display: flex; flex-direction: column; align-items: center; gap: 16px; min-width: 160px; }
+    .card.dark { background: #0f172a; border-color: #1e293b; }
+    .label { font-size: 12px; color: #94a3b8; font-weight: 500; }
+    .btn { background: #1D4ED8; color: white; border: none; padding: 8px 16px; border-radius: 8px; font-size: 13px; font-weight: 500; cursor: pointer; width: 100%; transition: background 0.15s; }
+    .btn:hover { background: #1E40AF; }
+    canvas { display: none; }
+    .preview { border: 1px dashed #e2e8f0; border-radius: 8px; padding: 12px; display: flex; align-items: center; justify-content: center; }
+    .preview.dark { border-color: #334155; background: #0f172a; }
+    h2 { font-size: 13px; font-weight: 600; color: #64748b; text-transform: uppercase; letter-spacing: 0.06em; margin-top: 8px; }
+  </style>
+</head>
+<body>
+  <h1>UseCasePilot — Logo PNG Export</h1>
+  <p style="font-size:13px;color:#64748b;">Click any button to download the logo as a PNG file.</p>
+
+  <h2>Icon only</h2>
+  <div class="grid">
+    <div class="card">
+      <div class="label">16 × 16</div>
+      <div class="preview"><canvas id="c-icon-16" width="16" height="16"></canvas><img id="p-icon-16" /></div>
+      <button class="btn" onclick="download('icon-16', 16, false, false)">Download 16px</button>
+    </div>
+    <div class="card">
+      <div class="label">32 × 32</div>
+      <div class="preview"><canvas id="c-icon-32" width="32" height="32"></canvas><img id="p-icon-32" /></div>
+      <button class="btn" onclick="download('icon-32', 32, false, false)">Download 32px</button>
+    </div>
+    <div class="card">
+      <div class="label">48 × 48</div>
+      <div class="preview"><canvas id="c-icon-48" width="48" height="48"></canvas><img id="p-icon-48" /></div>
+      <button class="btn" onclick="download('icon-48', 48, false, false)">Download 48px</button>
+    </div>
+    <div class="card">
+      <div class="label">64 × 64</div>
+      <div class="preview"><canvas id="c-icon-64" width="64" height="64"></canvas><img id="p-icon-64" /></div>
+      <button class="btn" onclick="download('icon-64', 64, false, false)">Download 64px</button>
+    </div>
+    <div class="card">
+      <div class="label">180 × 180 (Apple)</div>
+      <div class="preview"><canvas id="c-icon-180" width="64" height="64"></canvas><img id="p-icon-180" /></div>
+      <button class="btn" onclick="download('icon-180', 180, false, false)">Download 180px</button>
+    </div>
+    <div class="card">
+      <div class="label">512 × 512</div>
+      <div class="preview"><canvas id="c-icon-512" width="64" height="64"></canvas><img id="p-icon-512" /></div>
+      <button class="btn" onclick="download('icon-512', 512, false, false)">Download 512px</button>
+    </div>
+  </div>
+
+  <h2>Full logo — light background</h2>
+  <div class="grid">
+    <div class="card">
+      <div class="label">200 × 48</div>
+      <div class="preview"><canvas id="c-logo-light-sm" width="200" height="48"></canvas><img id="p-logo-light-sm" /></div>
+      <button class="btn" onclick="download('logo-light-200', 200, true, false)">Download</button>
+    </div>
+    <div class="card">
+      <div class="label">400 × 96</div>
+      <div class="preview"><canvas id="c-logo-light-md" width="200" height="48"></canvas><img id="p-logo-light-md" /></div>
+      <button class="btn" onclick="download('logo-light-400', 400, true, false)">Download</button>
+    </div>
+    <div class="card">
+      <div class="label">800 × 192</div>
+      <div class="preview"><canvas id="c-logo-light-lg" width="200" height="48"></canvas><img id="p-logo-light-lg" /></div>
+      <button class="btn" onclick="download('logo-light-800', 800, true, false)">Download</button>
+    </div>
+  </div>
+
+  <h2>Full logo — dark background</h2>
+  <div class="grid">
+    <div class="card dark">
+      <div class="label" style="color:#475569">200 × 48</div>
+      <div class="preview dark"><canvas id="c-logo-dark-sm" width="200" height="48"></canvas><img id="p-logo-dark-sm" /></div>
+      <button class="btn" onclick="download('logo-dark-200', 200, true, true)">Download</button>
+    </div>
+    <div class="card dark">
+      <div class="label" style="color:#475569">400 × 96</div>
+      <div class="preview dark"><canvas id="c-logo-dark-md" width="200" height="48"></canvas><img id="p-logo-dark-md" /></div>
+      <button class="btn" onclick="download('logo-dark-400', 400, true, true)">Download</button>
+    </div>
+  </div>
+
+  <script>
+    // SVG path data for the Waypoint icon
+    function buildIconSVG(size, darkBg) {
+      const scale = size / 28;
+      return `<svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}" viewBox="0 0 28 28" fill="none">
+        <rect width="28" height="28" rx="8" fill="#1D4ED8"/>
+        <circle cx="7" cy="21" r="3" fill="white"/>
+        <path d="M7 21 L7 12.5 Q7 9 10.5 9 L19 9" stroke="white" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+        <path d="M19 6.5 L23.5 9 L19 11.5 Z" fill="white"/>
+      </svg>`;
+    }
+
+    function buildLogoSVG(width, darkBg) {
+      const h = Math.round(width * 0.24);
+      const iconSize = h;
+      const gap = Math.round(h * 0.29);
+      const fontSize = Math.round(h * 0.54);
+      const textColor = darkBg ? 'white' : '#111827';
+      const textX = iconSize + gap;
+      const textY = Math.round(h * 0.68);
+
+      return `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${h}" viewBox="0 0 ${width} ${h}">
+        ${darkBg ? `<rect width="${width}" height="${h}" fill="#0F172A"/>` : ''}
+        <!-- Icon -->
+        <rect width="${iconSize}" height="${iconSize}" rx="${Math.round(iconSize * 0.286)}" fill="#1D4ED8"/>
+        <circle cx="${Math.round(iconSize * 0.25)}" cy="${Math.round(iconSize * 0.75)}" r="${Math.round(iconSize * 0.107)}" fill="white"/>
+        <path d="M${Math.round(iconSize*0.25)} ${Math.round(iconSize*0.75)} L${Math.round(iconSize*0.25)} ${Math.round(iconSize*0.447)} Q${Math.round(iconSize*0.25)} ${Math.round(iconSize*0.321)} ${Math.round(iconSize*0.375)} ${Math.round(iconSize*0.321)} L${Math.round(iconSize*0.679)} ${Math.round(iconSize*0.321)}"
+              stroke="white" stroke-width="${Math.max(1.5, Math.round(iconSize*0.089))}" stroke-linecap="round" fill="none"/>
+        <path d="M${Math.round(iconSize*0.679)} ${Math.round(iconSize*0.232)} L${Math.round(iconSize*0.839)} ${Math.round(iconSize*0.321)} L${Math.round(iconSize*0.679)} ${Math.round(iconSize*0.411)} Z" fill="white"/>
+        <!-- Wordmark -->
+        <text x="${textX}" y="${textY}"
+              font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+              font-weight="600"
+              font-size="${fontSize}"
+              fill="${textColor}"
+              letter-spacing="-0.5">UseCasePilot</text>
+      </svg>`;
+    }
+
+    function svgToPng(svgString, canvasWidth, canvasHeight, callback) {
+      const blob = new Blob([svgString], { type: 'image/svg+xml' });
+      const url = URL.createObjectURL(blob);
+      const img = new Image();
+      img.onload = function() {
+        const canvas = document.createElement('canvas');
+        canvas.width = canvasWidth;
+        canvas.height = canvasHeight;
+        const ctx = canvas.getContext('2d');
+        ctx.drawImage(img, 0, 0, canvasWidth, canvasHeight);
+        URL.revokeObjectURL(url);
+        callback(canvas.toDataURL('image/png'));
+      };
+      img.src = url;
+    }
+
+    function download(filename, size, isFullLogo, darkBg) {
+      let svg, w, h;
+      if (isFullLogo) {
+        w = size;
+        h = Math.round(size * 0.24);
+        svg = buildLogoSVG(size, darkBg);
+      } else {
+        w = size;
+        h = size;
+        svg = buildIconSVG(size, darkBg);
+      }
+
+      svgToPng(svg, w, h, function(dataUrl) {
+        const a = document.createElement('a');
+        a.download = `usecasepilot-${filename}.png`;
+        a.href = dataUrl;
+        a.click();
+      });
+    }
+
+    // Render previews on load
+    window.addEventListener('load', function() {
+      const iconSizes = [16, 32, 48, 64, 180, 512];
+      iconSizes.forEach(function(s) {
+        const previewSize = Math.min(s, 64);
+        const svg = buildIconSVG(previewSize, false);
+        const blob = new Blob([svg], { type: 'image/svg+xml' });
+        const url = URL.createObjectURL(blob);
+        const el = document.getElementById('p-icon-' + s);
+        if (el) { el.src = url; el.width = previewSize; el.height = previewSize; }
+      });
+
+      const logoConfigs = [
+        { id: 'logo-light-sm',  w: 200, dark: false },
+        { id: 'logo-light-md',  w: 400, dark: false },
+        { id: 'logo-light-lg',  w: 800, dark: false },
+        { id: 'logo-dark-sm',   w: 200, dark: true },
+        { id: 'logo-dark-md',   w: 400, dark: true },
+      ];
+      logoConfigs.forEach(function(cfg) {
+        const previewW = 200;
+        const previewH = Math.round(previewW * 0.24);
+        const svg = buildLogoSVG(previewW, cfg.dark);
+        const blob = new Blob([svg], { type: 'image/svg+xml' });
+        const url = URL.createObjectURL(blob);
+        const el = document.getElementById('p-' + cfg.id);
+        if (el) { el.src = url; el.width = previewW; el.height = previewH; }
+      });
+    });
+  </script>
+</body>
+</html>
