@@ -25,10 +25,10 @@ function PricingBadge({ pricing }: { pricing?: string }) {
 export function RecommendedTool({ tool, compact = false }: Props) {
   if (compact) {
     return (
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-4 sm:p-5 rounded-xl border border-blue-100 bg-gradient-to-br from-blue-50/70 to-white hover:border-blue-200 hover:shadow-sm transition-all">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-4 sm:p-5 rounded-xl border border-[#DBEAFE] bg-gradient-to-br from-[#EFF6FF]/70 to-white hover:border-[#BFDBFE] hover:shadow-sm transition-all">
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-2 mb-1.5">
-            <p className="text-xs font-semibold text-blue-500 uppercase tracking-wider">
+            <p className="text-xs font-semibold text-[#1D4ED8] uppercase tracking-wider">
               Recommended Tool
             </p>
             <PricingBadge pricing={tool.pricing} />
@@ -43,7 +43,7 @@ export function RecommendedTool({ tool, compact = false }: Props) {
           href={`/api/track?tool=${tool.key}`}
           target="_blank"
           rel="nofollow noopener"
-          className="flex-shrink-0 inline-flex items-center gap-1.5 text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 active:scale-95 transition-all px-4 py-2 rounded-lg shadow-sm"
+          className="flex-shrink-0 inline-flex items-center gap-1.5 text-sm font-medium text-white bg-[#1D4ED8] hover:bg-[#1E40AF] active:scale-95 transition-all px-4 py-2 rounded-lg shadow-sm"
         >
           Try {tool.name}
           <svg width="11" height="11" viewBox="0 0 11 11" fill="none">
@@ -55,9 +55,9 @@ export function RecommendedTool({ tool, compact = false }: Props) {
   }
 
   return (
-    <div className="mt-10 p-5 rounded-xl border border-blue-100 bg-gradient-to-br from-blue-50/70 to-white hover:border-blue-200 hover:shadow-sm transition-all">
+    <div className="mt-10 p-5 rounded-xl border border-[#DBEAFE] bg-gradient-to-br from-[#EFF6FF]/70 to-white hover:border-[#BFDBFE] hover:shadow-sm transition-all">
       <div className="flex items-center justify-between mb-3">
-        <p className="text-xs font-semibold text-blue-500 uppercase tracking-wider">
+        <p className="text-xs font-semibold text-[#1D4ED8] uppercase tracking-wider">
           Recommended Tool
         </p>
         <PricingBadge pricing={tool.pricing} />
@@ -70,7 +70,7 @@ export function RecommendedTool({ tool, compact = false }: Props) {
             <li key={benefit} className="flex items-start gap-2.5 text-sm text-gray-600">
               <svg
                 width="14" height="14" viewBox="0 0 14 14" fill="none"
-                className="flex-shrink-0 mt-0.5 text-blue-500"
+                className="flex-shrink-0 mt-0.5 text-[#1D4ED8]"
               >
                 <circle cx="7" cy="7" r="6" stroke="currentColor" strokeWidth="1.2" opacity="0.25" />
                 <path
@@ -88,7 +88,7 @@ export function RecommendedTool({ tool, compact = false }: Props) {
         href={`/api/track?tool=${tool.key}`}
         target="_blank"
         rel="nofollow noopener"
-        className="inline-flex items-center gap-2 text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 active:scale-95 transition-all px-5 py-2.5 rounded-lg shadow-sm"
+        className="inline-flex items-center gap-2 text-sm font-medium text-white bg-[#1D4ED8] hover:bg-[#1E40AF] active:scale-95 transition-all px-5 py-2.5 rounded-lg shadow-sm"
       >
         Try {tool.name} Free
         <svg width="11" height="11" viewBox="0 0 11 11" fill="none">

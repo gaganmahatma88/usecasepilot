@@ -10,8 +10,13 @@
   --border: 220 13% 91%;
   --muted: 220 14% 96%;
   --muted-foreground: 220 9% 46%;
-  --primary: 221 83% 53%;
+  --primary: 224 76% 48%;          /* #1D4ED8 — brand blue */
+  --primary-hover: 224 71% 40%;    /* #1E40AF — brand blue hover */
   --primary-foreground: 0 0% 100%;
+  --brand-light-bg: 214 100% 97%;  /* #EFF6FF */
+  --brand-dark-bg: 222 47% 11%;    /* #0F172A */
+  --brand-border: 213 97% 87%;     /* #BFDBFE */
+  --focus-ring: 224 76% 48%;       /* #1D4ED8 */
 }
 
 * { box-sizing: border-box; }
@@ -132,7 +137,7 @@ details.faq-item > summary::-webkit-details-marker { display: none; }
   transition: border-color 0.15s, box-shadow 0.15s, background-color 0.15s;
 }
 .card-hover:hover {
-  box-shadow: 0 4px 16px rgba(59,130,246,0.07), 0 1px 4px rgba(0,0,0,0.04);
+  box-shadow: 0 4px 16px rgba(29,78,216,0.07), 0 1px 4px rgba(0,0,0,0.04);
 }
 
 /* ── Prompt block (dark code editor) ─────────────────── */

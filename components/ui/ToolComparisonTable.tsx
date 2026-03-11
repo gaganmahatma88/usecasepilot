@@ -49,7 +49,7 @@ export function ToolComparisonTable({ tools }: Props) {
                   href={`/api/track?tool=${tool.key}`}
                   target="_blank"
                   rel="nofollow noopener"
-                  className="inline-flex items-center gap-1 text-xs font-medium text-blue-600 hover:text-blue-700 transition-colors"
+                  className="inline-flex items-center gap-1 text-xs font-medium text-[#1D4ED8] hover:text-[#1E40AF] transition-colors"
                 >
                   Try free →
                 </a>

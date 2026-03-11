@@ -53,7 +53,7 @@ export default function AdminLoginPage() {
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full px-3.5 py-2.5 rounded-lg border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
+                className="w-full px-3.5 py-2.5 rounded-lg border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#1D4ED8] focus:border-transparent transition"
                 placeholder="Enter admin password"
                 required
                 autoFocus
@@ -67,7 +67,7 @@ export default function AdminLoginPage() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full bg-blue-600 text-white text-sm font-medium py-2.5 rounded-lg hover:bg-blue-700 disabled:opacity-50 transition-colors"
+              className="w-full bg-[#1D4ED8] text-white text-sm font-medium py-2.5 rounded-lg hover:bg-[#1E40AF] disabled:opacity-50 transition-colors"
             >
               {loading ? 'Signing in…' : 'Sign in'}
             </button>

@@ -19,7 +19,7 @@ const promptSections = [
 const ChevronRight = () => (
   <svg
     width="16" height="16" viewBox="0 0 16 16" fill="none"
-    className="text-gray-300 group-hover:text-blue-400 transition-colors flex-shrink-0 ml-4"
+    className="text-gray-300 group-hover:text-[#60A5FA] transition-colors flex-shrink-0 ml-4"
   >
     <path
       d="M4 8H12M12 8L8 4M12 8L8 12"
@@ -49,10 +49,10 @@ export default function AIPromptsPage() {
             <Link
               key={role.slug}
               href={`/ai-prompts/${role.slug}`}
-              className="group flex items-center justify-between p-5 rounded-xl border border-gray-100 hover:border-blue-200 hover:bg-blue-50/20 transition-all"
+              className="group flex items-center justify-between p-5 rounded-xl border border-gray-100 hover:border-[#BFDBFE] hover:bg-[#EFF6FF]/20 transition-all"
             >
               <div>
-                <p className="font-medium text-gray-900 group-hover:text-blue-700 transition-colors mb-1">
+                <p className="font-medium text-gray-900 group-hover:text-[#1E40AF] transition-colors mb-1">
                   {role.title}
                 </p>
                 <p className="text-sm text-gray-500 line-clamp-1">{role.description}</p>
@@ -75,10 +75,10 @@ export default function AIPromptsPage() {
                   <Link
                     key={page.slug}
                     href={`/ai-prompts/${page.slug}`}
-                    className="group flex items-center justify-between p-5 rounded-xl border border-gray-100 hover:border-blue-200 hover:bg-blue-50/20 transition-all"
+                    className="group flex items-center justify-between p-5 rounded-xl border border-gray-100 hover:border-[#BFDBFE] hover:bg-[#EFF6FF]/20 transition-all"
                   >
                     <div>
-                      <p className="font-medium text-gray-900 group-hover:text-blue-700 transition-colors mb-1">
+                      <p className="font-medium text-gray-900 group-hover:text-[#1E40AF] transition-colors mb-1">
                         {page.title}
                       </p>
                       <p className="text-sm text-gray-500 line-clamp-1">{page.description}</p>

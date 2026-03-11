@@ -57,14 +57,14 @@ export default function PromptTemplatesPage() {
                   <Link
                     key={entry.slug}
                     href={`/prompt-templates/${entry.slug}`}
-                    className="group flex items-center justify-between p-4 rounded-xl border border-gray-100 hover:border-blue-200 hover:bg-blue-50/20 transition-all"
+                    className="group flex items-center justify-between p-4 rounded-xl border border-gray-100 hover:border-[#BFDBFE] hover:bg-[#EFF6FF]/20 transition-all"
                   >
-                    <span className="text-sm font-medium text-gray-800 group-hover:text-blue-700 transition-colors">
+                    <span className="text-sm font-medium text-gray-800 group-hover:text-[#1E40AF] transition-colors">
                       {page.heading}
                     </span>
                     <svg
                       width="16" height="16" viewBox="0 0 16 16" fill="none"
-                      className="text-gray-300 group-hover:text-blue-400 transition-colors flex-shrink-0 ml-4"
+                      className="text-gray-300 group-hover:text-[#60A5FA] transition-colors flex-shrink-0 ml-4"
                     >
                       <path
                         d="M4 8H12M12 8L8 4M12 8L8 12"

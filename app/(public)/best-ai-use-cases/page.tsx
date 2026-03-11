@@ -116,7 +116,7 @@ export default async function BestAIUseCasesPage() {
                 </h2>
                 <Link
                   href={`/use-cases/${role.slug}`}
-                  className="text-xs text-blue-600 hover:text-blue-700 transition-colors"
+                  className="text-xs text-[#1D4ED8] hover:text-[#1E40AF] transition-colors"
                 >
                   View all →
                 </Link>
@@ -129,8 +129,8 @@ export default async function BestAIUseCasesPage() {
                       href={`/use-cases/${role.slug}/${uc.slug}`}
                       className="group flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 transition-colors"
                     >
-                      <span className="w-1.5 h-1.5 rounded-full bg-blue-400 flex-shrink-0" />
-                      <span className="text-sm text-gray-700 group-hover:text-blue-700 transition-colors">
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#60A5FA] flex-shrink-0" />
+                      <span className="text-sm text-gray-700 group-hover:text-[#1E40AF] transition-colors">
                         {uc.title}
                       </span>
                     </Link>

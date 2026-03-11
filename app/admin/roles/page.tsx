@@ -102,7 +102,7 @@ export default function AdminRolesPage() {
             </div>
             <button
               onClick={openNew}
-              className="bg-blue-600 text-white text-sm font-medium px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors"
+              className="bg-[#1D4ED8] text-white text-sm font-medium px-4 py-2 rounded-lg hover:bg-[#1E40AF] transition-colors"
             >
               + New Role
             </button>
@@ -110,7 +110,7 @@ export default function AdminRolesPage() {
 
           {/* Form */}
           {showForm && (
-            <div className="mb-6 p-5 rounded-xl border border-blue-100 bg-blue-50/30">
+            <div className="mb-6 p-5 rounded-xl border border-[#DBEAFE] bg-[#EFF6FF]/30">
               <h2 className="font-semibold text-gray-900 mb-4 text-sm">
                 {editingRole ? 'Edit Role' : 'New Role'}
               </h2>
@@ -122,7 +122,7 @@ export default function AdminRolesPage() {
                   <input
                     value={form.title}
                     onChange={(e) => handleTitleChange(e.target.value)}
-                    className="w-full px-3 py-2 rounded-lg border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full px-3 py-2 rounded-lg border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#1D4ED8]"
                     placeholder="e.g. Project Managers"
                   />
                 </div>
@@ -135,7 +135,7 @@ export default function AdminRolesPage() {
                     onChange={(e) =>
                       setForm((f) => ({ ...f, slug: e.target.value }))
                     }
-                    className="w-full px-3 py-2 rounded-lg border border-gray-200 text-sm font-mono focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full px-3 py-2 rounded-lg border border-gray-200 text-sm font-mono focus:outline-none focus:ring-2 focus:ring-[#1D4ED8]"
                     placeholder="project-managers"
                   />
                 </div>
@@ -148,7 +148,7 @@ export default function AdminRolesPage() {
                     onChange={(e) =>
                       setForm((f) => ({ ...f, description: e.target.value }))
                     }
-                    className="w-full px-3 py-2 rounded-lg border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"
+                    className="w-full px-3 py-2 rounded-lg border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#1D4ED8] resize-none"
                     rows={2}
                     placeholder="Brief description of this role…"
                   />
@@ -158,7 +158,7 @@ export default function AdminRolesPage() {
                   <button
                     onClick={handleSave}
                     disabled={saving}
-                    className="bg-blue-600 text-white text-sm font-medium px-4 py-2 rounded-lg hover:bg-blue-700 disabled:opacity-50 transition-colors"
+                    className="bg-[#1D4ED8] text-white text-sm font-medium px-4 py-2 rounded-lg hover:bg-[#1E40AF] disabled:opacity-50 transition-colors"
                   >
                     {saving ? 'Saving…' : 'Save Role'}
                   </button>
@@ -198,7 +198,7 @@ export default function AdminRolesPage() {
                   <div className="flex items-center gap-2">
                     <button
                       onClick={() => openEdit(role)}
-                      className="text-xs text-blue-600 hover:text-blue-700 px-3 py-1.5 rounded-lg hover:bg-blue-50 transition-colors"
+                      className="text-xs text-[#1D4ED8] hover:text-[#1E40AF] px-3 py-1.5 rounded-lg hover:bg-[#EFF6FF] transition-colors"
                     >
                       Edit
                     </button>

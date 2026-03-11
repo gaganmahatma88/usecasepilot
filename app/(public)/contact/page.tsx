@@ -18,7 +18,7 @@ export default function ContactPage() {
           Email:{' '}
           <a
             href="mailto:partner@usecasepilot.org"
-            className="text-blue-600 hover:underline"
+            className="text-[#1D4ED8] hover:underline"
           >
             partner@usecasepilot.org
           </a>

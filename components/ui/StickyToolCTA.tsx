@@ -13,7 +13,7 @@ export function StickyToolCTA({ tool }: Props) {
   if (dismissed) return null
 
   return (
-    <div className="hidden lg:block fixed bottom-6 right-6 z-40 w-64 rounded-xl border border-blue-100 bg-white shadow-lg shadow-blue-900/5 p-4">
+    <div className="hidden lg:block fixed bottom-6 right-6 z-40 w-64 rounded-xl border border-[#DBEAFE] bg-white shadow-lg shadow-[#1D4ED8]/5 p-4">
       <button
         onClick={() => setDismissed(true)}
         aria-label="Dismiss"
@@ -21,7 +21,7 @@ export function StickyToolCTA({ tool }: Props) {
       >
         ✕
       </button>
-      <p className="text-xs font-semibold text-blue-400 uppercase tracking-wide mb-1">
+      <p className="text-xs font-semibold text-[#1D4ED8] uppercase tracking-wide mb-1">
         Recommended Tool
       </p>
       <p className="text-sm font-semibold text-gray-900 mb-0.5">{tool.name}</p>
@@ -30,7 +30,7 @@ export function StickyToolCTA({ tool }: Props) {
         href={`/api/track?tool=${tool.key}`}
         target="_blank"
         rel="nofollow noopener"
-        className="flex items-center justify-center gap-1.5 text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 transition-colors px-3 py-1.5 rounded-lg w-full"
+        className="flex items-center justify-center gap-1.5 text-sm font-medium text-white bg-[#1D4ED8] hover:bg-[#1E40AF] transition-colors px-3 py-1.5 rounded-lg w-full"
       >
         Try {tool.name} →
       </a>

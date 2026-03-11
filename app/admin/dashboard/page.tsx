@@ -62,7 +62,7 @@ export default async function DashboardPage() {
               <Link
                 key={s.label}
                 href={s.href}
-                className="p-5 rounded-xl border border-gray-100 hover:border-blue-200 hover:bg-blue-50/20 transition-all block"
+                className="p-5 rounded-xl border border-gray-100 hover:border-[#BFDBFE] hover:bg-[#EFF6FF]/20 transition-all block"
               >
                 <div className="text-3xl font-bold text-gray-900 mb-1">
                   {s.value}
@@ -80,7 +80,7 @@ export default async function DashboardPage() {
             <div className="flex gap-3">
               <Link
                 href="/admin/editor"
-                className="inline-flex items-center gap-2 bg-blue-600 text-white text-sm font-medium px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors"
+                className="inline-flex items-center gap-2 bg-[#1D4ED8] text-white text-sm font-medium px-4 py-2 rounded-lg hover:bg-[#1E40AF] transition-colors"
               >
                 + New Use Case
               </Link>
@@ -129,7 +129,7 @@ export default async function DashboardPage() {
                       </span>
                       <Link
                         href={`/admin/editor?id=${uc.id}`}
-                        className="text-xs text-blue-600 hover:underline"
+                        className="text-xs text-[#1D4ED8] hover:underline"
                       >
                         Edit
                       </Link>

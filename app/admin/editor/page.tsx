@@ -240,7 +240,7 @@ function EditorContent() {
           <button
             onClick={() => handleSave(!form.published)}
             disabled={saving}
-            className="text-sm px-4 py-2 rounded-lg bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 transition-colors"
+            className="text-sm px-4 py-2 rounded-lg bg-[#1D4ED8] text-white hover:bg-[#1E40AF] disabled:opacity-50 transition-colors"
           >
             {form.published ? 'Unpublish' : 'Publish'}
           </button>
@@ -278,7 +278,7 @@ function EditorContent() {
                   onChange={(e) =>
                     setForm((f) => ({ ...f, role_id: e.target.value }))
                   }
-                  className="w-full px-2.5 py-2 rounded-lg border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white"
+                  className="w-full px-2.5 py-2 rounded-lg border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#1D4ED8] bg-white"
                 >
                   <option value="">Select role…</option>
                   {roles.map((r) => (
@@ -298,7 +298,7 @@ function EditorContent() {
                     setForm((f) => ({ ...f, slug: e.target.value }))
                   }
                   disabled={form.published}
-                  className="w-full px-2.5 py-2 rounded-lg border border-gray-200 text-xs font-mono focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:bg-gray-50 disabled:text-gray-400 disabled:cursor-not-allowed"
+                  className="w-full px-2.5 py-2 rounded-lg border border-gray-200 text-xs font-mono focus:outline-none focus:ring-2 focus:ring-[#1D4ED8] disabled:bg-gray-50 disabled:text-gray-400 disabled:cursor-not-allowed"
                   placeholder="my-use-case"
                 />
                 {form.published && (
@@ -322,7 +322,7 @@ function EditorContent() {
                   onChange={(e) =>
                     setForm((f) => ({ ...f, seo_title: e.target.value }))
                   }
-                  className="w-full px-2.5 py-2 rounded-lg border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-2.5 py-2 rounded-lg border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#1D4ED8]"
                   placeholder="SEO title…"
                 />
                 <p className="text-xs text-gray-400 mt-1">
@@ -341,7 +341,7 @@ function EditorContent() {
                       seo_description: e.target.value,
                     }))
                   }
-                  className="w-full px-2.5 py-2 rounded-lg border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"
+                  className="w-full px-2.5 py-2 rounded-lg border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#1D4ED8] resize-none"
                   rows={3}
                   placeholder="Brief description for search results…"
                 />
@@ -362,7 +362,7 @@ function EditorContent() {
                   }/${form.slug}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-xs text-blue-600 hover:underline break-all"
+                  className="text-xs text-[#1D4ED8] hover:underline break-all"
                 >
                   /use-cases/
                   {roles.find((r) => r.id === form.role_id)?.slug}/

@@ -39,7 +39,7 @@ export default function PrivacyPolicyPage() {
           <h2 className="text-lg font-semibold text-gray-800 mb-3">Contact</h2>
           <p>
             If you have questions about this policy, you can contact us through the{' '}
-            <a href="/contact" className="text-blue-600 hover:underline">
+            <a href="/contact" className="text-[#1D4ED8] hover:underline">
               contact page
             </a>
             .

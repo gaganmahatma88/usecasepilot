@@ -22,11 +22,11 @@ export default function Error({
       <div className="flex gap-4">
         <button
           onClick={reset}
-          className="text-sm text-blue-600 hover:text-blue-700 underline"
+          className="text-sm text-[#1D4ED8] hover:text-[#1E40AF] underline"
         >
           Try again
         </button>
-        <Link href="/" className="text-sm text-blue-600 hover:text-blue-700">
+        <Link href="/" className="text-sm text-[#1D4ED8] hover:text-[#1E40AF]">
           ← Back to home
         </Link>
       </div>

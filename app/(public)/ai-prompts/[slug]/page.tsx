@@ -247,7 +247,7 @@ function PromptPage({ slug }: { slug: string }) {
             <ol className="space-y-2">
               {howToSteps.map((step, i) => (
                 <li key={i} className="flex items-start gap-3 text-sm text-gray-600">
-                  <span className="flex-shrink-0 w-5 h-5 rounded-full bg-blue-100 text-blue-600 text-xs font-semibold flex items-center justify-center mt-0.5">
+                  <span className="flex-shrink-0 w-5 h-5 rounded-full bg-[#DBEAFE] text-[#1D4ED8] text-xs font-semibold flex items-center justify-center mt-0.5">
                     {i + 1}
                   </span>
                   {step}
@@ -299,14 +299,14 @@ function PromptPage({ slug }: { slug: string }) {
                 <Link
                   key={t!.slug}
                   href={`/prompt-templates/${t!.slug}`}
-                  className="group flex items-center justify-between p-4 rounded-xl border border-gray-100 hover:border-blue-200 hover:bg-blue-50/20 transition-all"
+                  className="group flex items-center justify-between p-4 rounded-xl border border-gray-100 hover:border-[#BFDBFE] hover:bg-[#EFF6FF]/20 transition-all"
                 >
-                  <span className="text-sm font-medium text-gray-800 group-hover:text-blue-700 transition-colors">
+                  <span className="text-sm font-medium text-gray-800 group-hover:text-[#1E40AF] transition-colors">
                     {t!.heading}
                   </span>
                   <svg
                     width="16" height="16" viewBox="0 0 16 16" fill="none"
-                    className="text-gray-300 group-hover:text-blue-400 transition-colors flex-shrink-0 ml-4"
+                    className="text-gray-300 group-hover:text-[#60A5FA] transition-colors flex-shrink-0 ml-4"
                   >
                     <path
                       d="M4 8H12M12 8L8 4M12 8L8 12"
@@ -329,14 +329,14 @@ function PromptPage({ slug }: { slug: string }) {
               <Link
                 key={uc.href}
                 href={uc.href}
-                className="group flex items-center justify-between p-4 rounded-xl border border-gray-100 hover:border-blue-200 hover:bg-blue-50/20 transition-all"
+                className="group flex items-center justify-between p-4 rounded-xl border border-gray-100 hover:border-[#BFDBFE] hover:bg-[#EFF6FF]/20 transition-all"
               >
-                <span className="text-sm font-medium text-gray-800 group-hover:text-blue-700 transition-colors">
+                <span className="text-sm font-medium text-gray-800 group-hover:text-[#1E40AF] transition-colors">
                   {uc.label}
                 </span>
                 <svg
                   width="16" height="16" viewBox="0 0 16 16" fill="none"
-                  className="text-gray-300 group-hover:text-blue-400 transition-colors flex-shrink-0"
+                  className="text-gray-300 group-hover:text-[#60A5FA] transition-colors flex-shrink-0"
                 >
                   <path
                     d="M4 8H12M12 8L8 4M12 8L8 12"
@@ -359,8 +359,8 @@ function PromptPage({ slug }: { slug: string }) {
             <details key={faq.question} className="faq-item group">
               <summary className="flex items-center justify-between gap-4 py-4 cursor-pointer">
                 <h3 className="text-sm font-semibold text-gray-900">{faq.question}</h3>
-                <span className="flex-shrink-0 w-5 h-5 rounded-full bg-gray-100 group-open:bg-blue-50 flex items-center justify-center transition-colors">
-                  <svg width="10" height="10" viewBox="0 0 10 10" fill="none" className="text-gray-400 group-open:text-blue-500 transition-colors group-open:rotate-45 duration-200">
+                <span className="flex-shrink-0 w-5 h-5 rounded-full bg-gray-100 group-open:bg-[#EFF6FF] flex items-center justify-center transition-colors">
+                  <svg width="10" height="10" viewBox="0 0 10 10" fill="none" className="text-gray-400 group-open:text-[#1D4ED8] transition-colors group-open:rotate-45 duration-200">
                     <path d="M5 2V8M2 5H8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
                   </svg>
                 </span>

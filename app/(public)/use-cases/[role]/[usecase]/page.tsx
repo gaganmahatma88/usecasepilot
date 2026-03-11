@@ -232,7 +232,7 @@ export default async function UseCasePage({ params }: Props) {
 
       <article>
         <header className="mb-10">
-          <div className="inline-flex items-center gap-1.5 text-xs font-medium text-blue-600 bg-blue-50 border border-blue-100 rounded-full px-2.5 py-1 mb-4">
+          <div className="inline-flex items-center gap-1.5 text-xs font-medium text-[#1D4ED8] bg-[#EFF6FF] border border-[#DBEAFE] rounded-full px-2.5 py-1 mb-4">
             {role.title}
           </div>
 
@@ -265,7 +265,7 @@ export default async function UseCasePage({ params }: Props) {
                   <span className="w-1 h-1 rounded-full bg-gray-300 flex-shrink-0" />
                   <a
                     href={`#${h.id}`}
-                    className="text-sm text-gray-600 hover:text-blue-600 transition-colors"
+                    className="text-sm text-gray-600 hover:text-[#1D4ED8] transition-colors"
                   >
                     {h.text}
                   </a>
@@ -293,7 +293,7 @@ export default async function UseCasePage({ params }: Props) {
             Looking for tools to implement these workflows?{' '}
             <Link
               href={ROLE_TOOLS_PAGE[params.role].href}
-              className="text-blue-600 hover:text-blue-700 hover:underline transition-colors"
+              className="text-[#1D4ED8] hover:text-[#1E40AF] hover:underline transition-colors"
             >
               See our guide to the {ROLE_TOOLS_PAGE[params.role].label}
             </Link>
@@ -311,8 +311,8 @@ export default async function UseCasePage({ params }: Props) {
             <details key={faq.question} className="faq-item group">
               <summary className="flex items-center justify-between gap-4 py-4 cursor-pointer">
                 <h3 className="text-sm font-semibold text-gray-900">{faq.question}</h3>
-                <span className="flex-shrink-0 w-5 h-5 rounded-full bg-gray-100 group-open:bg-blue-50 flex items-center justify-center transition-colors">
-                  <svg width="10" height="10" viewBox="0 0 10 10" fill="none" className="text-gray-400 group-open:text-blue-500 transition-colors group-open:rotate-45 duration-200">
+                <span className="flex-shrink-0 w-5 h-5 rounded-full bg-gray-100 group-open:bg-[#EFF6FF] flex items-center justify-center transition-colors">
+                  <svg width="10" height="10" viewBox="0 0 10 10" fill="none" className="text-gray-400 group-open:text-[#1D4ED8] transition-colors group-open:rotate-45 duration-200">
                     <path d="M5 2V8M2 5H8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
                   </svg>
                 </span>
@@ -333,14 +333,14 @@ export default async function UseCasePage({ params }: Props) {
               <Link
                 key={item.slug}
                 href={`/use-cases/${role.slug}/${item.slug}`}
-                className="group flex items-center justify-between p-4 rounded-xl border border-gray-100 hover:border-blue-200 hover:bg-blue-50/20 card-hover transition-all"
+                className="group flex items-center justify-between p-4 rounded-xl border border-gray-100 hover:border-[#BFDBFE] hover:bg-[#EFF6FF]/20 card-hover transition-all"
               >
-                <span className="text-sm font-medium text-gray-800 group-hover:text-blue-700 transition-colors">
+                <span className="text-sm font-medium text-gray-800 group-hover:text-[#1E40AF] transition-colors">
                   {item.title}
                 </span>
                 <svg
                   width="13" height="13" viewBox="0 0 13 13" fill="none"
-                  className="text-gray-300 group-hover:text-blue-400 transition-colors flex-shrink-0 ml-3"
+                  className="text-gray-300 group-hover:text-[#60A5FA] transition-colors flex-shrink-0 ml-3"
                 >
                   <path d="M2.5 6.5H10.5M10.5 6.5L7 3M10.5 6.5L7 10" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>

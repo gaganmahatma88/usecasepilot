@@ -94,7 +94,7 @@ const Btn = ({
     title={title}
     className={`p-1.5 rounded text-sm font-medium transition-colors min-w-[28px] ${
       active
-        ? 'bg-blue-100 text-blue-700'
+        ? 'bg-[#DBEAFE] text-[#1D4ED8]'
         : 'text-gray-600 hover:bg-gray-100 hover:text-gray-900'
     }`}
   >
@@ -174,7 +174,7 @@ export function RichEditor({ content, onChange }: RichEditorProps) {
           onClick={() => setShowMdx(!showMdx)}
           className={`text-xs px-2.5 py-1 rounded font-mono transition-colors ${
             showMdx
-              ? 'bg-blue-100 text-blue-700'
+              ? 'bg-[#DBEAFE] text-[#1D4ED8]'
               : 'text-gray-400 hover:text-gray-600 hover:bg-gray-100'
           }`}
         >

@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>UseCasePilot — Logo Preview</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'DM Sans', system-ui, sans-serif;
+      background: #f1f5f9;
+      color: #111827;
+      padding: 48px 40px;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .page-header { margin-bottom: 48px; }
+    .page-title { font-size: 24px; font-weight: 700; margin-bottom: 6px; }
+    .page-sub { font-size: 14px; color: #6b7280; }
+
+    /* Current logo section */
+    .current-section {
+      background: white;
+      border: 1px solid #e5e7eb;
+      border-radius: 16px;
+      padding: 24px 28px;
+      margin-bottom: 40px;
+      max-width: 960px;
+      display: flex;
+      align-items: center;
+      gap: 32px;
+    }
+    .current-badge {
+      font-size: 11px; font-weight: 600; text-transform: uppercase;
+      letter-spacing: 0.07em; color: #9ca3af;
+      background: #f3f4f6; padding: 3px 10px; border-radius: 20px;
+    }
+    .current-inner { display: flex; align-items: center; gap: 28px; flex: 1; }
+    .current-label { font-size: 13px; color: #6b7280; margin-top: 6px; }
+
+    /* Options grid */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      max-width: 960px;
+    }
+
+    .card {
+      background: white;
+      border: 1.5px solid #e5e7eb;
+      border-radius: 20px;
+      padding: 32px 28px;
+      transition: border-color 0.15s;
+    }
+    .card:hover { border-color: #3b82f6; }
+
+    .option-tag {
+      display: inline-block;
+      font-size: 11px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.07em; color: #3b82f6;
+      background: #eff6ff; padding: 3px 10px;
+      border-radius: 20px; margin-bottom: 16px;
+    }
+    .option-name {
+      font-size: 18px; font-weight: 700; margin-bottom: 6px;
+    }
+    .option-desc {
+      font-size: 13px; color: #6b7280; line-height: 1.6;
+      margin-bottom: 28px;
+    }
+
+    /* Icon display rows */
+    .icon-showcase {
+      display: flex; align-items: center; gap: 12px; margin-bottom: 24px;
+    }
+    .icon-wrap {
+      display: flex; align-items: center; justify-content: center;
+      width: 64px; height: 64px; border-radius: 14px;
+    }
+    .on-white { background: white; border: 1px solid #e5e7eb; }
+    .on-gray  { background: #f8fafc; border: 1px solid #e5e7eb; }
+    .on-dark  { background: #111827; }
+    .on-blue  { background: #2563eb; }
+
+    .icon-size-note {
+      font-size: 11px; color: #9ca3af; text-align: center; margin-top: 4px;
+    }
+
+    /* Header mockup */
+    .header-mock {
+      background: white;
+      border: 1px solid #e5e7eb;
+      border-radius: 10px;
+      padding: 11px 18px;
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 12px;
+    }
+    .mock-logo { display: flex; align-items: center; gap: 9px; }
+    .mock-wordmark { font-size: 15px; font-weight: 600; color: #111827; }
+    .mock-nav { display: flex; gap: 4px; }
+    .mock-nav span {
+      font-size: 13px; color: #6b7280;
+      padding: 4px 10px; border-radius: 6px; background: #f3f4f6;
+    }
+
+    /* Dark header mockup */
+    .header-mock-dark {
+      background: #111827;
+      border: 1px solid #374151;
+      border-radius: 10px;
+      padding: 11px 18px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .mock-wordmark-light { font-size: 15px; font-weight: 600; color: white; }
+    .mock-nav-dark span {
+      font-size: 13px; color: #9ca3af;
+      padding: 4px 10px; border-radius: 6px; background: #1f2937;
+    }
+
+    .mock-label {
+      font-size: 11px; color: #9ca3af; margin-bottom: 6px;
+    }
+
+    hr { border: none; border-top: 1px solid #e5e7eb; margin: 28px 0; }
+  </style>
+</head>
+<body>
+
+  <div class="page-header">
+    <h1 class="page-title">UseCasePilot — Logo Concepts</h1>
+    <p class="page-sub">Three redesigns ready for review. Choose one and it will be applied to the site.</p>
+  </div>
+
+  <!-- Current logo -->
+  <div class="current-section">
+    <span class="current-badge">Current</span>
+    <div class="current-inner">
+      <div>
+        <!-- Current logo SVG reproduced at 40px -->
+        <svg width="40" height="40" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="14" cy="14" r="13" stroke="hsl(221,83%,53%)" stroke-width="1.5"/>
+          <path d="M8 14 L11 14" stroke="hsl(221,83%,53%)" stroke-width="1.5" stroke-linecap="round"/>
+          <path d="M17 14 L20 14" stroke="hsl(221,83%,53%)" stroke-width="1.5" stroke-linecap="round"/>
+          <path d="M14 8 L14 11" stroke="hsl(221,83%,53%)" stroke-width="1.5" stroke-linecap="round"/>
+          <path d="M14 17 L14 20" stroke="hsl(221,83%,53%)" stroke-width="1.5" stroke-linecap="round"/>
+          <circle cx="14" cy="14" r="2.5" fill="hsl(221,83%,53%)"/>
+          <circle cx="8"  cy="14" r="1.5" fill="hsl(221,83%,53%)" fill-opacity="0.5"/>
+          <circle cx="20" cy="14" r="1.5" fill="hsl(221,83%,53%)" fill-opacity="0.5"/>
+          <circle cx="14" cy="8"  r="1.5" fill="hsl(221,83%,53%)" fill-opacity="0.5"/>
+          <circle cx="14" cy="20" r="1.5" fill="hsl(221,83%,53%)" fill-opacity="0.5"/>
+          <path d="M10.5 10.5 L12.5 12.5" stroke="hsl(221,83%,53%)" stroke-width="1" stroke-linecap="round" stroke-opacity="0.5"/>
+          <path d="M15.5 15.5 L17.5 17.5" stroke="hsl(221,83%,53%)" stroke-width="1" stroke-linecap="round" stroke-opacity="0.5"/>
+          <path d="M17.5 10.5 L15.5 12.5" stroke="hsl(221,83%,53%)" stroke-width="1" stroke-linecap="round" stroke-opacity="0.5"/>
+          <path d="M10.5 17.5 L12.5 15.5" stroke="hsl(221,83%,53%)" stroke-width="1" stroke-linecap="round" stroke-opacity="0.5"/>
+        </svg>
+        <div class="current-label">Hub/spoke mark — generic, lacks brand identity</div>
+      </div>
+      <div style="font-size:13px;color:#6b7280;max-width:340px;line-height:1.6;">
+        The current icon is a symmetrical hub-and-spoke pattern. It reads as generic "network" or "API" — it doesn't communicate the pilot/navigation concept or AI use cases.
+      </div>
+    </div>
+  </div>
+
+  <!-- Three new options -->
+  <div class="grid">
+
+    <!-- ═══════════════════════════════════════════════
+         OPTION A — "Heading"  (line-art compass mark)
+    ════════════════════════════════════════════════ -->
+    <div class="card">
+      <div class="option-tag">Option A</div>
+      <div class="option-name">Heading</div>
+      <p class="option-desc">
+        A compass bearing indicator — a circle with a diagonal course arrow from a start-point dot to an arrowhead.
+        Directly evokes the "pilot" metaphor: setting your heading.
+        Clean line-art, scales to any size.
+      </p>
+
+      <!-- Icon at multiple sizes -->
+      <div class="icon-showcase">
+        <div>
+          <div class="icon-wrap on-white">
+            <svg width="48" height="48" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="14" cy="14" r="12" stroke="hsl(221,83%,53%)" stroke-width="1.5"/>
+              <circle cx="7.5" cy="20.5" r="2" fill="hsl(221,83%,53%)"/>
+              <line x1="9.2" y1="18.8" x2="19.5" y2="8.5" stroke="hsl(221,83%,53%)" stroke-width="1.75" stroke-linecap="round"/>
+              <path d="M18.4 9.6 L20.5 7.5 L18.4 5.4" stroke="hsl(221,83%,53%)" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="icon-size-note">48px · light</div>
+        </div>
+        <div>
+          <div class="icon-wrap on-dark">
+            <svg width="48" height="48" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="14" cy="14" r="12" stroke="white" stroke-width="1.5"/>
+              <circle cx="7.5" cy="20.5" r="2" fill="white"/>
+              <line x1="9.2" y1="18.8" x2="19.5" y2="8.5" stroke="white" stroke-width="1.75" stroke-linecap="round"/>
+              <path d="M18.4 9.6 L20.5 7.5 L18.4 5.4" stroke="white" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="icon-size-note">dark bg</div>
+        </div>
+        <div>
+          <div class="icon-wrap on-white" style="width:36px;height:36px;border-radius:8px;">
+            <svg width="20" height="20" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="14" cy="14" r="12" stroke="hsl(221,83%,53%)" stroke-width="1.5"/>
+              <circle cx="7.5" cy="20.5" r="2" fill="hsl(221,83%,53%)"/>
+              <line x1="9.2" y1="18.8" x2="19.5" y2="8.5" stroke="hsl(221,83%,53%)" stroke-width="1.75" stroke-linecap="round"/>
+              <path d="M18.4 9.6 L20.5 7.5 L18.4 5.4" stroke="hsl(221,83%,53%)" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="icon-size-note">20px</div>
+        </div>
+      </div>
+
+      <hr />
+
+      <!-- Header mockup light -->
+      <div class="mock-label">Header — light</div>
+      <div class="header-mock">
+        <div class="mock-logo">
+          <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="14" cy="14" r="12" stroke="hsl(221,83%,53%)" stroke-width="1.5"/>
+            <circle cx="7.5" cy="20.5" r="2" fill="hsl(221,83%,53%)"/>
+            <line x1="9.2" y1="18.8" x2="19.5" y2="8.5" stroke="hsl(221,83%,53%)" stroke-width="1.75" stroke-linecap="round"/>
+            <path d="M18.4 9.6 L20.5 7.5 L18.4 5.4" stroke="hsl(221,83%,53%)" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span class="mock-wordmark">UseCasePilot</span>
+        </div>
+        <div class="mock-nav">
+          <span>Use Cases</span><span>AI Prompts</span><span>AI Tools</span>
+        </div>
+      </div>
+
+      <!-- Header mockup dark -->
+      <div class="mock-label" style="margin-top:10px;">Header — dark</div>
+      <div class="header-mock-dark">
+        <div class="mock-logo">
+          <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="14" cy="14" r="12" stroke="white" stroke-width="1.5"/>
+            <circle cx="7.5" cy="20.5" r="2" fill="white"/>
+            <line x1="9.2" y1="18.8" x2="19.5" y2="8.5" stroke="white" stroke-width="1.75" stroke-linecap="round"/>
+            <path d="M18.4 9.6 L20.5 7.5 L18.4 5.4" stroke="white" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span class="mock-wordmark-light">UseCasePilot</span>
+        </div>
+        <div class="mock-nav-dark mock-nav">
+          <span>Use Cases</span><span>AI Prompts</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════
+         OPTION B — "Waypoint"  (filled badge with route)
+    ════════════════════════════════════════════════ -->
+    <div class="card">
+      <div class="option-tag">Option B</div>
+      <div class="option-name">Waypoint</div>
+      <p class="option-desc">
+        A solid blue rounded-square badge with a white bezier route — dot origin at bottom-left,
+        smooth arc to a destination arrowhead. Bold, modern, instantly recognisable. Pairs well
+        with product and SaaS aesthetics.
+      </p>
+
+      <div class="icon-showcase">
+        <div>
+          <div class="icon-wrap on-gray">
+            <svg width="48" height="48" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="1.5" y="1.5" width="25" height="25" rx="7.5" fill="hsl(221,83%,53%)"/>
+              <circle cx="7" cy="21" r="2.5" fill="white"/>
+              <path d="M7 21 Q7 7 21 7" stroke="white" stroke-width="2.25" stroke-linecap="round" fill="none"/>
+              <path d="M21 11.5 L21 7 L16.5 7" stroke="white" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="icon-size-note">48px · light</div>
+        </div>
+        <div>
+          <div class="icon-wrap on-dark">
+            <svg width="48" height="48" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="1.5" y="1.5" width="25" height="25" rx="7.5" fill="hsl(221,83%,67%)"/>
+              <circle cx="7" cy="21" r="2.5" fill="white"/>
+              <path d="M7 21 Q7 7 21 7" stroke="white" stroke-width="2.25" stroke-linecap="round" fill="none"/>
+              <path d="M21 11.5 L21 7 L16.5 7" stroke="white" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="icon-size-note">dark bg</div>
+        </div>
+        <div>
+          <div class="icon-wrap on-gray" style="width:36px;height:36px;border-radius:8px;">
+            <svg width="20" height="20" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="1.5" y="1.5" width="25" height="25" rx="7.5" fill="hsl(221,83%,53%)"/>
+              <circle cx="7" cy="21" r="2.5" fill="white"/>
+              <path d="M7 21 Q7 7 21 7" stroke="white" stroke-width="2.25" stroke-linecap="round" fill="none"/>
+              <path d="M21 11.5 L21 7 L16.5 7" stroke="white" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="icon-size-note">20px</div>
+        </div>
+      </div>
+
+      <hr />
+
+      <div class="mock-label">Header — light</div>
+      <div class="header-mock">
+        <div class="mock-logo">
+          <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="1.5" y="1.5" width="25" height="25" rx="7.5" fill="hsl(221,83%,53%)"/>
+            <circle cx="7" cy="21" r="2.5" fill="white"/>
+            <path d="M7 21 Q7 7 21 7" stroke="white" stroke-width="2.25" stroke-linecap="round" fill="none"/>
+            <path d="M21 11.5 L21 7 L16.5 7" stroke="white" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span class="mock-wordmark">UseCasePilot</span>
+        </div>
+        <div class="mock-nav">
+          <span>Use Cases</span><span>AI Prompts</span><span>AI Tools</span>
+        </div>
+      </div>
+
+      <div class="mock-label" style="margin-top:10px;">Header — dark</div>
+      <div class="header-mock-dark">
+        <div class="mock-logo">
+          <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="1.5" y="1.5" width="25" height="25" rx="7.5" fill="hsl(221,83%,67%)"/>
+            <circle cx="7" cy="21" r="2.5" fill="white"/>
+            <path d="M7 21 Q7 7 21 7" stroke="white" stroke-width="2.25" stroke-linecap="round" fill="none"/>
+            <path d="M21 11.5 L21 7 L16.5 7" stroke="white" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span class="mock-wordmark-light">UseCasePilot</span>
+        </div>
+        <div class="mock-nav-dark mock-nav">
+          <span>Use Cases</span><span>AI Prompts</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════
+         OPTION C — "Chevrons"  (triple chevron speed mark)
+    ════════════════════════════════════════════════ -->
+    <div class="card">
+      <div class="option-tag">Option C</div>
+      <div class="option-name">Chevrons</div>
+      <p class="option-desc">
+        Three stacked rightward chevrons in fading opacity. Represents momentum,
+        direction, and multiple use-case workflows converging. The fade creates depth
+        and a distinctive silhouette. Bold and energetic.
+      </p>
+
+      <div class="icon-showcase">
+        <div>
+          <div class="icon-wrap on-white">
+            <svg width="48" height="48" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M5 8.5 L13.5 14 L5 19.5" stroke="hsl(221,83%,53%)" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+              <path d="M11.5 9.5 L19 14 L11.5 18.5" stroke="hsl(221,83%,53%)" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round" fill="none" stroke-opacity="0.55"/>
+              <path d="M17.5 11 L23 14 L17.5 17" stroke="hsl(221,83%,53%)" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round" fill="none" stroke-opacity="0.25"/>
+            </svg>
+          </div>
+          <div class="icon-size-note">48px · light</div>
+        </div>
+        <div>
+          <div class="icon-wrap on-dark">
+            <svg width="48" height="48" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M5 8.5 L13.5 14 L5 19.5" stroke="white" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+              <path d="M11.5 9.5 L19 14 L11.5 18.5" stroke="white" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round" fill="none" stroke-opacity="0.55"/>
+              <path d="M17.5 11 L23 14 L17.5 17" stroke="white" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round" fill="none" stroke-opacity="0.25"/>
+            </svg>
+          </div>
+          <div class="icon-size-note">dark bg</div>
+        </div>
+        <div>
+          <div class="icon-wrap on-white" style="width:36px;height:36px;border-radius:8px;">
+            <svg width="20" height="20" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M5 8.5 L13.5 14 L5 19.5" stroke="hsl(221,83%,53%)" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+              <path d="M11.5 9.5 L19 14 L11.5 18.5" stroke="hsl(221,83%,53%)" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round" fill="none" stroke-opacity="0.55"/>
+              <path d="M17.5 11 L23 14 L17.5 17" stroke="hsl(221,83%,53%)" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round" fill="none" stroke-opacity="0.25"/>
+            </svg>
+          </div>
+          <div class="icon-size-note">20px</div>
+        </div>
+      </div>
+
+      <hr />
+
+      <div class="mock-label">Header — light</div>
+      <div class="header-mock">
+        <div class="mock-logo">
+          <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M5 8.5 L13.5 14 L5 19.5" stroke="hsl(221,83%,53%)" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+            <path d="M11.5 9.5 L19 14 L11.5 18.5" stroke="hsl(221,83%,53%)" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round" fill="none" stroke-opacity="0.55"/>
+            <path d="M17.5 11 L23 14 L17.5 17" stroke="hsl(221,83%,53%)" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round" fill="none" stroke-opacity="0.25"/>
+          </svg>
+          <span class="mock-wordmark">UseCasePilot</span>
+        </div>
+        <div class="mock-nav">
+          <span>Use Cases</span><span>AI Prompts</span><span>AI Tools</span>
+        </div>
+      </div>
+
+      <div class="mock-label" style="margin-top:10px;">Header — dark</div>
+      <div class="header-mock-dark">
+        <div class="mock-logo">
+          <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M5 8.5 L13.5 14 L5 19.5" stroke="white" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+            <path d="M11.5 9.5 L19 14 L11.5 18.5" stroke="white" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round" fill="none" stroke-opacity="0.55"/>
+            <path d="M17.5 11 L23 14 L17.5 17" stroke="white" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round" fill="none" stroke-opacity="0.25"/>
+          </svg>
+          <span class="mock-wordmark-light">UseCasePilot</span>
+        </div>
+        <div class="mock-nav-dark mock-nav">
+          <span>Use Cases</span><span>AI Prompts</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Bottom summary -->
+  <div style="max-width:960px; margin-top:36px; padding:24px 28px; background:white; border:1px solid #e5e7eb; border-radius:16px;">
+    <p style="font-size:13px; font-weight:600; color:#374151; margin-bottom:8px;">How to choose</p>
+    <ul style="font-size:13px; color:#6b7280; line-height:1.8; list-style:none;">
+      <li>🅐 <strong style="color:#374151;">Heading</strong> — Best if you want minimal, precise, and timeless. Works on any background. Feels professional and understated.</li>
+      <li>🅑 <strong style="color:#374151;">Waypoint</strong> — Best if you want bold and instantly memorable. The filled blue badge creates strong visual weight in headers. Typical of modern SaaS products.</li>
+      <li>🅒 <strong style="color:#374151;">Chevrons</strong> — Best if you want energetic and distinctive. The three-chevron silhouette is highly recognisable and communicates "moving forward" and "multiple workflows."</li>
+    </ul>
+  </div>
+
+</body>
+</html>

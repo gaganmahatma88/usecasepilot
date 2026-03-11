@@ -50,10 +50,10 @@ export default async function UseCasesPage() {
               <Link
                 key={role.id}
                 href={`/use-cases/${role.slug}`}
-                className="group flex items-center justify-between p-5 rounded-xl border border-gray-100 hover:border-blue-200 hover:bg-blue-50/20 transition-all"
+                className="group flex items-center justify-between p-5 rounded-xl border border-gray-100 hover:border-[#BFDBFE] hover:bg-[#EFF6FF]/20 transition-all"
               >
                 <div>
-                  <h2 className="font-semibold text-gray-900 group-hover:text-blue-700 transition-colors mb-1">
+                  <h2 className="font-semibold text-gray-900 group-hover:text-[#1E40AF] transition-colors mb-1">
                     {role.title}
                   </h2>
                   <p className="text-sm text-gray-500">{role.description}</p>
@@ -64,7 +64,7 @@ export default async function UseCasesPage() {
                   </span>
                   <svg
                     width="16" height="16" viewBox="0 0 16 16" fill="none"
-                    className="text-gray-300 group-hover:text-blue-400 transition-colors"
+                    className="text-gray-300 group-hover:text-[#60A5FA] transition-colors"
                   >
                     <path
                       d="M4 8H12M12 8L8 4M12 8L8 12"

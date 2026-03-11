@@ -24,6 +24,14 @@ export const metadata: Metadata = {
   verification: {
     google: '6Xl4Z8KrUskQ-fCAOxpr-Da0qwkgM3-uKME8rz_C1Ug',
   },
+
+  icons: {
+    icon: [
+      { url: '/favicon.svg', type: 'image/svg+xml' },
+      { url: '/icon.png', sizes: '32x32', type: 'image/png' },
+    ],
+    apple: [{ url: '/apple-icon.png', sizes: '180x180', type: 'image/png' }],
+  },
 }
 
 export default function RootLayout({

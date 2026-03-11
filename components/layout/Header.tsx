@@ -13,7 +13,7 @@ export function Header() {
         href={href}
         className={`text-sm font-medium px-3 py-1.5 rounded-lg transition-all ${
           active
-            ? 'text-blue-600 bg-blue-50'
+            ? 'text-[#1D4ED8] bg-[#EFF6FF]'
             : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
         }`}
       >
@@ -35,7 +35,7 @@ export function Header() {
             href="/ai-prompts"
             className={`text-sm font-medium px-3 py-1.5 rounded-lg transition-all ${
               promptsActive
-                ? 'text-blue-600 bg-blue-50'
+                ? 'text-[#1D4ED8] bg-[#EFF6FF]'
                 : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
             }`}
           >

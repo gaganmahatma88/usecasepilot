@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>UseCasePilot — Waypoint · Polish Pass</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'DM Sans', system-ui, sans-serif;
+      background: #f1f5f9;
+      color: #0f172a;
+      padding: 48px 44px 80px;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ─── Helpers ─────────────────────────────────────── */
+    .w960        { max-width: 960px; }
+    .row         { display: flex; gap: 0; }
+    .col         { flex: 1; }
+    .divline-v   { width: 1px; background: #e2e8f0; margin: 0 2px; flex-shrink: 0; }
+    .divline-h   { height: 1px; background: #e2e8f0; margin: 0; }
+    .card        { background: #fff; border: 1px solid #e2e8f0; border-radius: 16px; overflow: hidden; }
+    .pad         { padding: 28px 32px; }
+    .pad-sm      { padding: 20px 28px; }
+
+    .lbl         { font-size: 10.5px; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: #94a3b8; margin-bottom: 14px; }
+    .lbl-green   { color: #22c55e; }
+    .lbl-red     { color: #f87171; }
+    .note        { font-size: 12.5px; color: #64748b; line-height: 1.65; margin-top: 10px; }
+    .note b      { color: #334155; font-weight: 600; }
+
+    .pg-title    { font-size: 22px; font-weight: 700; margin-bottom: 5px; }
+    .pg-sub      { font-size: 13.5px; color: #64748b; margin-bottom: 48px; }
+
+    .section-title { font-size: 10.5px; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: #94a3b8; margin-bottom: 14px; }
+
+    /* ─── Spacing between sections ────────────────────── */
+    .gap28 { margin-bottom: 28px; }
+    .gap36 { margin-bottom: 36px; }
+
+    /* ─── Icon cell ───────────────────────────────────── */
+    .icon-grid   { display: flex; gap: 20px; align-items: flex-end; flex-wrap: wrap; }
+    .ic          { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+    .ic-bg       { display: flex; align-items: center; justify-content: center; border-radius: 10px; }
+    .on-paper    { background: #fff; border: 1px solid #e2e8f0; }
+    .on-slate    { background: #f8fafc; border: 1px solid #e2e8f0; }
+    .on-dark     { background: #0f172a; }
+    .on-mid      { background: #1e293b; }
+    .ic-lbl      { font-size: 11px; color: #94a3b8; font-weight: 500; }
+
+    /* ─── Wordmark ────────────────────────────────────── */
+    .wm          { font-size: 15px; font-weight: 600; letter-spacing: -.01em; line-height: 1; }
+    .wm-dark     { color: #0f172a; }
+    .wm-white    { color: #fff; }
+    .wm-blue     { color: #1D4ED8; }
+    .wm-blue-lt  { color: #93c5fd; }
+
+    /* ─── Comparison grid ─────────────────────────────── */
+    .cmp         { display: grid; grid-template-columns: 1fr 1px 1fr; }
+    .cmp-cell    { padding: 26px 30px; }
+    .cmp-div     { background: #e2e8f0; }
+
+    /* ─── Header mockup ───────────────────────────────── */
+    .header-light {
+      height: 56px; padding: 0 24px;
+      background: rgba(255,255,255,.95);
+      border: 1px solid #e2e8f0; border-radius: 12px;
+      display: flex; align-items: center; justify-content: space-between;
+      backdrop-filter: blur(8px);
+    }
+    .header-dark {
+      height: 56px; padding: 0 24px;
+      background: #0f172a;
+      border: 1px solid #1e293b; border-radius: 12px;
+      display: flex; align-items: center; justify-content: space-between;
+      margin-top: 10px;
+    }
+    .nav         { display: flex; gap: 2px; }
+    .nav a       { font-size: 13px; font-weight: 500; padding: 6px 12px; border-radius: 7px; text-decoration: none; cursor: default; }
+    .nav-l a     { color: #64748b; }
+    .nav-l a.on  { color: #1D4ED8; background: #eff6ff; }
+    .nav-d a     { color: #64748b; }
+    .nav-d a.on  { color: #93c5fd; background: #1e3a5f; }
+
+    /* ─── Favicon strip ───────────────────────────────── */
+    .fav-row     { display: flex; gap: 28px; align-items: flex-end; }
+    .fav-cell    { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+    .fav-bg      { padding: 10px; border-radius: 8px; background: #f1f5f9; border: 1px solid #e2e8f0; display: flex; }
+    .fav-dark    { padding: 10px; border-radius: 8px; background: #1e293b; border: 1px solid #334155; display: flex; }
+    /* browser tab mock */
+    .tab-wrap    { display: flex; flex-direction: column; gap: 0; }
+    .browser-tab {
+      background: #e8eaed; border-radius: 8px 8px 0 0;
+      padding: 6px 14px 0 8px;
+      display: flex; align-items: center; gap: 6px;
+      width: 188px;
+    }
+    .tab-title   { font-size: 12px; color: #374151; font-weight: 500; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 145px; }
+    .browser-bar { background: #f1f3f4; height: 28px; border-radius: 0 0 4px 4px; border-top: 1px solid #dadce0; display: flex; align-items: center; padding: 0 8px; }
+    .url-pill    { font-size: 11px; color: #5f6368; background: #fff; border: 1px solid #dadce0; border-radius: 12px; padding: 2px 10px; }
+  </style>
+</head>
+<body>
+
+  <h1 class="pg-title">Waypoint — Final Polish Pass</h1>
+  <p class="pg-sub">Micro-refinements across geometry, color, and wordmark. Same concept, elevated execution.</p>
+
+  <!-- ══════════════════════════════════════════════════
+       1. WHAT CHANGED
+  ══════════════════════════════════════════════════ -->
+  <div class="w960 gap36">
+    <div class="section-title">What changed</div>
+    <div class="card">
+      <div class="cmp">
+
+        <!-- Before -->
+        <div class="cmp-cell">
+          <div class="lbl lbl-red">Before</div>
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;">
+            <svg width="32" height="32" viewBox="0 0 28 28" fill="none">
+              <rect width="28" height="28" rx="8" fill="#2563EB"/>
+              <circle cx="7" cy="21" r="3" fill="white"/>
+              <path d="M7 21 L7 12 Q7 9 10 9 L19 9" stroke="white" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+              <path d="M19 7 L23.5 9 L19 11 Z" fill="white"/>
+            </svg>
+            <span class="wm wm-dark">UseCase<span style="color:#2563EB">Pilot</span></span>
+          </div>
+          <ul class="note" style="list-style:none;display:flex;flex-direction:column;gap:5px;">
+            <li>→ Badge: <b>#2563EB</b> (Tailwind blue-600, slightly generic)</li>
+            <li>→ Arrowhead: 4-unit height, can disappear at 16px</li>
+            <li>→ Wordmark: split color (UseCase gray + Pilot blue)</li>
+            <li>→ Gap: 10px between icon and text</li>
+            <li>→ Vertical stroke starts at y=12</li>
+          </ul>
+        </div>
+
+        <div class="cmp-div"></div>
+
+        <!-- After -->
+        <div class="cmp-cell">
+          <div class="lbl lbl-green">After · Polished</div>
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:14px;">
+            <svg width="32" height="32" viewBox="0 0 28 28" fill="none">
+              <rect width="28" height="28" rx="8" fill="#1D4ED8"/>
+              <circle cx="7" cy="21" r="3" fill="white"/>
+              <path d="M7 21 L7 12.5 Q7 9 10.5 9 L19 9" stroke="white" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+              <path d="M19 6.5 L23.5 9 L19 11.5 Z" fill="white"/>
+            </svg>
+            <span class="wm wm-dark">UseCasePilot</span>
+          </div>
+          <ul class="note" style="list-style:none;display:flex;flex-direction:column;gap:5px;">
+            <li>→ Badge: <b>#1D4ED8</b> (deeper, more intentional, less stock)</li>
+            <li>→ Arrowhead: 5-unit height — sharper, bolder, reads at 16px</li>
+            <li>→ Wordmark: single dark — cleaner, more premium, less busy</li>
+            <li>→ Gap: 8px — tighter, more integrated lockup</li>
+            <li>→ Elbow curve entry at y=12.5, endpoint at x=10.5 — smoother curve</li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════
+       2. COLOR COMPARISON
+  ══════════════════════════════════════════════════ -->
+  <div class="w960 gap36">
+    <div class="section-title">Badge color — before vs after</div>
+    <div class="card">
+      <div class="cmp">
+        <div class="cmp-cell" style="display:flex;flex-direction:column;gap:10px;">
+          <div class="lbl">Before · #2563EB</div>
+          <div style="display:flex;align-items:center;gap:12px;">
+            <svg width="48" height="48" viewBox="0 0 28 28" fill="none">
+              <rect width="28" height="28" rx="8" fill="#2563EB"/>
+              <circle cx="7" cy="21" r="3" fill="white"/>
+              <path d="M7 21 L7 12 Q7 9 10 9 L19 9" stroke="white" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+              <path d="M19 7 L23.5 9 L19 11 Z" fill="white"/>
+            </svg>
+            <div style="width:40px;height:40px;border-radius:8px;background:#2563EB;"></div>
+            <span class="note" style="margin:0;">#2563EB<br/>Tailwind blue-600<br/>Bright, generic</span>
+          </div>
+        </div>
+        <div class="cmp-div"></div>
+        <div class="cmp-cell" style="display:flex;flex-direction:column;gap:10px;">
+          <div class="lbl lbl-green">After · #1D4ED8</div>
+          <div style="display:flex;align-items:center;gap:12px;">
+            <svg width="48" height="48" viewBox="0 0 28 28" fill="none">
+              <rect width="28" height="28" rx="8" fill="#1D4ED8"/>
+              <circle cx="7" cy="21" r="3" fill="white"/>
+              <path d="M7 21 L7 12.5 Q7 9 10.5 9 L19 9" stroke="white" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+              <path d="M19 6.5 L23.5 9 L19 11.5 Z" fill="white"/>
+            </svg>
+            <div style="width:40px;height:40px;border-radius:8px;background:#1D4ED8;"></div>
+            <span class="note" style="margin:0;">#1D4ED8<br/>Deeper, crafted<br/>Premium, confident</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════
+       3. ARROWHEAD COMPARISON
+  ══════════════════════════════════════════════════ -->
+  <div class="w960 gap36">
+    <div class="section-title">Arrowhead geometry — before vs after</div>
+    <div class="card">
+      <div class="cmp">
+        <div class="cmp-cell">
+          <div class="lbl">Before — 4-unit height</div>
+          <div style="display:flex;gap:14px;align-items:flex-end;">
+            <div>
+              <svg width="64" height="64" viewBox="0 0 28 28" fill="none">
+                <rect width="28" height="28" rx="8" fill="#1D4ED8"/>
+                <circle cx="7" cy="21" r="3" fill="white"/>
+                <path d="M7 21 L7 12.5 Q7 9 10.5 9 L19 9" stroke="white" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+                <path d="M19 7 L23.5 9 L19 11 Z" fill="white"/>
+              </svg>
+              <div class="ic-lbl" style="text-align:center;margin-top:6px;">64px</div>
+            </div>
+            <div>
+              <svg width="16" height="16" viewBox="0 0 28 28" fill="none">
+                <rect width="28" height="28" rx="8" fill="#1D4ED8"/>
+                <circle cx="7" cy="21" r="3" fill="white"/>
+                <path d="M7 21 L7 12.5 Q7 9 10.5 9 L19 9" stroke="white" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+                <path d="M19 7 L23.5 9 L19 11 Z" fill="white"/>
+              </svg>
+              <div class="ic-lbl" style="text-align:center;margin-top:6px;">16px</div>
+            </div>
+          </div>
+          <p class="note">At 16px the arrowhead is 2.3px wide × 1.4px tall — barely visible, looks like a rounded line end.</p>
+        </div>
+        <div class="cmp-div"></div>
+        <div class="cmp-cell">
+          <div class="lbl lbl-green">After — 5-unit height</div>
+          <div style="display:flex;gap:14px;align-items:flex-end;">
+            <div>
+              <svg width="64" height="64" viewBox="0 0 28 28" fill="none">
+                <rect width="28" height="28" rx="8" fill="#1D4ED8"/>
+                <circle cx="7" cy="21" r="3" fill="white"/>
+                <path d="M7 21 L7 12.5 Q7 9 10.5 9 L19 9" stroke="white" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+                <path d="M19 6.5 L23.5 9 L19 11.5 Z" fill="white"/>
+              </svg>
+              <div class="ic-lbl" style="text-align:center;margin-top:6px;">64px</div>
+            </div>
+            <div>
+              <svg width="16" height="16" viewBox="0 0 28 28" fill="none">
+                <rect width="28" height="28" rx="8" fill="#1D4ED8"/>
+                <circle cx="7" cy="21" r="3" fill="white"/>
+                <path d="M7 21 L7 12.5 Q7 9 10.5 9 L19 9" stroke="white" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+                <path d="M19 6.5 L23.5 9 L19 11.5 Z" fill="white"/>
+              </svg>
+              <div class="ic-lbl" style="text-align:center;margin-top:6px;">16px</div>
+            </div>
+          </div>
+          <p class="note">At 16px the arrowhead is 2.6px wide × 1.8px tall — reads as a clear directional pointer.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════
+       4. WORDMARK COMPARISON
+  ══════════════════════════════════════════════════ -->
+  <div class="w960 gap36">
+    <div class="section-title">Wordmark treatment — split color vs single dark</div>
+    <div class="card">
+      <div class="cmp">
+        <div class="cmp-cell">
+          <div class="lbl">Split color (previous)</div>
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px;">
+            <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+              <rect width="28" height="28" rx="8" fill="#1D4ED8"/>
+              <circle cx="7" cy="21" r="3" fill="white"/>
+              <path d="M7 21 L7 12.5 Q7 9 10.5 9 L19 9" stroke="white" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+              <path d="M19 6.5 L23.5 9 L19 11.5 Z" fill="white"/>
+            </svg>
+            <span class="wm">
+              <span class="wm-dark">UseCase</span><span class="wm-blue">Pilot</span>
+            </span>
+          </div>
+          <p class="note">The blue "Pilot" creates visual noise alongside the already-blue icon. Two sources of color compete. Reads as "startup-y" rather than premium.</p>
+        </div>
+        <div class="cmp-div"></div>
+        <div class="cmp-cell">
+          <div class="lbl lbl-green">Single dark (polished)</div>
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px;">
+            <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+              <rect width="28" height="28" rx="8" fill="#1D4ED8"/>
+              <circle cx="7" cy="21" r="3" fill="white"/>
+              <path d="M7 21 L7 12.5 Q7 9 10.5 9 L19 9" stroke="white" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+              <path d="M19 6.5 L23.5 9 L19 11.5 Z" fill="white"/>
+            </svg>
+            <span class="wm wm-dark">UseCasePilot</span>
+          </div>
+          <p class="note">The icon carries all the brand color. The wordmark in dark is clean and unambiguous. Consistent with how Linear, Vercel, and Notion handle their logos.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════
+       5. FINAL ICON — ALL SIZES
+  ══════════════════════════════════════════════════ -->
+  <div class="w960 gap36">
+    <div class="section-title">Final icon — all sizes</div>
+    <div class="card pad">
+      <div class="icon-grid">
+
+        <div class="ic">
+          <div class="ic-bg on-slate" style="padding:18px;border-radius:14px;">
+            <svg width="64" height="64" viewBox="0 0 28 28" fill="none">
+              <rect width="28" height="28" rx="8" fill="#1D4ED8"/>
+              <circle cx="7" cy="21" r="3" fill="white"/>
+              <path d="M7 21 L7 12.5 Q7 9 10.5 9 L19 9" stroke="white" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+              <path d="M19 6.5 L23.5 9 L19 11.5 Z" fill="white"/>
+            </svg>
+          </div>
+          <span class="ic-lbl">64px</span>
+        </div>
+
+        <div class="ic">
+          <div class="ic-bg on-slate" style="padding:14px;">
+            <svg width="48" height="48" viewBox="0 0 28 28" fill="none">
+              <rect width="28" height="28" rx="8" fill="#1D4ED8"/>
+              <circle cx="7" cy="21" r="3" fill="white"/>
+              <path d="M7 21 L7 12.5 Q7 9 10.5 9 L19 9" stroke="white" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+              <path d="M19 6.5 L23.5 9 L19 11.5 Z" fill="white"/>
+            </svg>
+          </div>
+          <span class="ic-lbl">48px</span>
+        </div>
+
+        <div class="ic">
+          <div class="ic-bg on-slate" style="padding:12px;">
+            <svg width="32" height="32" viewBox="0 0 28 28" fill="none">
+              <rect width="28" height="28" rx="8" fill="#1D4ED8"/>
+              <circle cx="7" cy="21" r="3" fill="white"/>
+              <path d="M7 21 L7 12.5 Q7 9 10.5 9 L19 9" stroke="white" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+              <path d="M19 6.5 L23.5 9 L19 11.5 Z" fill="white"/>
+            </svg>
+          </div>
+          <span class="ic-lbl">32px</span>
+        </div>
+
+        <div class="ic">
+          <div class="ic-bg on-slate" style="padding:10px;">
+            <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+              <rect width="28" height="28" rx="8" fill="#1D4ED8"/>
+              <circle cx="7" cy="21" r="3" fill="white"/>
+              <path d="M7 21 L7 12.5 Q7 9 10.5 9 L19 9" stroke="white" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+              <path d="M19 6.5 L23.5 9 L19 11.5 Z" fill="white"/>
+            </svg>
+          </div>
+          <span class="ic-lbl">28px · header</span>
+        </div>
+
+        <div class="ic">
+          <div class="ic-bg on-slate" style="padding:10px;">
+            <svg width="20" height="20" viewBox="0 0 28 28" fill="none">
+              <rect width="28" height="28" rx="8" fill="#1D4ED8"/>
+              <circle cx="7" cy="21" r="3" fill="white"/>
+              <path d="M7 21 L7 12.5 Q7 9 10.5 9 L19 9" stroke="white" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+              <path d="M19 6.5 L23.5 9 L19 11.5 Z" fill="white"/>
+            </svg>
+          </div>
+          <span class="ic-lbl">20px</span>
+        </div>
+
+        <div style="width:1px;background:#e2e8f0;margin:0 6px;align-self:stretch;"></div>
+
+        <div class="ic">
+          <div class="ic-bg on-dark" style="padding:14px;">
+            <svg width="48" height="48" viewBox="0 0 28 28" fill="none">
+              <rect width="28" height="28" rx="8" fill="#1D4ED8"/>
+              <circle cx="7" cy="21" r="3" fill="white"/>
+              <path d="M7 21 L7 12.5 Q7 9 10.5 9 L19 9" stroke="white" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+              <path d="M19 6.5 L23.5 9 L19 11.5 Z" fill="white"/>
+            </svg>
+          </div>
+          <span class="ic-lbl">dark bg</span>
+        </div>
+
+        <div class="ic">
+          <div class="ic-bg" style="padding:14px;background:#dbeafe;border:1px solid #bfdbfe;">
+            <svg width="48" height="48" viewBox="0 0 28 28" fill="none">
+              <rect width="28" height="28" rx="8" fill="#1e40af"/>
+              <circle cx="7" cy="21" r="3" fill="white"/>
+              <path d="M7 21 L7 12.5 Q7 9 10.5 9 L19 9" stroke="white" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+              <path d="M19 6.5 L23.5 9 L19 11.5 Z" fill="white"/>
+            </svg>
+          </div>
+          <span class="ic-lbl">blue tint bg</span>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════
+       6. FAVICON SIZES
+  ══════════════════════════════════════════════════ -->
+  <div class="w960 gap36">
+    <div class="section-title">Favicon sizes — 16 · 32 · 48px</div>
+    <div class="card pad">
+      <div class="fav-row">
+
+        <div class="fav-cell">
+          <div class="fav-bg">
+            <svg width="16" height="16" viewBox="0 0 28 28" fill="none">
+              <rect width="28" height="28" rx="8" fill="#1D4ED8"/>
+              <circle cx="7" cy="21" r="3" fill="white"/>
+              <path d="M7 21 L7 12.5 Q7 9 10.5 9 L19 9" stroke="white" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+              <path d="M19 6.5 L23.5 9 L19 11.5 Z" fill="white"/>
+            </svg>
+          </div>
+          <span class="ic-lbl">16px</span>
+        </div>
+
+        <div class="fav-cell">
+          <div class="fav-bg">
+            <svg width="32" height="32" viewBox="0 0 28 28" fill="none">
+              <rect width="28" height="28" rx="8" fill="#1D4ED8"/>
+              <circle cx="7" cy="21" r="3" fill="white"/>
+              <path d="M7 21 L7 12.5 Q7 9 10.5 9 L19 9" stroke="white" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+              <path d="M19 6.5 L23.5 9 L19 11.5 Z" fill="white"/>
+            </svg>
+          </div>
+          <span class="ic-lbl">32px</span>
+        </div>
+
+        <div class="fav-cell">
+          <div class="fav-bg">
+            <svg width="48" height="48" viewBox="0 0 28 28" fill="none">
+              <rect width="28" height="28" rx="8" fill="#1D4ED8"/>
+              <circle cx="7" cy="21" r="3" fill="white"/>
+              <path d="M7 21 L7 12.5 Q7 9 10.5 9 L19 9" stroke="white" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+              <path d="M19 6.5 L23.5 9 L19 11.5 Z" fill="white"/>
+            </svg>
+          </div>
+          <span class="ic-lbl">48px</span>
+        </div>
+
+        <div style="width:1px;background:#e2e8f0;margin:0 6px;align-self:stretch;"></div>
+
+        <!-- Browser tab simulation -->
+        <div class="fav-cell" style="align-items:flex-start;">
+          <div class="tab-wrap">
+            <div class="browser-tab">
+              <svg width="16" height="16" viewBox="0 0 28 28" fill="none">
+                <rect width="28" height="28" rx="8" fill="#1D4ED8"/>
+                <circle cx="7" cy="21" r="3" fill="white"/>
+                <path d="M7 21 L7 12.5 Q7 9 10.5 9 L19 9" stroke="white" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+                <path d="M19 6.5 L23.5 9 L19 11.5 Z" fill="white"/>
+              </svg>
+              <span class="tab-title">UseCasePilot – AI Use Cases</span>
+            </div>
+            <div class="browser-bar">
+              <span class="url-pill">usecasepilot.com</span>
+            </div>
+          </div>
+          <span class="ic-lbl" style="margin-top:8px;">browser tab</span>
+        </div>
+
+        <!-- Dark bg favicon -->
+        <div class="fav-cell">
+          <div class="fav-dark">
+            <svg width="16" height="16" viewBox="0 0 28 28" fill="none">
+              <rect width="28" height="28" rx="8" fill="#1D4ED8"/>
+              <circle cx="7" cy="21" r="3" fill="white"/>
+              <path d="M7 21 L7 12.5 Q7 9 10.5 9 L19 9" stroke="white" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+              <path d="M19 6.5 L23.5 9 L19 11.5 Z" fill="white"/>
+            </svg>
+          </div>
+          <span class="ic-lbl">dark OS</span>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════
+       7. FULL LOGO SYSTEM
+  ══════════════════════════════════════════════════ -->
+  <div class="w960 gap36">
+    <div class="section-title">Full logo system</div>
+    <div class="card pad">
+      <div style="display:flex;flex-direction:column;gap:28px;">
+
+        <!-- Light background lockup -->
+        <div>
+          <div class="lbl" style="margin-bottom:12px;">Primary — light background</div>
+          <div style="display:flex;gap:48px;align-items:center;flex-wrap:wrap;">
+            <div style="display:flex;align-items:center;gap:8px;">
+              <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+                <rect width="28" height="28" rx="8" fill="#1D4ED8"/>
+                <circle cx="7" cy="21" r="3" fill="white"/>
+                <path d="M7 21 L7 12.5 Q7 9 10.5 9 L19 9" stroke="white" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+                <path d="M19 6.5 L23.5 9 L19 11.5 Z" fill="white"/>
+              </svg>
+              <span class="wm wm-dark">UseCasePilot</span>
+            </div>
+            <!-- Icon only -->
+            <div>
+              <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+                <rect width="28" height="28" rx="8" fill="#1D4ED8"/>
+                <circle cx="7" cy="21" r="3" fill="white"/>
+                <path d="M7 21 L7 12.5 Q7 9 10.5 9 L19 9" stroke="white" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+                <path d="M19 6.5 L23.5 9 L19 11.5 Z" fill="white"/>
+              </svg>
+            </div>
+          </div>
+        </div>
+
+        <div class="divline-h"></div>
+
+        <!-- Dark background lockup -->
+        <div style="background:#0f172a;border-radius:10px;padding:24px 28px;display:flex;gap:48px;align-items:center;flex-wrap:wrap;">
+          <div>
+            <div class="lbl" style="color:#475569;margin-bottom:12px;">Dark background</div>
+            <div style="display:flex;align-items:center;gap:8px;">
+              <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+                <rect width="28" height="28" rx="8" fill="#1D4ED8"/>
+                <circle cx="7" cy="21" r="3" fill="white"/>
+                <path d="M7 21 L7 12.5 Q7 9 10.5 9 L19 9" stroke="white" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+                <path d="M19 6.5 L23.5 9 L19 11.5 Z" fill="white"/>
+              </svg>
+              <span class="wm wm-white">UseCasePilot</span>
+            </div>
+          </div>
+          <div>
+            <div class="lbl" style="color:#475569;margin-bottom:12px;">Icon only</div>
+            <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+              <rect width="28" height="28" rx="8" fill="#1D4ED8"/>
+              <circle cx="7" cy="21" r="3" fill="white"/>
+              <path d="M7 21 L7 12.5 Q7 9 10.5 9 L19 9" stroke="white" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+              <path d="M19 6.5 L23.5 9 L19 11.5 Z" fill="white"/>
+            </svg>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════
+       8. HEADER MOCKUP
+  ══════════════════════════════════════════════════ -->
+  <div class="w960 gap36">
+    <div class="section-title">Site header — light &amp; dark</div>
+
+    <!-- Light -->
+    <div class="header-light">
+      <div style="display:flex;align-items:center;gap:8px;">
+        <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+          <rect width="28" height="28" rx="8" fill="#1D4ED8"/>
+          <circle cx="7" cy="21" r="3" fill="white"/>
+          <path d="M7 21 L7 12.5 Q7 9 10.5 9 L19 9" stroke="white" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+          <path d="M19 6.5 L23.5 9 L19 11.5 Z" fill="white"/>
+        </svg>
+        <span class="wm wm-dark">UseCasePilot</span>
+      </div>
+      <div class="nav nav-l">
+        <a class="on">Use Cases</a>
+        <a>AI Prompts</a>
+        <a>AI Tools</a>
+      </div>
+    </div>
+
+    <!-- Dark -->
+    <div class="header-dark">
+      <div style="display:flex;align-items:center;gap:8px;">
+        <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+          <rect width="28" height="28" rx="8" fill="#1D4ED8"/>
+          <circle cx="7" cy="21" r="3" fill="white"/>
+          <path d="M7 21 L7 12.5 Q7 9 10.5 9 L19 9" stroke="white" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+          <path d="M19 6.5 L23.5 9 L19 11.5 Z" fill="white"/>
+        </svg>
+        <span class="wm wm-white">UseCasePilot</span>
+      </div>
+      <div class="nav nav-d">
+        <a class="on">Use Cases</a>
+        <a>AI Prompts</a>
+        <a>AI Tools</a>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

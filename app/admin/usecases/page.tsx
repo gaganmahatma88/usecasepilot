@@ -54,7 +54,7 @@ export default function AdminUseCasesPage() {
             </div>
             <Link
               href="/admin/editor"
-              className="bg-blue-600 text-white text-sm font-medium px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors"
+              className="bg-[#1D4ED8] text-white text-sm font-medium px-4 py-2 rounded-lg hover:bg-[#1E40AF] transition-colors"
             >
               + New Use Case
             </Link>
@@ -67,7 +67,7 @@ export default function AdminUseCasesPage() {
               <p>No use cases yet.</p>
               <Link
                 href="/admin/editor"
-                className="text-sm text-blue-600 mt-2 inline-block"
+                className="text-sm text-[#1D4ED8] mt-2 inline-block"
               >
                 Create your first use case →
               </Link>
@@ -111,7 +111,7 @@ export default function AdminUseCasesPage() {
                     </button>
                     <Link
                       href={`/admin/editor?id=${uc.id}`}
-                      className="text-xs text-blue-600 hover:text-blue-700 px-3 py-1.5 rounded-lg hover:bg-blue-50 transition-colors"
+                      className="text-xs text-[#1D4ED8] hover:text-[#1E40AF] px-3 py-1.5 rounded-lg hover:bg-[#EFF6FF] transition-colors"
                     >
                       Edit
                     </Link>

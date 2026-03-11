@@ -38,7 +38,7 @@ export function AdminNav() {
               pathname === item.href ||
               (item.href !== '/admin/dashboard' &&
                 pathname.startsWith(item.href))
-                ? 'bg-blue-50 text-blue-700 font-medium'
+                ? 'bg-[#EFF6FF] text-[#1D4ED8] font-medium'
                 : 'text-gray-600 hover:bg-gray-100 hover:text-gray-900'
             }`}
           >

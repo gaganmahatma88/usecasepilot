@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>UseCasePilot — Brand System Preview</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --brand-primary: #1D4ED8;
+      --brand-primary-hover: #1E40AF;
+      --brand-light-bg: #EFF6FF;
+      --brand-dark-bg: #0F172A;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'DM Sans', system-ui, sans-serif; background: #F8FAFC; color: #0f172a; -webkit-font-smoothing: antialiased; }
+
+    .page { max-width: 900px; margin: 0 auto; padding: 48px 24px; }
+    .page-title { font-size: 13px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #94a3b8; margin-bottom: 48px; }
+
+    /* Section */
+    .section { margin-bottom: 56px; }
+    .section-label { font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: #94a3b8; margin-bottom: 16px; }
+
+    /* ─── Logo ─── */
+    .logo-row { display: flex; align-items: center; gap: 8px; }
+    .logo-row svg { flex-shrink: 0; }
+    .logo-wordmark { font-size: 15px; font-weight: 600; letter-spacing: -0.02em; line-height: 1; color: #111827; }
+
+    /* ─── Header mockup ─── */
+    .header-mock {
+      border-radius: 12px; overflow: hidden;
+      border: 1px solid #e2e8f0;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+      margin-bottom: 12px;
+    }
+    .header-inner {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 24px; height: 56px;
+    }
+    .header-inner.light { background: rgba(255,255,255,0.95); border-bottom: 1px solid #f1f5f9; }
+    .header-inner.dark  { background: #0F172A; }
+
+    .nav { display: flex; align-items: center; gap: 4px; }
+    .nav-link {
+      font-size: 13.5px; font-weight: 500; padding: 6px 12px;
+      border-radius: 8px; text-decoration: none; transition: all 0.15s;
+      color: #4b5563;
+    }
+    .nav-link:hover { color: #111827; background: #f1f5f9; }
+    .nav-link.active { color: #1D4ED8; background: #EFF6FF; }
+    .nav-link.dark-idle { color: #94a3b8; }
+    .nav-link.dark-active { color: white; background: rgba(255,255,255,0.1); }
+
+    .dark-wordmark { color: white; }
+
+    /* ─── Color Swatches ─── */
+    .swatches { display: flex; gap: 12px; flex-wrap: wrap; }
+    .swatch { border-radius: 10px; overflow: hidden; box-shadow: 0 1px 4px rgba(0,0,0,0.1); width: 140px; }
+    .swatch-color { height: 60px; }
+    .swatch-info { padding: 10px 12px; background: white; border-top: 1px solid #f1f5f9; }
+    .swatch-name { font-size: 11px; font-weight: 600; color: #374151; margin-bottom: 2px; }
+    .swatch-value { font-size: 11px; color: #94a3b8; font-family: monospace; }
+
+    /* ─── Favicon strip ─── */
+    .favicon-strip { display: flex; align-items: flex-end; gap: 24px; flex-wrap: wrap; }
+    .favicon-item { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+    .favicon-label { font-size: 11px; color: #94a3b8; text-align: center; }
+    .favicon-container { background: white; border: 1px solid #e2e8f0; border-radius: 6px; display: flex; align-items: center; justify-content: center; padding: 4px; }
+
+    /* ─── Browser tab simulation ─── */
+    .browser-tabs { display: flex; gap: 0; margin-bottom: -1px; }
+    .tab {
+      display: flex; align-items: center; gap: 6px;
+      padding: 8px 16px; border-radius: 8px 8px 0 0;
+      font-size: 12px; color: #374151; font-weight: 500;
+      background: #f1f5f9; border: 1px solid #e2e8f0;
+      border-bottom: none; cursor: pointer;
+    }
+    .tab.active { background: white; color: #111827; }
+    .browser-bar {
+      background: white; border: 1px solid #e2e8f0; border-radius: 0 8px 8px 8px;
+      padding: 12px 16px; display: flex; align-items: center; gap: 8px;
+    }
+    .url-bar { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 6px; padding: 5px 12px; font-size: 12px; color: #64748b; flex: 1; }
+
+    /* ─── UI elements ─── */
+    .ui-row { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 8px 16px; border-radius: 8px; font-size: 14px;
+      font-weight: 500; cursor: pointer; border: none; font-family: inherit;
+      transition: all 0.15s; text-decoration: none;
+    }
+    .btn-primary { background: #1D4ED8; color: white; }
+    .btn-primary:hover { background: #1E40AF; }
+    .btn-outline { background: white; color: #1D4ED8; border: 1.5px solid #1D4ED8; }
+    .btn-outline:hover { background: #EFF6FF; }
+    .btn-ghost { background: transparent; color: #1D4ED8; }
+    .btn-ghost:hover { background: #EFF6FF; }
+
+    .badge { display: inline-flex; align-items: center; padding: 3px 10px; border-radius: 20px; font-size: 12px; font-weight: 500; }
+    .badge-blue { background: #EFF6FF; color: #1D4ED8; }
+    .badge-dark { background: #1D4ED8; color: white; }
+
+    .tag { display: inline-flex; align-items: center; padding: 4px 10px; border-radius: 6px; font-size: 12px; background: #EFF6FF; color: #1D4ED8; border: 1px solid #BFDBFE; }
+
+    .link { color: #1D4ED8; text-decoration: none; font-size: 14px; font-weight: 500; border-bottom: 1px solid rgba(29,78,216,0.3); transition: border-color 0.15s; }
+    .link:hover { border-bottom-color: #1D4ED8; }
+
+    .focus-demo { padding: 6px 12px; border-radius: 6px; border: 1px solid #e2e8f0; font-size: 13px; font-family: inherit; outline: 2px solid #1D4ED8; outline-offset: 2px; }
+
+    /* ─── Logo file usage table ─── */
+    .usage-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    .usage-table th { text-align: left; padding: 8px 12px; background: #f8fafc; border-bottom: 1px solid #e2e8f0; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: #64748b; }
+    .usage-table td { padding: 10px 12px; border-bottom: 1px solid #f1f5f9; color: #374151; vertical-align: top; }
+    .usage-table tr:last-child td { border-bottom: none; }
+    .file-path { font-family: monospace; font-size: 12px; color: #7c3aed; }
+    .usage-note { font-size: 12px; color: #64748b; }
+    code.inline { font-family: monospace; font-size: 12px; background: #f1f5f9; padding: 2px 6px; border-radius: 4px; color: #374151; }
+
+    .divider { height: 1px; background: linear-gradient(to right, transparent, #e2e8f0, transparent); margin: 48px 0; }
+  </style>
+</head>
+<body>
+<div class="page">
+  <div class="page-title">UseCasePilot — Brand System Preview</div>
+
+  <!-- ─── 1. Logo ─── -->
+  <div class="section">
+    <div class="section-label">Logo — Primary</div>
+    <div style="display:flex; gap:48px; align-items:center; flex-wrap:wrap;">
+      <!-- Light background -->
+      <div style="background:white; padding:24px 32px; border-radius:12px; border:1px solid #e2e8f0;">
+        <div class="logo-row">
+          <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="28" height="28" rx="8" fill="#1D4ED8"/>
+            <circle cx="7" cy="21" r="3" fill="white"/>
+            <path d="M7 21 L7 12.5 Q7 9 10.5 9 L19 9" stroke="white" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+            <path d="M19 6.5 L23.5 9 L19 11.5 Z" fill="white"/>
+          </svg>
+          <span class="logo-wordmark">UseCasePilot</span>
+        </div>
+        <div style="font-size:11px;color:#94a3b8;margin-top:10px;">Light background</div>
+      </div>
+      <!-- Dark background -->
+      <div style="background:#0F172A; padding:24px 32px; border-radius:12px;">
+        <div class="logo-row">
+          <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="28" height="28" rx="8" fill="#1D4ED8"/>
+            <circle cx="7" cy="21" r="3" fill="white"/>
+            <path d="M7 21 L7 12.5 Q7 9 10.5 9 L19 9" stroke="white" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+            <path d="M19 6.5 L23.5 9 L19 11.5 Z" fill="white"/>
+          </svg>
+          <span class="logo-wordmark dark-wordmark">UseCasePilot</span>
+        </div>
+        <div style="font-size:11px;color:#475569;margin-top:10px;">Dark background</div>
+      </div>
+      <!-- Icon only -->
+      <div style="background:white; padding:24px 32px; border-radius:12px; border:1px solid #e2e8f0;">
+        <svg width="36" height="36" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect width="28" height="28" rx="8" fill="#1D4ED8"/>
+          <circle cx="7" cy="21" r="3" fill="white"/>
+          <path d="M7 21 L7 12.5 Q7 9 10.5 9 L19 9" stroke="white" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+          <path d="M19 6.5 L23.5 9 L19 11.5 Z" fill="white"/>
+        </svg>
+        <div style="font-size:11px;color:#94a3b8;margin-top:10px;">Icon only</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ─── 2. Header mockup ─── -->
+  <div class="section">
+    <div class="section-label">Header — Light</div>
+    <div class="header-mock">
+      <div class="header-inner light">
+        <div class="logo-row">
+          <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="28" height="28" rx="8" fill="#1D4ED8"/>
+            <circle cx="7" cy="21" r="3" fill="white"/>
+            <path d="M7 21 L7 12.5 Q7 9 10.5 9 L19 9" stroke="white" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+            <path d="M19 6.5 L23.5 9 L19 11.5 Z" fill="white"/>
+          </svg>
+          <span class="logo-wordmark">UseCasePilot</span>
+        </div>
+        <nav class="nav">
+          <a class="nav-link active" href="#">Use Cases</a>
+          <a class="nav-link" href="#">AI Prompts</a>
+          <a class="nav-link" href="#">AI Tools</a>
+        </nav>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-label">Header — Dark</div>
+    <div class="header-mock">
+      <div class="header-inner dark">
+        <div class="logo-row">
+          <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="28" height="28" rx="8" fill="#1D4ED8"/>
+            <circle cx="7" cy="21" r="3" fill="white"/>
+            <path d="M7 21 L7 12.5 Q7 9 10.5 9 L19 9" stroke="white" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+            <path d="M19 6.5 L23.5 9 L19 11.5 Z" fill="white"/>
+          </svg>
+          <span class="logo-wordmark dark-wordmark">UseCasePilot</span>
+        </div>
+        <nav class="nav">
+          <a class="nav-link dark-active" href="#">Use Cases</a>
+          <a class="nav-link dark-idle" href="#">AI Prompts</a>
+          <a class="nav-link dark-idle" href="#">AI Tools</a>
+        </nav>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ─── 3. Favicon strip ─── -->
+  <div class="section">
+    <div class="section-label">Favicon System</div>
+    <div class="favicon-strip">
+      <div class="favicon-item">
+        <div class="favicon-container" style="width:32px;height:32px;border-radius:4px;">
+          <svg width="16" height="16" viewBox="0 0 28 28" fill="none"><rect width="28" height="28" rx="8" fill="#1D4ED8"/><circle cx="7" cy="21" r="3" fill="white"/><path d="M7 21 L7 12.5 Q7 9 10.5 9 L19 9" stroke="white" stroke-width="2.5" stroke-linecap="round" fill="none"/><path d="M19 6.5 L23.5 9 L19 11.5 Z" fill="white"/></svg>
+        </div>
+        <div class="favicon-label">16×16<br>browser tab</div>
+      </div>
+      <div class="favicon-item">
+        <div class="favicon-container" style="width:40px;height:40px;border-radius:4px;">
+          <svg width="32" height="32" viewBox="0 0 28 28" fill="none"><rect width="28" height="28" rx="8" fill="#1D4ED8"/><circle cx="7" cy="21" r="3" fill="white"/><path d="M7 21 L7 12.5 Q7 9 10.5 9 L19 9" stroke="white" stroke-width="2.5" stroke-linecap="round" fill="none"/><path d="M19 6.5 L23.5 9 L19 11.5 Z" fill="white"/></svg>
+        </div>
+        <div class="favicon-label">32×32<br>taskbar</div>
+      </div>
+      <div class="favicon-item">
+        <div class="favicon-container" style="width:56px;height:56px;border-radius:4px;">
+          <svg width="48" height="48" viewBox="0 0 28 28" fill="none"><rect width="28" height="28" rx="8" fill="#1D4ED8"/><circle cx="7" cy="21" r="3" fill="white"/><path d="M7 21 L7 12.5 Q7 9 10.5 9 L19 9" stroke="white" stroke-width="2.5" stroke-linecap="round" fill="none"/><path d="M19 6.5 L23.5 9 L19 11.5 Z" fill="white"/></svg>
+        </div>
+        <div class="favicon-label">48×48<br>bookmark</div>
+      </div>
+      <div class="favicon-item">
+        <div class="favicon-container" style="width:96px;height:96px;border-radius:16px;">
+          <svg width="80" height="80" viewBox="0 0 28 28" fill="none"><rect width="28" height="28" rx="8" fill="#1D4ED8"/><circle cx="7" cy="21" r="3" fill="white"/><path d="M7 21 L7 12.5 Q7 9 10.5 9 L19 9" stroke="white" stroke-width="2.5" stroke-linecap="round" fill="none"/><path d="M19 6.5 L23.5 9 L19 11.5 Z" fill="white"/></svg>
+        </div>
+        <div class="favicon-label">180×180<br>Apple touch</div>
+      </div>
+    </div>
+
+    <!-- Browser tab simulation -->
+    <div style="margin-top:32px;">
+      <div class="section-label">Browser tab simulation</div>
+      <div class="browser-tabs">
+        <div class="tab active">
+          <svg width="14" height="14" viewBox="0 0 28 28" fill="none"><rect width="28" height="28" rx="8" fill="#1D4ED8"/><circle cx="7" cy="21" r="3" fill="white"/><path d="M7 21 L7 12.5 Q7 9 10.5 9 L19 9" stroke="white" stroke-width="2.5" stroke-linecap="round" fill="none"/><path d="M19 6.5 L23.5 9 L19 11.5 Z" fill="white"/></svg>
+          UseCasePilot
+        </div>
+        <div class="tab">New Tab</div>
+      </div>
+      <div class="browser-bar">
+        <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="#94a3b8" stroke-width="2"><path d="M12 2a10 10 0 100 20A10 10 0 0012 2z"/><path d="M2 12h20M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20"/></svg>
+        <div class="url-bar">usecasepilot.com</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ─── 4. Color tokens ─── -->
+  <div class="section">
+    <div class="section-label">Brand Color Tokens</div>
+    <div class="swatches">
+      <div class="swatch">
+        <div class="swatch-color" style="background:#1D4ED8;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Brand Primary</div>
+          <div class="swatch-value">#1D4ED8</div>
+          <div class="swatch-value" style="margin-top:2px;">hsl(224, 76%, 48%)</div>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background:#1E40AF;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Brand Hover</div>
+          <div class="swatch-value">#1E40AF</div>
+          <div class="swatch-value" style="margin-top:2px;">hsl(224, 71%, 40%)</div>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background:#EFF6FF; border-top:1px solid #e2e8f0;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Brand Light</div>
+          <div class="swatch-value">#EFF6FF</div>
+          <div class="swatch-value" style="margin-top:2px;">active nav bg</div>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background:#0F172A;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Brand Dark</div>
+          <div class="swatch-value">#0F172A</div>
+          <div class="swatch-value" style="margin-top:2px;">dark backgrounds</div>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background:#BFDBFE; border-top:1px solid #e2e8f0;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">blue-200</div>
+          <div class="swatch-value">#BFDBFE</div>
+          <div class="swatch-value" style="margin-top:2px;">tag borders</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:24px; background:white; border:1px solid #e2e8f0; border-radius:10px; padding:20px; font-family:monospace; font-size:13px; line-height:1.8; color:#374151;">
+      <div style="color:#94a3b8; margin-bottom:8px;">/* globals.css */</div>
+      <div><span style="color:#7c3aed;">--primary</span>: 224 76% 48%;          <span style="color:#94a3b8;">/* #1D4ED8 */</span></div>
+      <div><span style="color:#7c3aed;">--primary-hover</span>: 224 71% 40%;    <span style="color:#94a3b8;">/* #1E40AF */</span></div>
+      <div><span style="color:#7c3aed;">--brand-light-bg</span>: 214 100% 97%;  <span style="color:#94a3b8;">/* #EFF6FF */</span></div>
+      <div><span style="color:#7c3aed;">--brand-dark-bg</span>: 222 47% 11%;    <span style="color:#94a3b8;">/* #0F172A */</span></div>
+      <br>
+      <div style="color:#94a3b8; margin-bottom:8px;">/* tailwind.config.ts — theme.extend.colors */</div>
+      <div><span style="color:#1d4ed8;">brand.DEFAULT</span>: '#1D4ED8'</div>
+      <div><span style="color:#1d4ed8;">brand.hover</span>:   '#1E40AF'</div>
+      <div><span style="color:#1d4ed8;">brand.light</span>:   '#EFF6FF'</div>
+      <div><span style="color:#1d4ed8;">brand.dark</span>:    '#0F172A'</div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ─── 5. UI Elements ─── -->
+  <div class="section">
+    <div class="section-label">UI Elements</div>
+
+    <div style="margin-bottom:20px;">
+      <div style="font-size:11px;color:#94a3b8;margin-bottom:10px;">Buttons</div>
+      <div class="ui-row">
+        <button class="btn btn-primary">Get Started</button>
+        <button class="btn btn-outline">Learn More</button>
+        <button class="btn btn-ghost">View All</button>
+      </div>
+    </div>
+
+    <div style="margin-bottom:20px;">
+      <div style="font-size:11px;color:#94a3b8;margin-bottom:10px;">Badges &amp; Tags</div>
+      <div class="ui-row">
+        <span class="badge badge-blue">New</span>
+        <span class="badge badge-dark">Pro</span>
+        <span class="tag">Software Engineers</span>
+        <span class="tag">AI Tools</span>
+      </div>
+    </div>
+
+    <div style="margin-bottom:20px;">
+      <div style="font-size:11px;color:#94a3b8;margin-bottom:10px;">Links &amp; Focus</div>
+      <div class="ui-row">
+        <a href="#" class="link">Read the use case →</a>
+        <input class="focus-demo" value="Focus ring demo" readonly />
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ─── 6. Logo usage in code ─── -->
+  <div class="section">
+    <div class="section-label">Logo Usage in Codebase</div>
+    <table class="usage-table">
+      <thead>
+        <tr>
+          <th>File</th>
+          <th>Usage</th>
+          <th>Notes</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="file-path">components/ui/Logo.tsx</span></td>
+          <td>Source of truth for the logo component</td>
+          <td class="usage-note">Icon <code class="inline">#1D4ED8</code> · wordmark <code class="inline">text-gray-900</code> · gap-2</td>
+        </tr>
+        <tr>
+          <td><span class="file-path">components/layout/Header.tsx</span></td>
+          <td><code class="inline">&lt;Logo /&gt;</code></td>
+          <td class="usage-note">Active nav: <code class="inline">text-[#1D4ED8] bg-[#EFF6FF]</code></td>
+        </tr>
+        <tr>
+          <td><span class="file-path">components/layout/Footer.tsx</span></td>
+          <td><code class="inline">&lt;Logo /&gt;</code></td>
+          <td class="usage-note">Light background — wordmark auto dark</td>
+        </tr>
+        <tr>
+          <td><span class="file-path">app/icon.tsx</span></td>
+          <td>Auto-generates <code class="inline">/icon.png</code> 32×32</td>
+          <td class="usage-note">Next.js serves as browser tab favicon</td>
+        </tr>
+        <tr>
+          <td><span class="file-path">app/apple-icon.tsx</span></td>
+          <td>Auto-generates <code class="inline">/apple-icon.png</code> 180×180</td>
+          <td class="usage-note">Apple touch icon for iOS home screen</td>
+        </tr>
+        <tr>
+          <td><span class="file-path">public/favicon.svg</span></td>
+          <td>SVG favicon for modern browsers</td>
+          <td class="usage-note">Scales perfectly at all sizes</td>
+        </tr>
+        <tr>
+          <td><span class="file-path">app/layout.tsx</span></td>
+          <td><code class="inline">metadata.icons</code></td>
+          <td class="usage-note">References <code class="inline">/favicon.svg</code> + auto-generated PNGs</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div style="text-align:center; padding:24px; font-size:12px; color:#94a3b8;">
+    UseCasePilot Brand System · Primary: #1D4ED8 · Waypoint Logo
+  </div>
+</div>
+</body>
+</html>

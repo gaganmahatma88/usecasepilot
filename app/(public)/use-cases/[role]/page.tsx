@@ -112,7 +112,7 @@ export default async function RolePage({ params }: Props) {
             Looking for tool recommendations?{' '}
             <Link
               href={ROLE_TOOLS_PAGE[params.role]}
-              className="text-blue-600 hover:text-blue-700 hover:underline transition-colors"
+              className="text-[#1D4ED8] hover:text-[#1E40AF] hover:underline transition-colors"
             >
               Explore AI Tools for {role.title} →
             </Link>
@@ -130,11 +130,11 @@ export default async function RolePage({ params }: Props) {
             <Link
               key={uc.id}
               href={`/use-cases/${params.role}/${uc.slug}`}
-              className="group block p-5 rounded-xl border border-gray-100 hover:border-blue-200 hover:bg-blue-50/20 transition-all"
+              className="group block p-5 rounded-xl border border-gray-100 hover:border-[#BFDBFE] hover:bg-[#EFF6FF]/20 transition-all"
             >
               <div className="flex items-start justify-between gap-4">
                 <div className="flex-1 min-w-0">
-                  <h2 className="font-semibold text-gray-900 group-hover:text-blue-700 transition-colors mb-1.5">
+                  <h2 className="font-semibold text-gray-900 group-hover:text-[#1E40AF] transition-colors mb-1.5">
                     {uc.title}
                   </h2>
                   {uc.seo_description && (
@@ -145,7 +145,7 @@ export default async function RolePage({ params }: Props) {
                 </div>
                 <svg
                   width="16" height="16" viewBox="0 0 16 16" fill="none"
-                  className="text-gray-300 group-hover:text-blue-400 transition-colors flex-shrink-0 mt-0.5"
+                  className="text-gray-300 group-hover:text-[#60A5FA] transition-colors flex-shrink-0 mt-0.5"
                 >
                   <path
                     d="M4 8H12M12 8L8 4M12 8L8 12"

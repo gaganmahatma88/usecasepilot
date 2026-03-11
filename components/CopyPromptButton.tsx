@@ -32,7 +32,7 @@ export function CopyPromptButton({ text, variant = 'dark' }: Props) {
             : 'bg-green-50 border-green-200 text-green-700'
           : isDark
           ? 'bg-gray-800/80 border-gray-700 text-gray-400 hover:border-gray-500 hover:text-gray-200'
-          : 'bg-white border-gray-200 text-gray-500 hover:border-blue-300 hover:text-blue-600'
+          : 'bg-white border-gray-200 text-gray-500 hover:border-[#1D4ED8] hover:text-[#1D4ED8]'
       }`}
     >
       {copied ? (

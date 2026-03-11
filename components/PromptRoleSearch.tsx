@@ -66,7 +66,7 @@ export function PromptRoleSearch({ items, popularItems }: Props) {
           value={search}
           onChange={(e) => setSearch(e.target.value)}
           placeholder="Search AI prompts (e.g. Python, React, SQL)"
-          className="w-full pl-9 pr-4 py-2.5 text-sm rounded-xl border border-gray-200 bg-white text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-100 focus:border-blue-300 transition-colors"
+          className="w-full pl-9 pr-4 py-2.5 text-sm rounded-xl border border-gray-200 bg-white text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#DBEAFE] focus:border-[#1D4ED8] transition-colors"
         />
       </div>
 
@@ -83,14 +83,14 @@ export function PromptRoleSearch({ items, popularItems }: Props) {
               <Link
                 key={item.slug}
                 href={`/prompt-templates/${item.slug}`}
-                className="group flex items-center justify-between p-4 rounded-xl border border-gray-100 hover:border-blue-200 hover:bg-blue-50/20 transition-all"
+                className="group flex items-center justify-between p-4 rounded-xl border border-gray-100 hover:border-[#BFDBFE] hover:bg-[#EFF6FF]/20 transition-all"
               >
-                <span className="text-sm font-medium text-gray-800 group-hover:text-blue-700 transition-colors">
+                <span className="text-sm font-medium text-gray-800 group-hover:text-[#1E40AF] transition-colors">
                   {item.heading}
                 </span>
                 <svg
                   width="16" height="16" viewBox="0 0 16 16" fill="none"
-                  className="text-gray-300 group-hover:text-blue-400 transition-colors flex-shrink-0 ml-4"
+                  className="text-gray-300 group-hover:text-[#60A5FA] transition-colors flex-shrink-0 ml-4"
                 >
                   <path
                     d="M4 8H12M12 8L8 4M12 8L8 12"
@@ -118,10 +118,10 @@ export function PromptRoleSearch({ items, popularItems }: Props) {
               <Link
                 key={item.slug}
                 href={`/ai-prompts/${item.slug}`}
-                className="group flex items-center justify-between p-5 rounded-xl border border-gray-100 hover:border-blue-200 hover:bg-blue-50/20 transition-all"
+                className="group flex items-center justify-between p-5 rounded-xl border border-gray-100 hover:border-[#BFDBFE] hover:bg-[#EFF6FF]/20 transition-all"
               >
                 <div>
-                  <p className="font-medium text-gray-900 group-hover:text-blue-700 transition-colors mb-1">
+                  <p className="font-medium text-gray-900 group-hover:text-[#1E40AF] transition-colors mb-1">
                     <Highlight text={item.title} query={search} />
                   </p>
                   <p className="text-sm text-gray-500 line-clamp-1">
@@ -130,7 +130,7 @@ export function PromptRoleSearch({ items, popularItems }: Props) {
                 </div>
                 <svg
                   width="16" height="16" viewBox="0 0 16 16" fill="none"
-                  className="text-gray-300 group-hover:text-blue-400 transition-colors flex-shrink-0 ml-4"
+                  className="text-gray-300 group-hover:text-[#60A5FA] transition-colors flex-shrink-0 ml-4"
                 >
                   <path
                     d="M4 8H12M12 8L8 4M12 8L8 12"

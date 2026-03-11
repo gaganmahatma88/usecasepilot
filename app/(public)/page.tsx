@@ -56,10 +56,10 @@ export default async function HomePage() {
   return (
     <div>
       {/* Hero */}
-      <section className="border-b border-gray-100 bg-gradient-to-b from-blue-50/50 to-white">
+      <section className="border-b border-gray-100 bg-gradient-to-b from-[#EFF6FF]/50 to-white">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 py-20 sm:py-28">
-          <div className="inline-flex items-center gap-2 bg-blue-50 border border-blue-100 rounded-full px-3 py-1 text-xs font-medium text-blue-600 mb-6">
-            <span className="w-1.5 h-1.5 bg-blue-500 rounded-full animate-pulse" />
+          <div className="inline-flex items-center gap-2 bg-[#EFF6FF] border border-[#DBEAFE] rounded-full px-3 py-1 text-xs font-medium text-[#1D4ED8] mb-6">
+            <span className="w-1.5 h-1.5 bg-[#1D4ED8] rounded-full animate-pulse" />
             Real-world AI use cases
           </div>
           <h1 className="text-4xl sm:text-5xl font-bold tracking-tight text-gray-900 mb-5 leading-tight">
@@ -73,7 +73,7 @@ export default async function HomePage() {
           <div className="flex flex-wrap items-center gap-3">
             <Link
               href="/use-cases"
-              className="inline-flex items-center gap-2 bg-blue-600 text-white text-sm font-medium px-5 py-2.5 rounded-lg hover:bg-blue-700 active:scale-95 transition-all shadow-sm shadow-blue-200"
+              className="inline-flex items-center gap-2 bg-[#1D4ED8] text-white text-sm font-medium px-5 py-2.5 rounded-lg hover:bg-[#1E40AF] active:scale-95 transition-all shadow-sm shadow-[#BFDBFE]"
             >
               Browse use cases
               <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
@@ -127,7 +127,7 @@ export default async function HomePage() {
       <section className="max-w-5xl mx-auto px-4 sm:px-6 py-10 sm:py-14 border-t border-gray-100">
         <div className="flex items-center justify-between mb-8">
           <h2 className="text-xl font-semibold text-gray-900">Browse AI Use Cases by Role</h2>
-          <Link href="/use-cases" className="text-sm text-blue-600 hover:text-blue-700 font-medium">
+          <Link href="/use-cases" className="text-sm text-[#1D4ED8] hover:text-[#1E40AF] font-medium">
             View all →
           </Link>
         </div>
@@ -143,17 +143,17 @@ export default async function HomePage() {
             <Link
               key={role.href}
               href={role.href}
-              className="group flex items-center justify-between p-4 rounded-xl border border-gray-100 hover:border-blue-200 hover:bg-blue-50/30 card-hover transition-all"
+              className="group flex items-center justify-between p-4 rounded-xl border border-gray-100 hover:border-[#BFDBFE] hover:bg-[#EFF6FF]/30 card-hover transition-all"
             >
               <div className="flex items-center gap-3">
                 <span className="text-lg">{ROLE_ICONS[role.slug] ?? '📁'}</span>
-                <h3 className="font-medium text-gray-900 group-hover:text-blue-700 transition-colors text-sm">
+                <h3 className="font-medium text-gray-900 group-hover:text-[#1E40AF] transition-colors text-sm">
                   {role.label}
                 </h3>
               </div>
               <svg
                 width="14" height="14" viewBox="0 0 14 14" fill="none"
-                className="text-gray-300 group-hover:text-blue-400 transition-colors flex-shrink-0"
+                className="text-gray-300 group-hover:text-[#60A5FA] transition-colors flex-shrink-0"
               >
                 <path d="M3 7H11M11 7L7.5 3.5M11 7L7.5 10.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
@@ -195,14 +195,14 @@ export default async function HomePage() {
             <Link
               key={uc.href}
               href={uc.href}
-              className="group flex items-center justify-between p-4 rounded-xl border border-gray-100 hover:border-blue-200 hover:bg-blue-50/20 card-hover transition-all"
+              className="group flex items-center justify-between p-4 rounded-xl border border-gray-100 hover:border-[#BFDBFE] hover:bg-[#EFF6FF]/20 card-hover transition-all"
             >
-              <span className="text-sm font-medium text-gray-800 group-hover:text-blue-700 transition-colors">
+              <span className="text-sm font-medium text-gray-800 group-hover:text-[#1E40AF] transition-colors">
                 {uc.label}
               </span>
               <svg
                 width="14" height="14" viewBox="0 0 14 14" fill="none"
-                className="text-gray-300 group-hover:text-blue-400 transition-colors flex-shrink-0 ml-3"
+                className="text-gray-300 group-hover:text-[#60A5FA] transition-colors flex-shrink-0 ml-3"
               >
                 <path d="M3 7H11M11 7L7.5 3.5M11 7L7.5 10.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
@@ -215,7 +215,7 @@ export default async function HomePage() {
       <section className="max-w-5xl mx-auto px-4 sm:px-6 py-16 sm:py-20">
         <div className="flex items-center justify-between mb-8">
           <h2 className="text-xl font-semibold text-gray-900">Browse by role</h2>
-          <Link href="/use-cases" className="text-sm text-blue-600 hover:text-blue-700 font-medium">
+          <Link href="/use-cases" className="text-sm text-[#1D4ED8] hover:text-[#1E40AF] font-medium">
             View all →
           </Link>
         </div>
@@ -225,7 +225,7 @@ export default async function HomePage() {
             <p className="text-lg font-medium mb-2">No roles yet</p>
             <p className="text-sm">
               Add roles from the{' '}
-              <Link href="/admin" className="text-blue-600 hover:underline">
+              <Link href="/admin" className="text-[#1D4ED8] hover:underline">
                 admin panel
               </Link>{' '}
               to get started.
@@ -240,9 +240,9 @@ export default async function HomePage() {
                 <Link
                   key={role.id}
                   href={`/use-cases/${role.slug}`}
-                  className="group block p-5 rounded-xl border border-gray-100 hover:border-blue-200 hover:bg-blue-50/30 card-hover transition-all"
+                  className="group block p-5 rounded-xl border border-gray-100 hover:border-[#BFDBFE] hover:bg-[#EFF6FF]/30 card-hover transition-all"
                 >
-                  <h3 className="font-semibold text-gray-900 group-hover:text-blue-700 transition-colors mb-1.5 text-[15px]">
+                  <h3 className="font-semibold text-gray-900 group-hover:text-[#1E40AF] transition-colors mb-1.5 text-[15px]">
                     {role.title}
                   </h3>
                   <p className="text-sm text-gray-500 leading-relaxed line-clamp-2">
@@ -258,7 +258,7 @@ export default async function HomePage() {
                     </div>
                     <svg
                       width="13" height="13" viewBox="0 0 13 13" fill="none"
-                      className="text-gray-200 group-hover:text-blue-300 transition-colors"
+                      className="text-gray-200 group-hover:text-[#93C5FD] transition-colors"
                     >
                       <path d="M2.5 6.5H10.5M10.5 6.5L7 3M10.5 6.5L7 10" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>
@@ -282,14 +282,14 @@ export default async function HomePage() {
                 <Link
                   key={uc.slug}
                   href={`/use-cases/${roleSlug}/${uc.slug}`}
-                  className="group flex items-center justify-between p-4 rounded-xl border border-gray-100 hover:border-blue-200 hover:bg-blue-50/20 card-hover transition-all"
+                  className="group flex items-center justify-between p-4 rounded-xl border border-gray-100 hover:border-[#BFDBFE] hover:bg-[#EFF6FF]/20 card-hover transition-all"
                 >
-                  <span className="text-sm font-medium text-gray-800 group-hover:text-blue-700 transition-colors">
+                  <span className="text-sm font-medium text-gray-800 group-hover:text-[#1E40AF] transition-colors">
                     {uc.title}
                   </span>
                   <svg
                     width="14" height="14" viewBox="0 0 14 14" fill="none"
-                    className="text-gray-300 group-hover:text-blue-400 transition-colors flex-shrink-0 ml-3"
+                    className="text-gray-300 group-hover:text-[#60A5FA] transition-colors flex-shrink-0 ml-3"
                   >
                     <path d="M3 7H11M11 7L7.5 3.5M11 7L7.5 10.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
@@ -329,10 +329,10 @@ export default async function HomePage() {
             <Link
               key={item.href}
               href={item.href}
-              className="group block p-5 rounded-xl border border-gray-100 hover:border-blue-200 hover:bg-blue-50/30 card-hover transition-all"
+              className="group block p-5 rounded-xl border border-gray-100 hover:border-[#BFDBFE] hover:bg-[#EFF6FF]/30 card-hover transition-all"
             >
               <span className="text-xl mb-3 block">{item.icon}</span>
-              <h3 className="font-semibold text-gray-900 group-hover:text-blue-700 transition-colors mb-1.5 text-[15px]">
+              <h3 className="font-semibold text-gray-900 group-hover:text-[#1E40AF] transition-colors mb-1.5 text-[15px]">
                 {item.label}
               </h3>
               <p className="text-sm text-gray-500 leading-relaxed">{item.desc}</p>
@@ -348,7 +348,7 @@ export default async function HomePage() {
             {[
               {
                 icon: (
-                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none" className="text-blue-500">
+                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none" className="text-[#1D4ED8]">
                     <rect x="2" y="2" width="7" height="7" rx="1.5" stroke="currentColor" strokeWidth="1.5" />
                     <rect x="11" y="2" width="7" height="7" rx="1.5" stroke="currentColor" strokeWidth="1.5" />
                     <rect x="2" y="11" width="7" height="7" rx="1.5" stroke="currentColor" strokeWidth="1.5" />
@@ -360,7 +360,7 @@ export default async function HomePage() {
               },
               {
                 icon: (
-                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none" className="text-blue-500">
+                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none" className="text-[#1D4ED8]">
                     <path d="M10 2L12.4 7.3L18 8.1L14 12L15 17.6L10 15L5 17.6L6 12L2 8.1L7.6 7.3L10 2Z" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" />
                   </svg>
                 ),
@@ -369,7 +369,7 @@ export default async function HomePage() {
               },
               {
                 icon: (
-                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none" className="text-blue-500">
+                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none" className="text-[#1D4ED8]">
                     <rect x="3" y="2" width="14" height="16" rx="2" stroke="currentColor" strokeWidth="1.5" />
                     <path d="M7 7H13M7 10H13M7 13H10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
                   </svg>
@@ -379,7 +379,7 @@ export default async function HomePage() {
               },
             ].map((f) => (
               <div key={f.title} className="flex gap-4">
-                <div className="flex-shrink-0 w-9 h-9 rounded-lg bg-blue-50 border border-blue-100 flex items-center justify-center">
+                <div className="flex-shrink-0 w-9 h-9 rounded-lg bg-[#EFF6FF] border border-[#DBEAFE] flex items-center justify-center">
                   {f.icon}
                 </div>
                 <div>
