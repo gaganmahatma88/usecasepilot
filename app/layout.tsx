@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   description:
     'Discover practical AI use cases tailored to your professional role. From project managers to engineers, find out how AI can enhance your workflow.',
   metadataBase: new URL(
-    process.env.NEXT_PUBLIC_SITE_URL || 'https://usecasepilot.com'
+    process.env.NEXT_PUBLIC_SITE_URL || 'https://usecasepilot.org'
   ),
   openGraph: {
     type: 'website',

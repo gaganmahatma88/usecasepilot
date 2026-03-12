@@ -9,7 +9,7 @@ export const revalidate = 3600
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl =
-    process.env.NEXT_PUBLIC_SITE_URL || 'https://usecasepilot.com'
+    process.env.NEXT_PUBLIC_SITE_URL || 'https://usecasepilot.org'
 
   const { data: roles } = await supabase
     .from('roles')

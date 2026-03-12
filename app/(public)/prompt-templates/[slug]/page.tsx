@@ -7,7 +7,7 @@ import { allTemplatePages as templatePages } from '@/lib/templateRegistry'
 import { tools } from '@/lib/tools'
 import type { Metadata } from 'next'
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://usecasepilot.com'
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://usecasepilot.org'
 
 interface Props {
   params: { slug: string }

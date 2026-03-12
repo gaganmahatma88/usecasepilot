@@ -4,7 +4,7 @@ import { supabase } from '@/lib/supabase'
 import { Breadcrumb } from '@/components/ui/Breadcrumb'
 import type { Metadata } from 'next'
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://usecasepilot.com'
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://usecasepilot.org'
 
 const ROLE_TOOLS_PAGE: Record<string, string> = {
   'software-engineers':  '/best-ai-tools-for-software-engineers',

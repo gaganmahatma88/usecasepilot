@@ -30,7 +30,7 @@ const POPULAR_TEMPLATE_SLUGS = [
   'chatgpt-test-python',
 ]
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://usecasepilot.com'
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://usecasepilot.org'
 
 interface Props {
   params: { slug: string }

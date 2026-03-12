@@ -3,7 +3,7 @@ import type { Metadata } from 'next'
 import { supabase } from '@/lib/supabase'
 import { Breadcrumb } from '@/components/ui/Breadcrumb'
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://usecasepilot.com'
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://usecasepilot.org'
 const canonical = `${siteUrl}/ai-use-cases`
 
 export const metadata: Metadata = {

@@ -6,7 +6,7 @@ import { ToolComparisonTable } from '@/components/ui/ToolComparisonTable'
 import { tools } from '@/lib/tools'
 import { supabase } from '@/lib/supabase'
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://usecasepilot.com'
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://usecasepilot.org'
 const canonical = `${siteUrl}/best-ai-tools-for-project-managers`
 
 export const metadata: Metadata = {

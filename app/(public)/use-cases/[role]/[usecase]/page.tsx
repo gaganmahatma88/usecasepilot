@@ -49,7 +49,7 @@ function extractHeadings(content: string): { text: string; id: string }[] {
   })
 }
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://usecasepilot.com'
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://usecasepilot.org'
 
 const ROLE_TOOLS_PAGE: Record<string, { href: string; label: string }> = {
   'software-engineers': {
