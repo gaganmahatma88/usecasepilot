@@ -9,6 +9,7 @@ import { assistantConfig } from '@/lib/promptTemplates'
 import { PromptRoleSearch } from '@/components/PromptRoleSearch'
 import { templateRegistry, allTemplatePages } from '@/lib/templateRegistry'
 import { tools } from '@/lib/tools'
+import { RelatedWorkflows } from '@/components/ui/RelatedWorkflows'
 import type { Metadata } from 'next'
 import type { TemplateEntry } from '@/lib/templateRegistry'
 
@@ -370,6 +371,8 @@ function PromptPage({ slug }: { slug: string }) {
           ))}
         </div>
       </div>
+
+      <RelatedWorkflows role={page.role} />
     </div>
   )
 }

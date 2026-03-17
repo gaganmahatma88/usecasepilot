@@ -9,6 +9,8 @@ import { Breadcrumb } from '@/components/ui/Breadcrumb'
 import { MDXRenderer } from '@/components/ui/MDXRenderer'
 import { RecommendedTool } from '@/components/ui/RecommendedTool'
 import { StickyToolCTA } from '@/components/ui/StickyToolCTA'
+import { RelatedPrompts } from '@/components/ui/RelatedPrompts'
+import { WorkflowViewTracker } from '@/components/ui/WorkflowViewTracker'
 import { getToolForSlug } from '@/lib/tools'
 import { formatDate } from '@/lib/utils'
 import type { Metadata } from 'next'
@@ -209,6 +211,7 @@ export default async function UseCasePage({ params }: Props) {
 
   return (
     <div className="max-w-3xl mx-auto px-4 sm:px-6 py-10 sm:py-14">
+      <WorkflowViewTracker role={params.role} slug={params.usecase} />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
@@ -349,6 +352,8 @@ export default async function UseCasePage({ params }: Props) {
           </div>
         </div>
       )}
+
+      <RelatedPrompts role={params.role} />
 
       <div className="mt-8 pt-8 border-t border-gray-100">
         <Link

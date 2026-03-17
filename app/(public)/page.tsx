@@ -213,6 +213,33 @@ export default async function HomePage() {
         </div>
       </section>
 
+      {/* Explore AI Workflows */}
+      <section className="max-w-5xl mx-auto px-4 sm:px-6 py-10 sm:py-14 border-t border-gray-100">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+          <div>
+            <h2 className="text-xl font-semibold text-gray-900 mb-1">Explore AI Workflows</h2>
+            <p className="text-sm text-gray-500 leading-relaxed max-w-lg">
+              Browse our full library of AI automation workflows organised by professional role.
+            </p>
+          </div>
+          <Link
+            href="/ai-workflows"
+            className="inline-flex items-center gap-2 bg-[#1D4ED8] text-white text-sm font-semibold px-5 py-2.5 rounded-lg hover:bg-[#1E40AF] hover:-translate-y-0.5 active:scale-95 transition-all shadow-[0_1px_2px_rgba(29,78,216,0.3),0_4px_12px_rgba(29,78,216,0.15)] self-start sm:self-auto flex-shrink-0"
+          >
+            View AI Workflow Library
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+              <path
+                d="M3 7H11M11 7L7.5 3.5M11 7L7.5 10.5"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </Link>
+        </div>
+      </section>
+
       {/* Roles grid — dynamic from Supabase */}
       <section className="max-w-5xl mx-auto px-4 sm:px-6 py-16 sm:py-20">
         <div className="flex items-center justify-between mb-8">

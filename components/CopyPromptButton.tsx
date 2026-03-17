@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import { trackEvent, getPageContext } from '@/lib/analytics'
 
 interface Props {
   text: string
@@ -15,6 +16,8 @@ export function CopyPromptButton({ text, variant = 'dark' }: Props) {
       await navigator.clipboard.writeText(text)
       setCopied(true)
       setTimeout(() => setCopied(false), 2000)
+      const { page_type, page_slug } = getPageContext()
+      trackEvent('copy_prompt', { page_type, prompt_slug: page_slug })
     } catch {
       // clipboard not available — fail silently
     }

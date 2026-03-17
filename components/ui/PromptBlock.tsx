@@ -2,6 +2,7 @@
 
 import React from 'react'
 import { CopyPromptButton } from '@/components/CopyPromptButton'
+import { trackEvent, getPageContext } from '@/lib/analytics'
 
 function extractText(node: React.ReactNode): string {
   if (typeof node === 'string' || typeof node === 'number') return String(node)
@@ -47,6 +48,10 @@ export function PromptBlock({ children }: { children: React.ReactNode }) {
           href={`https://chat.openai.com/?prompt=${encoded}`}
           target="_blank"
           rel="noopener noreferrer"
+          onClick={() => {
+            const { page_type, page_slug } = getPageContext()
+            trackEvent('open_chatgpt', { page_type, prompt_slug: page_slug })
+          }}
           className="inline-flex items-center gap-1.5 text-xs font-medium px-3 py-1.5 rounded-lg border border-[hsl(220_15%_22%)] bg-[hsl(220_15%_12%)] text-gray-400 hover:border-green-700/60 hover:text-green-400 hover:bg-green-950/40 transition-all"
         >
           <svg width="10" height="10" viewBox="0 0 10 10" fill="none" className="opacity-70">
@@ -58,6 +63,10 @@ export function PromptBlock({ children }: { children: React.ReactNode }) {
           href={`https://claude.ai/new?q=${encoded}`}
           target="_blank"
           rel="noopener noreferrer"
+          onClick={() => {
+            const { page_type, page_slug } = getPageContext()
+            trackEvent('open_claude', { page_type, prompt_slug: page_slug })
+          }}
           className="inline-flex items-center gap-1.5 text-xs font-medium px-3 py-1.5 rounded-lg border border-[hsl(220_15%_22%)] bg-[hsl(220_15%_12%)] text-gray-400 hover:border-orange-700/60 hover:text-orange-400 hover:bg-orange-950/40 transition-all"
         >
           <svg width="10" height="10" viewBox="0 0 10 10" fill="none" className="opacity-70">
