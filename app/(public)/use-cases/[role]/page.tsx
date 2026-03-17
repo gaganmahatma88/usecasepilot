@@ -125,12 +125,12 @@ export default async function RolePage({ params }: Props) {
           <p>No use cases published for this role yet.</p>
         </div>
       ) : (
-        <div className="space-y-3">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
           {role.use_cases.map((uc: any) => (
             <Link
               key={uc.id}
               href={`/use-cases/${params.role}/${uc.slug}`}
-              className="group block p-5 rounded-xl border border-gray-100 hover:border-[#BFDBFE] hover:bg-[#EFF6FF]/20 transition-all"
+              className="group block p-5 rounded-xl border border-gray-100 hover:border-[#BFDBFE] hover:bg-[#EFF6FF]/20 card-hover transition-all"
             >
               <div className="flex items-start justify-between gap-4">
                 <div className="flex-1 min-w-0">

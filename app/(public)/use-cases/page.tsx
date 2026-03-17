@@ -42,7 +42,7 @@ export default async function UseCasesPage() {
           <p>No roles available yet.</p>
         </div>
       ) : (
-        <div className="space-y-3">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
           {roles.map((role: any) => {
             const publishedCount =
               role.use_cases?.filter((uc: any) => uc.published).length || 0
@@ -50,7 +50,7 @@ export default async function UseCasesPage() {
               <Link
                 key={role.id}
                 href={`/use-cases/${role.slug}`}
-                className="group flex items-center justify-between p-5 rounded-xl border border-gray-100 hover:border-[#BFDBFE] hover:bg-[#EFF6FF]/20 transition-all"
+                className="group flex items-center justify-between p-5 rounded-xl border border-gray-100 hover:border-[#BFDBFE] hover:bg-[#EFF6FF]/20 card-hover transition-all"
               >
                 <div>
                   <h2 className="font-semibold text-gray-900 group-hover:text-[#1E40AF] transition-colors mb-1">
@@ -59,7 +59,7 @@ export default async function UseCasesPage() {
                   <p className="text-sm text-gray-500">{role.description}</p>
                 </div>
                 <div className="flex items-center gap-3 ml-4 flex-shrink-0">
-                  <span className="text-xs text-gray-400 bg-gray-50 border border-gray-100 rounded-full px-2.5 py-1">
+                  <span className="text-xs font-semibold text-[#1D4ED8] bg-[#EFF6FF] border border-[#DBEAFE] rounded-full px-2.5 py-1">
                     {publishedCount} use case{publishedCount !== 1 ? 's' : ''}
                   </span>
                   <svg

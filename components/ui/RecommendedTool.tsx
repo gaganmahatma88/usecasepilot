@@ -43,7 +43,7 @@ export function RecommendedTool({ tool, compact = false }: Props) {
           href={`/api/track?tool=${tool.key}`}
           target="_blank"
           rel="nofollow noopener"
-          className="flex-shrink-0 inline-flex items-center gap-1.5 text-sm font-medium text-white bg-[#1D4ED8] hover:bg-[#1E40AF] active:scale-95 transition-all px-4 py-2 rounded-lg shadow-sm"
+          className="flex-shrink-0 inline-flex items-center gap-1.5 text-sm font-medium text-white bg-[#1D4ED8] hover:bg-[#1E40AF] hover:-translate-y-0.5 active:scale-95 transition-all px-4 py-2 rounded-lg shadow-[0_1px_2px_rgba(29,78,216,0.25),0_2px_8px_rgba(29,78,216,0.12)]"
         >
           Try {tool.name}
           <svg width="11" height="11" viewBox="0 0 11 11" fill="none">
@@ -88,7 +88,7 @@ export function RecommendedTool({ tool, compact = false }: Props) {
         href={`/api/track?tool=${tool.key}`}
         target="_blank"
         rel="nofollow noopener"
-        className="inline-flex items-center gap-2 text-sm font-medium text-white bg-[#1D4ED8] hover:bg-[#1E40AF] active:scale-95 transition-all px-5 py-2.5 rounded-lg shadow-sm"
+        className="inline-flex items-center gap-2 text-sm font-medium text-white bg-[#1D4ED8] hover:bg-[#1E40AF] hover:-translate-y-0.5 active:scale-95 transition-all px-5 py-2.5 rounded-lg shadow-[0_1px_2px_rgba(29,78,216,0.25),0_2px_8px_rgba(29,78,216,0.12)]"
       >
         Try {tool.name} Free
         <svg width="11" height="11" viewBox="0 0 11 11" fill="none">

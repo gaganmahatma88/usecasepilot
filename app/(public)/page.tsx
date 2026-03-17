@@ -56,9 +56,9 @@ export default async function HomePage() {
   return (
     <div>
       {/* Hero */}
-      <section className="border-b border-gray-100 bg-gradient-to-b from-[#EFF6FF]/50 to-white">
+      <section className="border-b border-gray-100 hero-section">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 py-20 sm:py-28">
-          <div className="inline-flex items-center gap-2 bg-[#EFF6FF] border border-[#DBEAFE] rounded-full px-3 py-1 text-xs font-medium text-[#1D4ED8] mb-6">
+          <div className="inline-flex items-center gap-2 bg-[#EFF6FF] border border-[#DBEAFE] rounded-full px-4 py-1.5 text-sm font-medium text-[#1D4ED8] mb-6 shadow-sm">
             <span className="w-1.5 h-1.5 bg-[#1D4ED8] rounded-full animate-pulse" />
             Real-world AI use cases
           </div>
@@ -73,7 +73,7 @@ export default async function HomePage() {
           <div className="flex flex-wrap items-center gap-3">
             <Link
               href="/use-cases"
-              className="inline-flex items-center gap-2 bg-[#1D4ED8] text-white text-sm font-medium px-5 py-2.5 rounded-lg hover:bg-[#1E40AF] active:scale-95 transition-all shadow-sm shadow-[#BFDBFE]"
+              className="inline-flex items-center gap-2 bg-[#1D4ED8] text-white text-sm font-semibold px-5 py-2.5 rounded-lg hover:bg-[#1E40AF] hover:-translate-y-0.5 active:scale-95 transition-all shadow-[0_1px_2px_rgba(29,78,216,0.3),0_4px_12px_rgba(29,78,216,0.15)]"
             >
               Browse use cases
               <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
@@ -146,7 +146,9 @@ export default async function HomePage() {
               className="group flex items-center justify-between p-4 rounded-xl border border-gray-100 hover:border-[#BFDBFE] hover:bg-[#EFF6FF]/30 card-hover transition-all"
             >
               <div className="flex items-center gap-3">
-                <span className="text-lg">{ROLE_ICONS[role.slug] ?? '📁'}</span>
+                <span className="w-8 h-8 rounded-lg bg-[#EFF6FF] border border-[#DBEAFE] flex items-center justify-center text-base flex-shrink-0">
+                  {ROLE_ICONS[role.slug] ?? '📁'}
+                </span>
                 <h3 className="font-medium text-gray-900 group-hover:text-[#1E40AF] transition-colors text-sm">
                   {role.label}
                 </h3>
@@ -242,6 +244,9 @@ export default async function HomePage() {
                   href={`/use-cases/${role.slug}`}
                   className="group block p-5 rounded-xl border border-gray-100 hover:border-[#BFDBFE] hover:bg-[#EFF6FF]/30 card-hover transition-all"
                 >
+                  <div className="w-8 h-8 rounded-lg bg-[#EFF6FF] border border-[#DBEAFE] flex items-center justify-center text-base mb-3">
+                    {ROLE_ICONS[role.slug] ?? '📁'}
+                  </div>
                   <h3 className="font-semibold text-gray-900 group-hover:text-[#1E40AF] transition-colors mb-1.5 text-[15px]">
                     {role.title}
                   </h3>
@@ -331,7 +336,7 @@ export default async function HomePage() {
               href={item.href}
               className="group block p-5 rounded-xl border border-gray-100 hover:border-[#BFDBFE] hover:bg-[#EFF6FF]/30 card-hover transition-all"
             >
-              <span className="text-xl mb-3 block">{item.icon}</span>
+              <div className="w-8 h-8 rounded-lg bg-[#EFF6FF] border border-[#DBEAFE] flex items-center justify-center text-base mb-3">{item.icon}</div>
               <h3 className="font-semibold text-gray-900 group-hover:text-[#1E40AF] transition-colors mb-1.5 text-[15px]">
                 {item.label}
               </h3>

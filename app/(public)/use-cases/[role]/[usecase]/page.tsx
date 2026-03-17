@@ -232,7 +232,7 @@ export default async function UseCasePage({ params }: Props) {
 
       <article>
         <header className="mb-10">
-          <div className="inline-flex items-center gap-1.5 text-xs font-medium text-[#1D4ED8] bg-[#EFF6FF] border border-[#DBEAFE] rounded-full px-2.5 py-1 mb-4">
+          <div className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#1D4ED8] bg-[#EFF6FF] border border-[#DBEAFE] rounded-full px-3 py-1 mb-4 tracking-wide">
             {role.title}
           </div>
 
@@ -255,14 +255,14 @@ export default async function UseCasePage({ params }: Props) {
         <RecommendedTool tool={recommendedTool} compact />
 
         {headings.length > 0 && (
-          <nav aria-label="Table of contents" className="mb-8 p-4 rounded-xl border border-gray-100 bg-gray-50/60">
-            <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-3">
+          <nav aria-label="Table of contents" className="mb-8 p-4 rounded-xl bg-[#EFF6FF]/30 toc-nav">
+            <p className="text-xs font-semibold text-[#1D4ED8] uppercase tracking-wider mb-3">
               On this page
             </p>
             <ul className="space-y-1.5">
               {headings.map((h) => (
                 <li key={h.id} className="flex items-center gap-2">
-                  <span className="w-1 h-1 rounded-full bg-gray-300 flex-shrink-0" />
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#BFDBFE] flex-shrink-0" />
                   <a
                     href={`#${h.id}`}
                     className="text-sm text-gray-600 hover:text-[#1D4ED8] transition-colors"

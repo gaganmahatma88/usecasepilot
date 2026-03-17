@@ -11,7 +11,8 @@
       "Bash(find D:\\\\Pers\\\\usecasepilot\\\\app\\\\\\(public\\):*)",
       "Bash(start:*)",
       "Bash(cmd:*)",
-      "Bash(do:*)"
+      "Bash(do:*)",
+      "WebFetch(domain:usecasepilot.org)"
     ]
   }
 }

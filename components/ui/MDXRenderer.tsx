@@ -2,6 +2,8 @@ import { MDXRemote } from 'next-mdx-remote/rsc'
 import rehypeSlug from 'rehype-slug'
 import { rehypeToolLinks } from '@/lib/rehypeToolLinks'
 import { rehypeExternalLinks } from '@/lib/rehypeExternalLinks'
+import { PromptBlock } from '@/components/ui/PromptBlock'
+import { Step } from '@/components/ui/Step'
 
 const components = {
   Callout: ({
@@ -24,6 +26,8 @@ const components = {
       </div>
     )
   },
+  Prompt: PromptBlock,
+  Step,
 }
 
 interface MDXRendererProps {
