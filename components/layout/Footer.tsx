@@ -40,6 +40,11 @@ export function Footer() {
                 </Link>
               </li>
               <li>
+                <Link href="/ai-use-cases-directory" className="hover:text-gray-900 transition-colors">
+                  AI Use Cases Directory (Full)
+                </Link>
+              </li>
+              <li>
                 <Link href="/best-ai-use-cases" className="hover:text-gray-900 transition-colors">
                   Best AI Use Cases
                 </Link>
